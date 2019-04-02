@@ -1,3 +1,2 @@
-# Fortnut
-A multiplayer 2D battle royale type game.
-This may or may not end up being for a school project.
+# No Name Game
+A soon to be multiplayer game for a capstone project.
