@@ -838,8 +838,8 @@ public class Window extends JApplet {
 		}
 
 		/**
-		 * Fills a rectangle centered at the given x, y coordinate with the given width
-		 * and height.
+		 * Fills a rectangle from upper left at the given x, y coordinate with the given
+		 * width and height.
 		 * 
 		 * @param x      - x coordinate of the rectangle
 		 * @param y      - y coordinate of the rectangle
@@ -849,7 +849,7 @@ public class Window extends JApplet {
 		public static void rectangle(int x, int y, int width, int height) {
 			if (!initialized)
 				Window.size(defaultWidth, defaultHeight);
-			Window.getInstanceFromThread().fillRect(x - width / 2, y - height / 2, width, height);
+			Window.getInstanceFromThread().fillRect(x, y, width, height);
 		}
 
 		/**
@@ -885,8 +885,8 @@ public class Window extends JApplet {
 		}
 
 		/**
-		 * Fills a square centered at the given x, y coordinate with the given side
-		 * length.
+		 * Fills a square int the upper left of the given x, y coordinate with the given
+		 * side length.
 		 * 
 		 * @param x    - the x coordinate of the square
 		 * @param y    - the y coordinate of the square
@@ -895,7 +895,7 @@ public class Window extends JApplet {
 		public static void square(int x, int y, int side) {
 			if (!initialized)
 				Window.size(defaultWidth, defaultHeight);
-			Window.getInstanceFromThread().fillRect(x - side / 2, y - side / 2, side, side);
+			Window.getInstanceFromThread().fillRect(x, y, side, side);
 		}
 
 		/**
@@ -1114,7 +1114,7 @@ public class Window extends JApplet {
 				Window.size(defaultWidth, defaultHeight);
 			Window.getInstanceFromThread().setColor(red, green, blue);
 		}
-		
+
 		/**
 		 * Author: Kevin
 		 * 
