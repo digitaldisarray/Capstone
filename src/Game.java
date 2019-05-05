@@ -27,7 +27,6 @@ public class Game implements Runnable {
 		this.width = width;
 		this.height = height;
 		this.title = title;
-		init();
 	}
 
 	// Init anything we need here like asset managers
