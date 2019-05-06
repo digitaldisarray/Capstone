@@ -1,7 +1,7 @@
 
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -48,8 +48,9 @@ public class Window {
 		frame.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.out.println("press");
+
 				char c = e.getKeyChar();
+				System.out.println(c);
 				if (c >= 0 && c < keyPressed.length)
 					keyPressed[c] = keyTyped[c] = true;
 
@@ -81,6 +82,10 @@ public class Window {
 
 	public boolean isKeyPressed(char key) {
 		return key >= 0 && key < keyPressed.length ? keyPressed[key] : false;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
 	}
 
 }
