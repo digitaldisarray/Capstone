@@ -13,13 +13,13 @@ import gui.objects.Button;
 public class MainMenu implements Screen, MouseListener {
 
 	ArrayList<Button> buttons = new ArrayList<>();
-	
 
 	
+
 	@Override
 	public void init() {
 		buttons.add(new Button(10, 10, 100, 40, "Hello World!", Color.GRAY, null));
-		
+
 	}
 
 	@Override
@@ -37,7 +37,6 @@ public class MainMenu implements Screen, MouseListener {
 				button.clicked();
 			}
 		}
-		
 
 	}
 
@@ -59,7 +58,7 @@ public class MainMenu implements Screen, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
