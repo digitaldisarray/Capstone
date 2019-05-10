@@ -1,3 +1,4 @@
+package base;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -33,7 +34,7 @@ public class Game implements Runnable {
 	private void init() {
 		window = new Window(title, width, height);
 		mManager = new MenuManager();
-		player = new Player(50, 50, 100, 100, new Color(255, 255, 255), "Test Player");
+		player = new Player(50, 50, 100, 100, new Color(0, 0, 0), "Test Player");
 	}
 
 	int x = 0;
@@ -52,11 +53,14 @@ public class Game implements Runnable {
 		}
 		g = (Graphics2D) bs.getDrawGraphics();
 		g.scale(window.getCanvas().getWidth() / 800.0, window.getCanvas().getHeight() / 600.0);
-
+		
 		g.clearRect(0, 0, width, height);
 		
 		if(!inGame) {
 			mManager.draw(g);
+		} else {
+			player.draw(g);
+			
 		}
 
 		// End Graphics
@@ -123,5 +127,15 @@ public class Game implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public double getXScaleFactor() {
+	
+		return window.getCanvas().getWidth() / 800.0;
+	}
+	
+	public double getYScaleFactor() {
+		
+		return window.getCanvas().getHeight() / 600.0;
 	}
 }

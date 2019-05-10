@@ -5,7 +5,10 @@ import java.awt.Graphics2D;
 
 public class Entity {
 	
-	private int x, y, width, height;
+	private int x;
+	private int y;
+	private int width;
+	private int height;
 	private Color color;
 	
 	public Entity(int x, int y, int width, int height, Color color) {

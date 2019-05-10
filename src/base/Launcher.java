@@ -1,3 +1,4 @@
+package base;
 public class Launcher {
 	private static Game game;
 	

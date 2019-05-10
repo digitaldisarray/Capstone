@@ -1,3 +1,4 @@
+package base;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

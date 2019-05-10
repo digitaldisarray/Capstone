@@ -3,6 +3,8 @@ package gui.objects;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import base.Launcher;
+
 
 public class Button {
 	private int x, y, width, height;
@@ -55,6 +57,9 @@ public class Button {
 	}
 	
 	public boolean contains(int xClick, int yClick) {
+		xClick /= Launcher.getGame().getXScaleFactor();
+		yClick /= Launcher.getGame().getYScaleFactor();
+		
 		if(xClick >= this.getX() && xClick <= this.getX() + this.getWidth()) {
 			if(yClick >= this.getY() && yClick <= this.getY() + this.getHeight() ) {
 				return true;
