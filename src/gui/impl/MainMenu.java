@@ -3,14 +3,11 @@ package gui.impl;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import gui.Screen;
 import gui.objects.Button;
-import gui.objects.tasks.testTask;
+import gui.objects.tasks.TestingTask;
 
 public class MainMenu implements Screen{
 	private int xClick, yClick;
@@ -21,7 +18,7 @@ public class MainMenu implements Screen{
 	
 
 	public void init() {
-		buttons.add(new Button(10, 10, 100, 40, "Hello World!", Color.GRAY, new testTask()));
+		buttons.add(new Button(10, 10, 100, 40, "Hello World!", Color.GRAY, new TestingTask()));
 
 	}
 
