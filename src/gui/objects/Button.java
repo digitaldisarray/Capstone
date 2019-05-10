@@ -3,8 +3,10 @@ package gui.objects;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+
 public class Button {
 	private int x, y, width, height;
+	
 	private String text;
 	private Color color;
 	private ButtonTask task;
@@ -34,6 +36,8 @@ public class Button {
 		task.run();
 	}
 	
+	
+	
 	public int getX() {
 		return x;
 	}
@@ -49,4 +53,13 @@ public class Button {
 	public int getHeight() {
 		return height;
 	}
-}
+	
+	public boolean contains(int xClick, int yClick) {
+		if(xClick >= this.getX() && xClick <= this.getX() + this.getWidth()) {
+			if(yClick >= this.getY() && yClick <= this.getY() + this.getHeight() ) {
+				return true;
+			}
+		}
+		return false;
+		}
+	}

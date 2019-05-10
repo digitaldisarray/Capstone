@@ -83,7 +83,8 @@ public class Window {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println(e.getX());
 				System.out.println(e.getY());
-			}
+				Launcher.getGame().mManager.getCurrent().passKeyEvent(e.getX(), e.getY());			
+				}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {

@@ -33,4 +33,8 @@ public class Launcher {
 //		// make the window visible
 //		mainScreen.setVisible(true);
 	}
+	
+	public static Game getGame() {
+		return game;
+	}
 }
