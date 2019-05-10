@@ -14,9 +14,6 @@ public class MainMenu implements Screen{
 	ArrayList<Button> buttons = new ArrayList<>();
 
 	@Override
-
-	
-
 	public void init() {
 		buttons.add(new Button(10, 10, 100, 40, "Hello World!", Color.GRAY, new TestingTask()));
 
