@@ -146,21 +146,21 @@ public class Window {
 				int playerY = Launcher.getGame().getPlayer().getY() + Launcher.getGame().getPlayer().getHeight() / 2;
 
 				double tanValue = Math.abs(((double) e.getY() - playerY) / ((double) e.getX() - playerX));
-				
-				if(e.getX() == playerX) {
+
+				if (e.getX() == playerX) {
 					if (e.getY() < playerY)
 						mouseDeg = 90;
 					else if (e.getY() > playerY)
 						mouseDeg = 270;
 				}
-				
-				if(e.getY() == playerY) {
+
+				if (e.getY() == playerY) {
 					if (e.getX() < playerX)
 						mouseDeg = 180;
 					else if (e.getX() > playerX)
 						mouseDeg = 0;
 				}
-				
+
 				if (e.getX() > playerX) {
 					if (e.getY() < playerY)
 						mouseDeg = Math.toDegrees(Math.atan(tanValue));
@@ -172,9 +172,9 @@ public class Window {
 					if (e.getY() < playerY)
 						mouseDeg = 180 - Math.toDegrees(Math.atan(tanValue));
 					else if (e.getY() > playerY)
-						mouseDeg = 180 +  Math.toDegrees(Math.atan(tanValue));
+						mouseDeg = 180 + Math.toDegrees(Math.atan(tanValue));
 				}
-				System.out.println(mouseDeg);
+
 			}
 
 			@Override
@@ -233,5 +233,10 @@ public class Window {
 		// Prob unreachable but who knows
 		return false;
 	}
-
+	
+	public double getMouseDeg() {
+		System.out.println("Radians: " + Math.toRadians(mouseDeg) + "  Degrees: " + mouseDeg);
+		return mouseDeg;
+	}
+	
 }

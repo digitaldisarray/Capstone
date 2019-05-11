@@ -1,6 +1,7 @@
 package entities;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
@@ -17,6 +18,15 @@ public class Player extends Entity {
 		this.name = name;
 	}
 
+	public void draw(Graphics2D g) {
+		g.setColor(getColor());
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
+		
+		for(Lazer lazer : lazers) {
+			lazer.draw(g);
+		}
+	}
+	
 	public void tick() {
 		
 		// WASD Movement
@@ -50,9 +60,12 @@ public class Player extends Entity {
 		
 		// Shooting
 		if(Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
-			//lazers.add(new Lazer())
+			lazers.add(new Lazer(getX(), getY(), 3, 20, Color.RED, Launcher.getGame().getWindow().getMouseDeg()));
 		}
 		
+		for(Lazer lazer : lazers) {
+			lazer.tick();
+		}
 	}
 
 }
