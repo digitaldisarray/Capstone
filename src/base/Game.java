@@ -15,7 +15,7 @@ public class Game implements Runnable {
 	private boolean running = false;
 	private Thread thread;
 	
-	private boolean inGame = true;
+	private boolean inGame = false;
 	private boolean connected = false;
 	MenuManager mManager;
 	
@@ -145,5 +145,9 @@ public class Game implements Runnable {
 	
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public void setInGame(boolean b) {
+		inGame = b;
 	}
 }

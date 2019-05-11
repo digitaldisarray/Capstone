@@ -14,12 +14,14 @@ public class Lazer extends Entity {
 
 	public void draw(Graphics2D g) {
 		AffineTransform old = g.getTransform();
-		AffineTransform n = AffineTransform.getRotateInstance(Math.toRadians(degrees - 90), getX(), getY());
+		AffineTransform n = AffineTransform.getRotateInstance(-Math.toRadians(degrees + 90), getX(), getY());
 		// g.rotate(Math.toRadians(degrees-90));
 		g.transform(n);
 		g.setColor(this.getColor());
-		g.drawRect(getX(), getY(), getWidth(), getHeight());
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
 		g.setTransform(old);
 	}
+
+	
 
 }

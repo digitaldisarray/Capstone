@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import gui.Screen;
 import gui.objects.Button;
-import gui.objects.tasks.TestingTask;
+import gui.objects.tasks.StartButton;
 
 public class MainMenu implements Screen {
 	private int xClick, yClick;
@@ -18,7 +18,7 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(10, 10, 100, 40, "Hello World!", Color.GRAY, new TestingTask()));
+		buttons.add(new Button(10, 10, 100, 40, "Enter Game", Color.RED, new StartButton()));
 
 	}
 
