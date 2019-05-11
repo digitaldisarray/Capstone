@@ -147,7 +147,19 @@ public class Window {
 
 				double tanValue = Math.abs(((double) e.getY() - playerY) / ((double) e.getX() - playerX));
 				
+				if(e.getX() == playerX) {
+					if (e.getY() < playerY)
+						mouseDeg = 90;
+					else if (e.getY() > playerY)
+						mouseDeg = 270;
+				}
 				
+				if(e.getY() == playerY) {
+					if (e.getX() < playerX)
+						mouseDeg = 180;
+					else if (e.getX() > playerX)
+						mouseDeg = 0;
+				}
 				
 				if (e.getX() > playerX) {
 					if (e.getY() < playerY)
