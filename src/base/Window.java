@@ -18,10 +18,9 @@ public class Window {
 	private String title;
 	private int width, height;
 
+	// Stores all key states on the keyboard
 	private boolean[] keyPressed = new boolean[256];
-	private boolean[] keyTyped = new boolean[256];
-	private boolean[] virtualKeyPressed = new boolean[1024];
-	private boolean[] virtualKeyTyped = new boolean[1024];
+	private boolean[] keyTyped = new boolean[256]; // Nobody is going to have 256 key anti ghosting but too bad
 
 	public Window(String title, int width, int height) {
 		this.title = title;
@@ -48,18 +47,13 @@ public class Window {
 		frame.add(canvas);
 		frame.pack();
 
-		frame.addKeyListener(new KeyListener() {
+		// Add key listener to the canvas
+		canvas.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-
 				char c = e.getKeyChar();
-				System.out.println(c);
 				if (c >= 0 && c < keyPressed.length)
 					keyPressed[c] = keyTyped[c] = true;
-
-//				int vk = e.getKeyCode();
-//				if (vk >= 0 && vk < virtualKeyPressed.length)
-//					virtualKeyPressed[vk] = virtualKeyTyped[vk] = true;
 			}
 
 			@Override
@@ -67,61 +61,57 @@ public class Window {
 				char c = e.getKeyChar(); // may be CHAR_UNDEFINED
 				if (c >= 0 && c < keyPressed.length)
 					keyPressed[c] = false;
-
-//				int vk = e.getKeyCode();
-//				if (vk >= 0 && vk < virtualKeyPressed.length)
-//					virtualKeyPressed[vk] = false;
 			}
 
 			@Override
 			public void keyTyped(KeyEvent e) {
+
 			}
 		});
-		
-		canvas.addMouseListener(new MouseListener() {
 
+		// Add a mouse listener to the canvas
+		canvas.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println(e.getX());
 				System.out.println(e.getY());
-				Launcher.getGame().mManager.getCurrent().passKeyEvent(e.getX(), e.getY());			
-				}
+				Launcher.getGame().mManager.getCurrent().passKeyEvent(e.getX(), e.getY());
+			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 		});
 	}
 
+	// Get the canvas object
 	public Canvas getCanvas() {
 		return canvas;
 	}
 
+	// Function used to tell if a certain key is pressed
 	public boolean isKeyPressed(char key) {
 		return key >= 0 && key < keyPressed.length ? keyPressed[key] : false;
 	}
 
+	// Having this here magically fixes our mouse events
 	public void actionPerformed(ActionEvent e) {
 
 	}

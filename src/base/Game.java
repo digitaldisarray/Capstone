@@ -15,7 +15,7 @@ public class Game implements Runnable {
 	private boolean running = false;
 	private Thread thread;
 	
-	private boolean inGame = false;
+	private boolean inGame = true;
 	private boolean connected = false;
 	MenuManager mManager;
 	
@@ -34,7 +34,7 @@ public class Game implements Runnable {
 	private void init() {
 		window = new Window(title, width, height);
 		mManager = new MenuManager();
-		player = new Player(50, 50, 100, 100, new Color(0, 0, 0), "Test Player");
+		player = new Player(50, 50, 10, 10, new Color(0, 100, 80), "Test Player");
 	}
 
 	int x = 0;
@@ -59,8 +59,8 @@ public class Game implements Runnable {
 		if(!inGame) {
 			mManager.draw(g);
 		} else {
+			player.tick();
 			player.draw(g);
-			
 		}
 
 		// End Graphics
@@ -137,5 +137,9 @@ public class Game implements Runnable {
 	public double getYScaleFactor() {
 		
 		return window.getCanvas().getHeight() / 600.0;
+	}
+	
+	public Window getWindow() {
+		return this.window;
 	}
 }
