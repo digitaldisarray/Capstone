@@ -1,6 +1,7 @@
 package gui.objects;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 import base.Launcher;
@@ -31,6 +32,7 @@ public class Button {
 		
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, width, height);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 18)); 
 		g.drawString(text, x, y + height / 2 + 5);
 	}
 	

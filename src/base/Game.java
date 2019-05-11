@@ -94,7 +94,7 @@ public class Game implements Runnable {
 			}
 
 			if (timer >= 1000000000) {
-				System.out.println("FPS/TPS: " + ticks);
+				//dSystem.out.println("FPS/TPS: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}
@@ -141,5 +141,9 @@ public class Game implements Runnable {
 	
 	public Window getWindow() {
 		return this.window;
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 }
