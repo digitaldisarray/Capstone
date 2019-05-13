@@ -29,11 +29,11 @@ public class Button {
 	public void draw(Graphics2D g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, width, height);
-		
+		int stringX = g.getFontMetrics().stringWidth(text);
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, width, height);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 18)); 
-		g.drawString(text, x, y + height / 2 + 5);
+		g.drawString(text, ((width / 2) + x) - (stringX/2 - 18), y + height / 2 + 5);
 	}
 	
 	public void clicked() {
