@@ -18,7 +18,7 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(10, 10, 100, 40, "Enter Game", Color.RED, new StartButton()));
+		buttons.add(new Button(400-150, -55 + 350+300 -(413 / 2), 300, 55, "Enter Game", Color.RED, new StartButton()));
 
 	}
 
@@ -26,7 +26,7 @@ public class MainMenu implements Screen {
 	public void draw(Graphics2D g) {
 
 		g.setColor(grey);
-		g.fillRect(400 - 150, 300 - (413 / 2), 300, 413);
+		g.fillRect(400 - 150, 300 - (413 / 2), 300, 350);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
 		g.drawString("Bracket", 345, 150);
