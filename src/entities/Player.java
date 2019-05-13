@@ -73,5 +73,7 @@ public class Player extends Entity {
 			lazer.tick();
 		}
 	}
+	
+	
 
 }

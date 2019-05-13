@@ -146,37 +146,40 @@ public class Window {
 					break;
 				}
 
+				int mx = (int) Math.round( e.getX() / Launcher.getGame().getXScaleFactor());
+				int my = (int) Math.round(e.getY() / Launcher.getGame().getYScaleFactor());
+				
 				// playerX, playerY
 				int playerX = Launcher.getGame().getPlayer().getX() + Launcher.getGame().getPlayer().getWidth() / 2;
 				int playerY = Launcher.getGame().getPlayer().getY() + Launcher.getGame().getPlayer().getHeight() / 2;
 
-				double tanValue = Math.abs(((double) e.getY() - playerY) / ((double) e.getX() - playerX));
+				double tanValue = Math.abs(((double) my - playerY) / ((double) mx - playerX));
 
-				if (e.getX() == playerX) {
-					if (e.getY() < playerY)
+				if (mx == playerX) {
+					if (my < playerY)
 						mouseDeg = 90;
-					else if (e.getY() > playerY)
+					else if (my > playerY)
 						mouseDeg = 270;
 				}
 
-				if (e.getY() == playerY) {
-					if (e.getX() < playerX)
+				if (my == playerY) {
+					if (mx < playerX)
 						mouseDeg = 180;
-					else if (e.getX() > playerX)
+					else if (mx > playerX)
 						mouseDeg = 0;
 				}
 
-				if (e.getX() > playerX) {
-					if (e.getY() < playerY)
+				if (mx > playerX) {
+					if (my < playerY)
 						mouseDeg = Math.toDegrees(Math.atan(tanValue));
-					else if (e.getY() > playerY)
+					else if (my > playerY)
 						mouseDeg = 360 - Math.toDegrees(Math.atan(tanValue));
 				}
 
-				if (e.getX() < playerX) {
-					if (e.getY() < playerY)
+				if (mx < playerX) {
+					if (my < playerY)
 						mouseDeg = 180 - Math.toDegrees(Math.atan(tanValue));
-					else if (e.getY() > playerY)
+					else if (my > playerY)
 						mouseDeg = 180 + Math.toDegrees(Math.atan(tanValue));
 				}
 

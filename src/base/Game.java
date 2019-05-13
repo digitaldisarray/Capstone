@@ -150,4 +150,6 @@ public class Game implements Runnable {
 	public void setInGame(boolean b) {
 		inGame = b;
 	}
+	
+	
 }
