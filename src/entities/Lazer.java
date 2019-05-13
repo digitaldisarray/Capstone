@@ -21,7 +21,4 @@ public class Lazer extends Entity {
 		g.fillRect(getX(), getY(), getWidth(), getHeight());
 		g.setTransform(old);
 	}
-
-	
-
 }

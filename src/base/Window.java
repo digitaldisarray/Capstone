@@ -114,7 +114,6 @@ public class Window {
 			public void mouseClicked(MouseEvent e) {
 //				System.out.println(e.getX());
 //				System.out.println(e.getY());
-				Launcher.getGame().mManager.getCurrent().passKeyEvent(e.getX(), e.getY());
 			}
 
 			@Override
@@ -129,6 +128,12 @@ public class Window {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+
+				Launcher.getGame().mManager.getCurrent().passKeyEvent(e.getX(), e.getY());
+				
+				System.out.println(e.getX());
+				System.out.println(e.getY());
+				
 				switch (e.getButton()) {
 				case MouseEvent.BUTTON1:
 					mouse[0] = true;
