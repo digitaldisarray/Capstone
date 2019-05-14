@@ -7,22 +7,48 @@ import java.awt.geom.AffineTransform;
 import base.Launcher;
 
 public class Lazer extends Entity {
-	double degrees;
+	static int totalNumber;
+	private int number;
+	private double degrees;
+	private double velocity;//this is in pixles/millisecond
+	private boolean remove;
+	private long startTime;
+	private long lastTime;
+	private long duration;
 
-	public Lazer(int x, int y, int width, int height, Color color, double degrees) {
+	public Lazer(int x, int y, int width, int height, Color color, double degrees, double velocity, long duration) {
 		super(x, y, width, height, color);
 		this.degrees = degrees;
+		this.velocity = velocity;
+		remove = false;
+		startTime = System.currentTimeMillis();
+		lastTime = startTime;
+		this.duration = duration;
+		totalNumber = totalNumber+1;
+		number = totalNumber;
 	}
 
 	public void draw(Graphics2D g) {
+		long time = System.currentTimeMillis();
+		super.setX((int) (super.getX()+((int)(time-lastTime))*velocity*Math.cos(-Math.toRadians(degrees))));
+		super.setY((int) (super.getY()+((int)(time-lastTime))*velocity*Math.sin(-Math.toRadians(degrees))));
+		
 		AffineTransform old = g.getTransform();
 		AffineTransform n = AffineTransform.getRotateInstance(-Math.toRadians(degrees + 90), getX(), getY());
-		// g.rotate(Math.toRadians(degrees-90));
-		int playerWidth = Launcher.getGame().getPlayer().getWidth() / 2;
-		int playerHeight= Launcher.getGame().getPlayer().getHeight() / 2;
+
 		g.transform(n);
 		g.setColor(this.getColor());
 		g.fillRect(getX(), getY(), getWidth(), getHeight());
 		g.setTransform(old);
+		
+		lastTime = time;
+		if(time - startTime > duration) {
+			remove = true;
+		}
+		System.out.println(number);
+	}
+	
+	public boolean shouldRemove() {
+		return remove;
 	}
 }

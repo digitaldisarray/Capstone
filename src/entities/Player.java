@@ -23,7 +23,7 @@ public class Player extends Entity {
 
 	public void draw(Graphics2D g) {
 		g.setColor(getColor());
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
+		g.fillRect(getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
 
 		for (Lazer lazer : lazers) {
 			lazer.draw(g);
@@ -64,16 +64,21 @@ public class Player extends Entity {
 		// Shooting
 		if (System.currentTimeMillis() - lastShot > LAZER_MS_COOLDOWN) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
-				lazers.add(new Lazer(getX(), getY(), 3, 20, Color.RED, Launcher.getGame().getWindow().getMouseDeg()));
+				lazers.add(new Lazer(getX(), getY(), 3, 20, Color.RED, Launcher.getGame().getWindow().getMouseDeg(), 0.5, 2000));
 				lastShot = System.currentTimeMillis();
 			}
 		}
 
-		for (Lazer lazer : lazers) {
+		for(int i = 0; i < lazers.size(); i++) {
+			Lazer lazer = lazers.get(i);
 			lazer.tick();
+			
+			if(lazer.shouldRemove()) {//Do this last
+				lazers.remove(i);
+			}
 		}
 	}
-	
-	
+
+
 
 }
