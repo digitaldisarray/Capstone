@@ -1,2 +1,5 @@
+(IF YOU ARE A CODE REVIEWER AND ARE LOOKING AT THIS README FILE, YOU ARE LOOKING AT THE WRONG ONE)
+(LOOK AT THE PDF README)
+
 ## Capstone project
 This is some 2d game that is (very) epic.
