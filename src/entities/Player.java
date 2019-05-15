@@ -13,8 +13,9 @@ public class Player extends Entity {
 
 	ArrayList<Lazer> lazers = new ArrayList<>();
 
-	private final int LAZER_MS_COOLDOWN = 1;
+	private final int LAZER_MS_COOLDOWN = 250;
 	private long lastShot = 0;
+	private final int MOVEMENT_SPEED = 3;
 
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);
@@ -30,55 +31,57 @@ public class Player extends Entity {
 		}
 	}
 
-	public void tick() {
+	public void tick() {// Handles movement and shooting, also makes it so that player can't go off
+						// screen
 
 		// WASD Movement
 		if (Launcher.getGame().getWindow().isKeyPressed('w'))
-			this.setY(getY() - 2);
+			this.setY(getY() - MOVEMENT_SPEED);
 
 		if (Launcher.getGame().getWindow().isKeyPressed('a'))
-			this.setX(getX() - 2);
+			this.setX(getX() - MOVEMENT_SPEED);
 
 		if (Launcher.getGame().getWindow().isKeyPressed('s'))
-			this.setY(getY() + 2);
+			this.setY(getY() + MOVEMENT_SPEED);
 
 		if (Launcher.getGame().getWindow().isKeyPressed('d'))
-			this.setX(getX() + 2);
+			this.setX(getX() + MOVEMENT_SPEED);
 
-		if (this.getX() < 0) {
-			this.setX(0);
+		if (this.getX() < 0 + this.getWidth() /2) {
+			this.setX(0 + this.getWidth() / 2);
 		}
 
-		if (this.getY() < 0) {
-			this.setY(0);
+		if (this.getY() < 0 + this.getWidth() / 2) {
+			this.setY(0 + this.getWidth() / 2);
 		}
 
-		if (this.getX() > 800 - this.getWidth()) {
-			this.setX(800 - this.getWidth());
+		if (this.getX() > 800 - this.getWidth() / 2) {
+			this.setX(800 - this.getWidth() / 2);
 		}
 
-		if (this.getY() > 600 - this.getHeight()) {
-			this.setY(600 - this.getHeight());
+		if (this.getY() > 600 - this.getHeight() / 2) {
+			this.setY(600 - this.getHeight() / 2);
 		}
 
 		// Shooting
 		if (System.currentTimeMillis() - lastShot > LAZER_MS_COOLDOWN) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
-					lazers.add(new Lazer(getX(), getY(), 3, 20, Color.RED, Launcher.getGame().getWindow().getMouseDeg(), 0.5, 2000));
-					lastShot = System.currentTimeMillis();
+				lazers.add(new Lazer(getX(), getY(), 3, 20, Color.RED, Launcher.getGame().getWindow().getMouseDeg(),
+						0.5, 2000));// This creates a new lazer. It leverages a lot of other classes and methods to
+									// get mouse position
+				
+				lastShot = System.currentTimeMillis();
 			}
 		}
 
-		for(int i = 0; i < lazers.size(); i++) {
+		for (int i = 0; i < lazers.size(); i++) {// Used to remove old lazers to avoid an overflow error
 			Lazer lazer = lazers.get(i);
 			lazer.tick();
 
-			if(lazer.shouldRemove()) {//Do this last
+			if (lazer.shouldRemove()) {// Do this last
 				lazers.remove(i);
 			}
 		}
 	}
-
-
 
 }

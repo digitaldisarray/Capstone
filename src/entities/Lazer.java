@@ -8,7 +8,7 @@ import base.Launcher;
 
 public class Lazer extends Entity {
 	static int totalNumber;
-	private int number;
+
 	private double degrees;
 	private double velocity;//this is in pixles/millisecond
 	private boolean remove;
@@ -25,12 +25,12 @@ public class Lazer extends Entity {
 		lastTime = startTime;
 		this.duration = duration;
 		totalNumber = totalNumber+1;
-		number = totalNumber;
+		
 	}
 
-	public void draw(Graphics2D g) {
+	public void draw(Graphics2D g) {//Draws the lazer
 		long time = System.currentTimeMillis();
-		super.setX((int) (super.getX()+((int)(time-lastTime))*velocity*Math.cos(-Math.toRadians(degrees))));
+		super.setX((int) (super.getX()+((int)(time-lastTime))*velocity*Math.cos(-Math.toRadians(degrees))));//Moves x and y coordinates accordingly every time lazer is redrawn
 		super.setY((int) (super.getY()+((int)(time-lastTime))*velocity*Math.sin(-Math.toRadians(degrees))));
 		
 		AffineTransform old = g.getTransform();
@@ -42,7 +42,7 @@ public class Lazer extends Entity {
 		g.setTransform(old);
 		
 		lastTime = time;
-		if(time - startTime > duration) {
+		if(time - startTime > duration) {//Time is used to hopefully reduce screen lag due to too many objects being created
 			remove = true;
 		}
 	}

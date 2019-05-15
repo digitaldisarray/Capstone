@@ -6,6 +6,6 @@ public interface Screen {
 
 	public abstract void init();
 	public abstract void draw(Graphics2D g);
-	public abstract void passKeyEvent(int x, int y);
+	public abstract void passKeyEvent(int x, int y);//used to pass a key event
 
 }
