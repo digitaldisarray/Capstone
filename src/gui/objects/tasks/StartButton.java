@@ -9,6 +9,7 @@ public class StartButton implements ButtonTask {
 
 	@Override
 	public void run() {
+		
 		Launcher.getGame().setInGame(true);
 
 	}

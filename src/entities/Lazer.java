@@ -45,7 +45,6 @@ public class Lazer extends Entity {
 		if(time - startTime > duration) {
 			remove = true;
 		}
-		System.out.println(number);
 	}
 	
 	public boolean shouldRemove() {

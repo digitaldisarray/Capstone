@@ -13,7 +13,7 @@ public class Player extends Entity {
 
 	ArrayList<Lazer> lazers = new ArrayList<>();
 
-	private final int LAZER_MS_COOLDOWN = 250;
+	private final int LAZER_MS_COOLDOWN = 1;
 	private long lastShot = 0;
 
 	public Player(int x, int y, int width, int height, Color color, String name) {
@@ -64,15 +64,15 @@ public class Player extends Entity {
 		// Shooting
 		if (System.currentTimeMillis() - lastShot > LAZER_MS_COOLDOWN) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
-				lazers.add(new Lazer(getX(), getY(), 3, 20, Color.RED, Launcher.getGame().getWindow().getMouseDeg(), 0.5, 2000));
-				lastShot = System.currentTimeMillis();
+					lazers.add(new Lazer(getX(), getY(), 3, 20, Color.RED, Launcher.getGame().getWindow().getMouseDeg(), 0.5, 2000));
+					lastShot = System.currentTimeMillis();
 			}
 		}
 
 		for(int i = 0; i < lazers.size(); i++) {
 			Lazer lazer = lazers.get(i);
 			lazer.tick();
-			
+
 			if(lazer.shouldRemove()) {//Do this last
 				lazers.remove(i);
 			}

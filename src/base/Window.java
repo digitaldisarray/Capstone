@@ -2,6 +2,8 @@ package base;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -242,7 +244,48 @@ public class Window {
 		return false;
 	}
 	
+	public void updateMouseCoords() {
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		int mx = (int) (p.getX()/Launcher.getGame().getXScaleFactor()) - frame.getX();
+		int my = (int) (p.getY()/Launcher.getGame().getYScaleFactor())- frame.getY();
+		System.out.print(mx);
+		// playerX, playerY
+		int playerX = Launcher.getGame().getPlayer().getX() + Launcher.getGame().getPlayer().getWidth() / 2;
+		int playerY = Launcher.getGame().getPlayer().getY() + Launcher.getGame().getPlayer().getHeight() / 2;
+
+		double tanValue = Math.abs(((double) my - playerY) / ((double) mx - playerX));
+
+		if (mx == playerX) {
+			if (my < playerY)
+				mouseDeg = 90;
+			else if (my > playerY)
+				mouseDeg = 270;
+		}
+
+		if (my == playerY) {
+			if (mx < playerX)
+				mouseDeg = 180;
+			else if (mx > playerX)
+				mouseDeg = 0;
+		}
+
+		if (mx > playerX) {
+			if (my < playerY)
+				mouseDeg = Math.toDegrees(Math.atan(tanValue));
+			else if (my > playerY)
+				mouseDeg = 360 - Math.toDegrees(Math.atan(tanValue));
+		}
+
+		if (mx < playerX) {
+			if (my < playerY)
+				mouseDeg = 180 - Math.toDegrees(Math.atan(tanValue));
+			else if (my > playerY)
+				mouseDeg = 180 + Math.toDegrees(Math.atan(tanValue));
+		}
+	}
+	
 	public double getMouseDeg() {
+		updateMouseCoords();
 		System.out.println("Radians: " + Math.toRadians(mouseDeg) + "  Degrees: " + mouseDeg);
 		return mouseDeg;
 	}
