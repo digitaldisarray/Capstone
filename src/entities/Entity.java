@@ -3,6 +3,7 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Entity implements Serializable {
 	
@@ -12,12 +13,15 @@ public class Entity implements Serializable {
 	private int height;
 	private Color color;
 	
+	private UUID uuid; // Used to avoid duplicate entities on the server
+	
 	public Entity(int x, int y, int width, int height, Color color) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.color = color;
+		this.uuid = UUID.randomUUID();
 	}
 	
 	public void tick() {
@@ -55,5 +59,9 @@ public class Entity implements Serializable {
 	
 	public Color getColor() {
 		return color;
+	}
+	
+	public UUID getUUID() {
+		return this.uuid;
 	}
 }
