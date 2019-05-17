@@ -8,11 +8,12 @@ import java.util.ArrayList;
 
 import gui.Screen;
 import gui.objects.Button;
-import gui.objects.tasks.LazerColorButton;
+import gui.objects.tasks.BackToMain;
 import gui.objects.tasks.PlayerColorButton;
+import gui.objects.tasks.BluePlayerButton;
 import gui.objects.tasks.StartButton;
 
-public class MainMenu implements Screen {
+public class PlayerColorPicker implements Screen {
 	private int xClick, yClick;
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
@@ -20,9 +21,8 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(400-150, -55 + 350+300 -(413 / 2), 300, 55, "Enter Game", Color.RED, new StartButton()));
-		buttons.add(new Button(400-150, -55 + 250+300 -(413 / 2), 300, 55, "Player Color", Color.RED, new PlayerColorButton()));
-		buttons.add(new Button(400-150, -55 + 150+300 -(413 / 2), 300, 55, "Lazer Color", Color.RED, new LazerColorButton()));
+		buttons.add(new Button(250, -55 + 350+300 -(413 / 2), 300, 55, "Set player color blue", Color.RED, new BluePlayerButton()));
+		buttons.add(new Button(250, -55 + 250+300 -(413 / 2), 300, 55, "Back to Main", Color.RED, new BackToMain()));
 
 	}
 
@@ -33,7 +33,7 @@ public class MainMenu implements Screen {
 		g.fillRect(400 - 150, 300 - (413 / 2), 300, 350);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
-		g.drawString("Bracket", 345, 150);
+		g.drawString("Player Color", 345, 150);
 		for (Button button : buttons) {
 			button.draw(g);
 		}

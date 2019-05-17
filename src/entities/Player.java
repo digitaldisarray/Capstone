@@ -12,10 +12,11 @@ public class Player extends Entity {
 	String name; // The players name
 
 	ArrayList<Lazer> lazers = new ArrayList<>();
-
 	private final int LAZER_MS_COOLDOWN = 250;
 	private long lastShot = 0;
 	private final int MOVEMENT_SPEED = 3;
+	private static Color playerColor;
+	private static Color lazerColor;
 
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);
@@ -23,10 +24,11 @@ public class Player extends Entity {
 	}
 
 	public void draw(Graphics2D g) {
-		g.setColor(getColor());
+		g.setColor(playerColor);
 		g.fillRect(getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
 
 		for (Lazer lazer : lazers) {
+			g.setColor(lazerColor);
 			lazer.draw(g);
 		}
 	}
@@ -47,7 +49,7 @@ public class Player extends Entity {
 		if (Launcher.getGame().getWindow().isKeyPressed('d'))
 			this.setX(getX() + MOVEMENT_SPEED);
 
-		if (this.getX() < 0 + this.getWidth() /2) {
+		if (this.getX() < 0 + this.getWidth() / 2) {
 			this.setX(0 + this.getWidth() / 2);
 		}
 
@@ -66,10 +68,10 @@ public class Player extends Entity {
 		// Shooting
 		if (System.currentTimeMillis() - lastShot > LAZER_MS_COOLDOWN) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
-				lazers.add(new Lazer(getX(), getY(), 3, 20, Color.RED, Launcher.getGame().getWindow().getMouseDeg(),
+				lazers.add(new Lazer(getX(), getY(), 3, 20, lazerColor, Launcher.getGame().getWindow().getMouseDeg(),
 						0.5, 2000));// This creates a new lazer. It leverages a lot of other classes and methods to
 									// get mouse position
-				
+
 				lastShot = System.currentTimeMillis();
 			}
 		}
@@ -82,6 +84,13 @@ public class Player extends Entity {
 				lazers.remove(i);
 			}
 		}
+	}
+
+	public void setPlayerColor(Color color) {
+		playerColor = color;
+	}
+	public void setLazerColor(Color color) {
+		lazerColor = color;
 	}
 
 }

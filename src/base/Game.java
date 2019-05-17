@@ -151,5 +151,7 @@ public class Game implements Runnable {
 		inGame = b;
 	}
 	
-	
+	public MenuManager getMenuManager() {
+		return mManager;
+	}
 }

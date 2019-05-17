@@ -6,16 +6,15 @@ import java.awt.Graphics2D;
 
 import base.Launcher;
 
-
 public class Button {
 	private int x, y, width, height;
-	
+
 	private String text;
 	private Color color;
 	private ButtonTask task;
-	
+
 	// TODO: Create class called click task
-	
+
 	public Button(int x, int y, int width, int height, String text, Color color, ButtonTask task) {
 		this.x = x;
 		this.y = y;
@@ -25,48 +24,51 @@ public class Button {
 		this.color = color;
 		this.task = task;
 	}
-	
+
 	public void draw(Graphics2D g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, width, height);
-		int stringX = g.getFontMetrics().stringWidth(text);
+		
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 18));
+		int stringWidth = g.getFontMetrics().stringWidth(text);
+
+		int difference = (width - stringWidth) / 2;
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, width, height);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 18)); 
-		g.drawString(text, ((width / 2) + x) - (stringX/2 - 18), y + height / 2 + 5);
+
+		g.drawString(text, x + difference, y + height / 2 + 5);
+
 	}
-	
+
 	public void clicked() {
 		task.run();
 	}
-	
-	
-	
+
 	public int getX() {
 		return x;
 	}
-	
+
 	public int getY() {
 		return y;
 	}
-	
+
 	public int getWidth() {
 		return width;
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}
-	
+
 	public boolean contains(int xClick, int yClick) {
 		xClick /= Launcher.getGame().getXScaleFactor();
 		yClick /= Launcher.getGame().getYScaleFactor();
-		
-		if(xClick >= this.getX() && xClick <= this.getX() + this.getWidth()) {
-			if(yClick >= this.getY() && yClick <= this.getY() + this.getHeight() ) {
+
+		if (xClick >= this.getX() && xClick <= this.getX() + this.getWidth()) {
+			if (yClick >= this.getY() && yClick <= this.getY() + this.getHeight()) {
 				return true;
 			}
 		}
 		return false;
-		}
 	}
+}

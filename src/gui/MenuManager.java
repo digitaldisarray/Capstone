@@ -18,6 +18,7 @@ public class MenuManager {
 	
 	public void setCurrentScreen(Screen screen) {
 		this.current = screen;
+		this.current.init();
 	}
 	
 	public Screen getCurrent() {
