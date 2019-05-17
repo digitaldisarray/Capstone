@@ -130,9 +130,7 @@ public class Window {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-
-				Launcher.getGame().mManager.getCurrent().passKeyEvent(e.getX(), e.getY()); //Passes the mouse click to where it can be used
-
+				Launcher.getGame().mManager.getCurrent().passPressEvent(e.getX(), e.getY()); // Passes the mouse click to where it can be used
 
 				switch (e.getButton()) {
 				case MouseEvent.BUTTON1:
@@ -146,12 +144,12 @@ public class Window {
 					break;
 				}
 
-			
-
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				Launcher.getGame().mManager.getCurrent().passReleaseEvent(e.getX(), e.getY());
+				
 				switch (e.getButton()) {
 				case MouseEvent.BUTTON1:
 					mouse[0] = false;
@@ -248,7 +246,8 @@ public class Window {
 		}
 	}
 
-	public double getMouseDeg() {//Calls updateMouseCoords, forces angle to update to the current angle of the mouse
+	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the
+									// mouse
 		updateMouseCoords();
 		System.out.println("Radians: " + Math.toRadians(mouseDeg) + "  Degrees: " + mouseDeg);
 		return mouseDeg;

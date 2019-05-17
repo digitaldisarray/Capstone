@@ -43,10 +43,20 @@ public class MainMenu implements Screen {
 
 	}
 
-	public void passKeyEvent(int x, int y) {
+	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {
-			if (button.contains(x, y))
+			if (button.contains(x, y)) {
 				button.clicked();
+			}
+		}
+	}
+	
+	
+	public void passReleaseEvent(int x, int y) {
+		for (Button button : buttons) {
+			if (button.isBold()) {
+				button.setBold(false);
+			}
 		}
 	}
 

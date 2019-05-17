@@ -12,6 +12,7 @@ public class Button {
 	private String text;
 	private Color color;
 	private ButtonTask task;
+	private boolean bold;
 
 	// TODO: Create class called click task
 
@@ -29,13 +30,17 @@ public class Button {
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, width, height);
 		
+		
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 18));
 		int stringWidth = g.getFontMetrics().stringWidth(text);
 
 		int difference = (width - stringWidth) / 2;
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, width, height);
-
+		if(bold) {
+			g.drawRect(x + 1, y + 1, width - 1, height - 1);
+		}
+		
 		g.drawString(text, x + difference, y + height / 2 + 5);
 
 	}
@@ -70,5 +75,13 @@ public class Button {
 			}
 		}
 		return false;
+	}
+	
+	public void setBold(boolean input) {
+		this.bold = input;
+	}
+	
+	public boolean isBold() {
+		return bold;
 	}
 }
