@@ -7,14 +7,17 @@ import java.awt.Graphics2D;
 import base.Launcher;
 
 public class Button {
+	// Coordinates and size of the button
 	private int x, y, width, height;
 
+	// The text that the button will display
 	private String text;
-	private Color color;
+	
+	// The task that the button is assigned
 	private ButtonTask task;
+	
+	// Should the button be displayed in bold mode
 	private boolean bold;
-
-	// TODO: Create class called click task
 
 	public Button(int x, int y, int width, int height, String text, Color color, ButtonTask task) {
 		this.x = x;
@@ -22,14 +25,12 @@ public class Button {
 		this.width = width;
 		this.height = height;
 		this.text = text;
-		this.color = color;
 		this.task = task;
 	}
 
 	public void draw(Graphics2D g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, width, height);
-		
 		
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 18));
 		int stringWidth = g.getFontMetrics().stringWidth(text);
@@ -38,7 +39,7 @@ public class Button {
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, width, height);
 		if(bold) {
-			g.drawRect(x + 1, y + 1, width - 1, height - 1);
+			g.drawRect(x + 1, y + 1, width - 2, height - 2);
 		}
 		
 		g.drawString(text, x + difference, y + height / 2 + 5);

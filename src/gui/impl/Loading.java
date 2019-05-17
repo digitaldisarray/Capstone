@@ -25,8 +25,4 @@ public class Loading implements Screen {
 	public void passReleaseEvent(int x, int y) {
 		
 	}
-	
-
-	
-
 }

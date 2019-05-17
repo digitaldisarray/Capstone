@@ -19,9 +19,8 @@ public class PlayerColorPicker implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(250, -55 + 350+300 -(413 / 2), 300, 55, "Set player color blue", Color.RED, new BluePlayerButton()));
-		buttons.add(new Button(250, -55 + 250+300 -(413 / 2), 300, 55, "Back to Main", Color.RED, new BackToMain()));
-
+		buttons.add(new Button(250, -55 + 350 + 300 - (413 / 2), 300, 55, "Set player color blue", Color.RED, new BluePlayerButton()));
+		buttons.add(new Button(250, -55 + 250 + 300 - (413 / 2), 300, 55, "Back to Main", Color.RED, new BackToMain()));
 	}
 
 	@Override
@@ -41,12 +40,12 @@ public class PlayerColorPicker implements Screen {
 
 	}
 
-
 	@Override
 	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {
-			if (button.contains(x, y))
-				button.clicked();
+			if (button.contains(x, y)) {
+				button.setBold(true);
+			}
 		}
 	}
 
@@ -55,6 +54,10 @@ public class PlayerColorPicker implements Screen {
 		for (Button button : buttons) {
 			if (button.isBold()) {
 				button.setBold(false);
+			}
+			
+			if(button.contains(x, y)) {
+				button.clicked();
 			}
 		}
 	}

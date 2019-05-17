@@ -27,7 +27,6 @@ public class LazerColorPicker implements Screen {
 
 	@Override
 	public void draw(Graphics2D g) {
-
 		g.setColor(grey);
 		g.fillRect(400 - 150, 300 - (413 / 2), 300, 350);
 		g.setColor(Color.BLACK);
@@ -42,7 +41,7 @@ public class LazerColorPicker implements Screen {
 	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {
 			if (button.contains(x, y)) {
-				button.clicked();
+				button.setBold(true);
 			}
 		}
 	}
@@ -52,6 +51,10 @@ public class LazerColorPicker implements Screen {
 		for (Button button : buttons) {
 			if (button.isBold()) {
 				button.setBold(false);
+			}
+			
+			if(button.contains(x, y)) {
+				button.clicked();
 			}
 		}
 	}
