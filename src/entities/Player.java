@@ -23,6 +23,7 @@ public class Player extends Entity {
 		this.name = name;
 	}
 
+	@Override
 	public void draw(Graphics2D g) {
 		g.setColor(playerColor);
 		g.fillRect(getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
@@ -33,6 +34,7 @@ public class Player extends Entity {
 		}
 	}
 
+	@Override
 	public void tick() {// Handles movement and shooting, also makes it so that player can't go off
 						// screen
 

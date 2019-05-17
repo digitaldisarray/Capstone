@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 public class CustomPanel extends JPanel {
 
+	@Override
 	public void paint(Graphics g) {
 
 		super.paintComponent(g);

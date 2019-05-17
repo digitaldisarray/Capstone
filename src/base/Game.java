@@ -69,6 +69,7 @@ public class Game implements Runnable {
 	}
 
 	// Run the game
+	@Override
 	public void run() {
 		init();
 

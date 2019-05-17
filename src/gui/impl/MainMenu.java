@@ -43,6 +43,7 @@ public class MainMenu implements Screen {
 
 	}
 
+	@Override
 	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {
 			if (button.contains(x, y)) {
@@ -52,6 +53,7 @@ public class MainMenu implements Screen {
 	}
 	
 	
+	@Override
 	public void passReleaseEvent(int x, int y) {
 		for (Button button : buttons) {
 			if (button.isBold()) {

@@ -17,10 +17,15 @@ public class Loading implements Screen {
 	}
 
 	@Override
-	public void passKeyEvent(int x, int y) {
-		// TODO Auto-generated method stub
+	public void passPressEvent(int x, int y) {
 		
 	}
+
+	@Override
+	public void passReleaseEvent(int x, int y) {
+		
+	}
+	
 
 	
 

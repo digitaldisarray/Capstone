@@ -3,16 +3,12 @@ package gui.impl;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import gui.Screen;
 import gui.objects.Button;
 import gui.objects.tasks.BackToMain;
-import gui.objects.tasks.PlayerColorButton;
-import gui.objects.tasks.BluePlayerButton;
 import gui.objects.tasks.OrangeLazerButton;
-import gui.objects.tasks.StartButton;
 
 public class LazerColorPicker implements Screen {
 	private int xClick, yClick;
@@ -22,8 +18,10 @@ public class LazerColorPicker implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(400-150, -55 + 350+300 -(413 / 2), 300, 55, "Set Lazer Color Orange", Color.RED, new OrangeLazerButton()));
-		buttons.add(new Button(400-150, -55 + 250+300 -(413 / 2), 300, 55, "Back to Main menu", Color.RED, new BackToMain()));
+		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Set Lazer Color Orange", Color.RED,
+				new OrangeLazerButton()));
+		buttons.add(new Button(400 - 150, -55 + 250 + 300 - (413 / 2), 300, 55, "Back to Main menu", Color.RED,
+				new BackToMain()));
 
 	}
 
@@ -40,14 +38,21 @@ public class LazerColorPicker implements Screen {
 		}
 	}
 
-	public void actionPerformed(ActionEvent e) {
-
+	@Override
+	public void passPressEvent(int x, int y) {
+		for (Button button : buttons) {
+			if (button.contains(x, y)) {
+				button.clicked();
+			}
+		}
 	}
 
-	public void passKeyEvent(int x, int y) {
+	@Override
+	public void passReleaseEvent(int x, int y) {
 		for (Button button : buttons) {
-			if (button.contains(x, y))
-				button.clicked();
+			if (button.isBold()) {
+				button.setBold(false);
+			}
 		}
 	}
 

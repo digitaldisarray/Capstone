@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import gui.Screen;
 import gui.objects.Button;
 import gui.objects.tasks.BackToMain;
-import gui.objects.tasks.PlayerColorButton;
 import gui.objects.tasks.BluePlayerButton;
-import gui.objects.tasks.StartButton;
 
 public class PlayerColorPicker implements Screen {
 	private int xClick, yClick;

@@ -1,7 +1,6 @@
 package gui.objects.tasks;
 
 import gui.impl.MainMenu;
-import gui.impl.PlayerColorPicker;
 import gui.objects.ButtonTask;
 
 import base.Launcher;

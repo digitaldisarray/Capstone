@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import base.Launcher;
-
 public class Lazer extends Entity {
 	static int totalNumber;
 
@@ -28,6 +26,7 @@ public class Lazer extends Entity {
 		
 	}
 
+	@Override
 	public void draw(Graphics2D g) {//Draws the lazer
 		long time = System.currentTimeMillis();
 		super.setX((int) (super.getX()+((int)(time-lastTime))*velocity*Math.cos(-Math.toRadians(degrees))));//Moves x and y coordinates accordingly every time lazer is redrawn
