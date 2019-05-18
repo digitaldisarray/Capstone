@@ -75,6 +75,7 @@ public class Game implements Runnable {
 		}
 
 		// Draw FPS
+		g.setColor(Color.BLACK);
 		g.drawString("FPS: " + lastFPS, 1, 15);
 		
 		// End Graphics
