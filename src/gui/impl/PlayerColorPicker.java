@@ -19,8 +19,13 @@ public class PlayerColorPicker implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(250, -55 + 350 + 300 - (413 / 2), 300, 55, "Set player color blue", new BluePlayerButton()));
-		buttons.add(new Button(250, -55 + 250 + 300 - (413 / 2), 300, 55, "Back to Main", new BackToMain()));
+		buttons.add(new Button(250, 170, 100, 109, "", new BluePlayerButton(), Color.BLUE));
+		buttons.add(new Button(350, 170, 100, 109, "", new BluePlayerButton(), Color.ORANGE));
+		buttons.add(new Button(450, 170, 100, 109, "", new BluePlayerButton(), Color.RED));
+		buttons.add(new Button(250, 279, 100, 109, "", new BluePlayerButton(), Color.CYAN));
+		buttons.add(new Button(350, 279, 100, 109, "", new BluePlayerButton(), Color.GREEN));
+		buttons.add(new Button(450, 279, 100, 109, "", new BluePlayerButton(), Color.magenta));
+		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), Color.GRAY));
 	}
 
 	@Override
@@ -30,7 +35,10 @@ public class PlayerColorPicker implements Screen {
 		g.fillRect(400 - 150, 300 - (413 / 2), 300, 350);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
-		g.drawString("Player Color", 345, 150);
+		String title = "Player Color";
+		int stringWidth = g.getFontMetrics().stringWidth(title);
+		int difference = (300 - stringWidth) / 2;
+		g.drawString("Player Color", 250 + difference, 150);
 		for (Button button : buttons) {
 			button.draw(g);
 		}

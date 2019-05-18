@@ -12,26 +12,29 @@ public class Button {
 
 	// The text that the button will display
 	private String text;
-
+	
 	// The task that the button is assigned
 	private ButtonTask task;
 
 	// Should the button be displayed in bold mode
 	private boolean bold;
-
+	
+	//The color of the button]
+	private Color buttonColor;
 	// Constructor to create a new button
-	public Button(int x, int y, int width, int height, String text, ButtonTask task) {
+	public Button(int x, int y, int width, int height, String text, ButtonTask task, Color color) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.text = text;
 		this.task = task;
+		buttonColor = color;
 	}
 
 	// Draw the button
 	public void draw(Graphics2D g) {
-		g.setColor(Color.GRAY);
+		g.setColor(buttonColor);
 		g.fillRect(x, y, width, height);
 
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 18));

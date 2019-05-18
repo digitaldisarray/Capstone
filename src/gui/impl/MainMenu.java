@@ -20,10 +20,10 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Enter Game", new StartButton()));
+		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Enter Game", new StartButton(), Color.GRAY));
 		buttons.add(
-				new Button(400 - 150, -55 + 250 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorButton()));
-		buttons.add(new Button(400 - 150, -55 + 150 + 300 - (413 / 2), 300, 55, "Lazer Color", new LazerColorButton()));
+				new Button(400 - 150, -55 + 250 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorButton(),Color.GRAY));
+		buttons.add(new Button(400 - 150, -55 + 150 + 300 - (413 / 2), 300, 55, "Lazer Color", new LazerColorButton(), Color.GRAY));
 
 	}
 
@@ -33,7 +33,10 @@ public class MainMenu implements Screen {
 		g.fillRect(400 - 150, 300 - (413 / 2), 300, 350);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
-		g.drawString("Bracket", 345, 150);
+		String title = "Bracket";
+		int stringWidth = g.getFontMetrics().stringWidth(title);
+		int difference = (300 - stringWidth) / 2;
+		g.drawString(title, 250 + difference, 150);
 		for (Button button : buttons) {
 			button.draw(g);
 		}
