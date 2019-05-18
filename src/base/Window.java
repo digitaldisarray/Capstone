@@ -14,20 +14,24 @@ import javax.swing.JFrame;
 
 public class Window {
 
+	// Window property variables
 	private JFrame frame;
 	private Canvas canvas;
 
 	private String title;
 	private int width, height;
 
+	// The angle between the mouse and player
 	private double mouseDeg;
 
 	// Stores all key states on the keyboard
 	private boolean[] keyPressed = new boolean[256];
 	private boolean[] keyTyped = new boolean[256]; // Nobody is going to have 256 key anti ghosting but too bad
 
+	// Booleans for storing mouse presses
 	private boolean[] mouse = new boolean[2];
 
+	// Constructor for a new Window object
 	public Window(String title, int width, int height) {
 		this.title = title;
 		this.width = width;
@@ -36,6 +40,7 @@ public class Window {
 		init();
 	}
 
+	// Instantiate the window
 	private void init() {
 		frame = new JFrame(title);
 		frame.setSize(width, height);
@@ -246,8 +251,7 @@ public class Window {
 		}
 	}
 
-	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the
-									// mouse
+	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the mouse
 		updateMouseCoords();
 		System.out.println("Radians: " + Math.toRadians(mouseDeg) + "  Degrees: " + mouseDeg);
 		return mouseDeg;
