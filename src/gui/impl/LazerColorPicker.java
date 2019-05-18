@@ -11,18 +11,20 @@ import gui.objects.tasks.BackToMain;
 import gui.objects.tasks.OrangeLazerButton;
 
 public class LazerColorPicker implements Screen {
-	private int xClick, yClick;
-	ArrayList<Button> buttons = new ArrayList<>();
-	Color grey = new Color(224, 224, 224);
-	Font font = new Font("Serif", 10, 30);
+	
+	// The buttons that this screen uses
+	private ArrayList<Button> buttons = new ArrayList<>();
+	
+	// The color for buttons
+	private Color grey = new Color(224, 224, 224);
+	
+	// The font for text
+	private Font font = new Font("Serif", 10, 30);
 
 	@Override
 	public void init() {
-		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Set Lazer Color Orange", Color.RED,
-				new OrangeLazerButton()));
-		buttons.add(new Button(400 - 150, -55 + 250 + 300 - (413 / 2), 300, 55, "Back to Main menu", Color.RED,
-				new BackToMain()));
-
+		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Set Lazer Color Orange", new OrangeLazerButton()));
+		buttons.add(new Button(400 - 150, -55 + 250 + 300 - (413 / 2), 300, 55, "Back to Main menu", new BackToMain()));
 	}
 
 	@Override

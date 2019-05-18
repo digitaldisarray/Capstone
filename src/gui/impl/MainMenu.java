@@ -13,16 +13,17 @@ import gui.objects.tasks.PlayerColorButton;
 import gui.objects.tasks.StartButton;
 
 public class MainMenu implements Screen {
-	private int xClick, yClick;
+
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
 	Font font = new Font("Serif", 10, 30);
 
 	@Override
 	public void init() {
-		buttons.add(new Button(400-150, -55 + 350+300 -(413 / 2), 300, 55, "Enter Game", Color.RED, new StartButton()));
-		buttons.add(new Button(400-150, -55 + 250+300 -(413 / 2), 300, 55, "Player Color", Color.RED, new PlayerColorButton()));
-		buttons.add(new Button(400-150, -55 + 150+300 -(413 / 2), 300, 55, "Lazer Color", Color.RED, new LazerColorButton()));
+		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Enter Game", new StartButton()));
+		buttons.add(
+				new Button(400 - 150, -55 + 250 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorButton()));
+		buttons.add(new Button(400 - 150, -55 + 150 + 300 - (413 / 2), 300, 55, "Lazer Color", new LazerColorButton()));
 
 	}
 
@@ -57,8 +58,8 @@ public class MainMenu implements Screen {
 			if (button.isBold()) {
 				button.setBold(false);
 			}
-			
-			if(button.contains(x, y)) {
+
+			if (button.contains(x, y)) {
 				button.clicked();
 			}
 		}

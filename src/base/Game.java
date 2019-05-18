@@ -8,22 +8,33 @@ import entities.Player;
 import gui.MenuManager;
 
 public class Game implements Runnable {
+	
+	// Window properties
 	private Window window;
 	public int width, height;
 	public String title;
 
+	// Thread variables
 	private boolean running = false;
 	private Thread thread;
 	
+	// Game state booleans
 	private boolean inGame = false;
 	private boolean connected = false;
+	
+	// The menu manager object
 	MenuManager mManager;
 	
+	// Graphics objects
 	private BufferStrategy bs;
 	private Graphics2D g;
 	
+	// The local player
 	Player player;
 
+	// Store the last recorded fps
+	int lastFPS;
+	
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -63,6 +74,9 @@ public class Game implements Runnable {
 			player.draw(g);
 		}
 
+		// Draw FPS
+		g.drawString("FPS: " + lastFPS, 1, 15);
+		
 		// End Graphics
 		bs.show();
 		g.dispose();
@@ -80,7 +94,7 @@ public class Game implements Runnable {
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int ticks = 0;
-
+		
 		while (running) {
 			now = System.nanoTime();
 			delta += (now - lastTime) / timePerTick;
@@ -95,14 +109,14 @@ public class Game implements Runnable {
 			}
 
 			if (timer >= 1000000000) {
-				//dSystem.out.println("FPS/TPS: " + ticks);
+				// System.out.println("FPS/TPS: " + ticks);
+				lastFPS = ticks;
 				ticks = 0;
 				timer = 0;
 			}
 		}
 
 		stop();
-
 	}
 
 	// Start the game instance

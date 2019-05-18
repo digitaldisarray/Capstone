@@ -12,14 +12,15 @@ public class Button {
 
 	// The text that the button will display
 	private String text;
-	
+
 	// The task that the button is assigned
 	private ButtonTask task;
-	
+
 	// Should the button be displayed in bold mode
 	private boolean bold;
 
-	public Button(int x, int y, int width, int height, String text, Color color, ButtonTask task) {
+	// Constructor to create a new button
+	public Button(int x, int y, int width, int height, String text, ButtonTask task) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -28,28 +29,44 @@ public class Button {
 		this.task = task;
 	}
 
+	// Draw the button
 	public void draw(Graphics2D g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, width, height);
-		
+
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 18));
 		int stringWidth = g.getFontMetrics().stringWidth(text);
 
 		int difference = (width - stringWidth) / 2;
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, width, height);
-		if(bold) {
+		if (bold) {
 			g.drawRect(x + 1, y + 1, width - 2, height - 2);
 		}
-		
+
 		g.drawString(text, x + difference, y + height / 2 + 5);
 
 	}
 
+	// Run the task
 	public void clicked() {
 		task.run();
 	}
 
+	// If the button contains a certain x and y coordinate
+	public boolean contains(int xClick, int yClick) {
+		xClick /= Launcher.getGame().getXScaleFactor();
+		yClick /= Launcher.getGame().getYScaleFactor();
+
+		if (xClick >= this.getX() && xClick <= this.getX() + this.getWidth()) {
+			if (yClick >= this.getY() && yClick <= this.getY() + this.getHeight()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Getters and setters
 	public int getX() {
 		return x;
 	}
@@ -66,22 +83,10 @@ public class Button {
 		return height;
 	}
 
-	public boolean contains(int xClick, int yClick) {
-		xClick /= Launcher.getGame().getXScaleFactor();
-		yClick /= Launcher.getGame().getYScaleFactor();
-
-		if (xClick >= this.getX() && xClick <= this.getX() + this.getWidth()) {
-			if (yClick >= this.getY() && yClick <= this.getY() + this.getHeight()) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	public void setBold(boolean input) {
 		this.bold = input;
 	}
-	
+
 	public boolean isBold() {
 		return bold;
 	}

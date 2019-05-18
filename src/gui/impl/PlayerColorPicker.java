@@ -12,15 +12,15 @@ import gui.objects.tasks.BackToMain;
 import gui.objects.tasks.BluePlayerButton;
 
 public class PlayerColorPicker implements Screen {
-	private int xClick, yClick;
+	
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
 	Font font = new Font("Serif", 10, 30);
 
 	@Override
 	public void init() {
-		buttons.add(new Button(250, -55 + 350 + 300 - (413 / 2), 300, 55, "Set player color blue", Color.RED, new BluePlayerButton()));
-		buttons.add(new Button(250, -55 + 250 + 300 - (413 / 2), 300, 55, "Back to Main", Color.RED, new BackToMain()));
+		buttons.add(new Button(250, -55 + 350 + 300 - (413 / 2), 300, 55, "Set player color blue", new BluePlayerButton()));
+		buttons.add(new Button(250, -55 + 250 + 300 - (413 / 2), 300, 55, "Back to Main", new BackToMain()));
 	}
 
 	@Override
