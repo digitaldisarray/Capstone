@@ -53,7 +53,7 @@ public class Button {
 
 	// Run the task
 	public void clicked() {
-		task.run();
+		task.run(buttonColor);
 	}
 
 	// If the button contains a certain x and y coordinate
@@ -93,4 +93,6 @@ public class Button {
 	public boolean isBold() {
 		return bold;
 	}
+	
+	
 }

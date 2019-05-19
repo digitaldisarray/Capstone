@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import base.Launcher;
 import gui.Screen;
 import gui.objects.Button;
 import gui.objects.tasks.BackToMain;
@@ -23,6 +24,7 @@ public class LazerColorPicker implements Screen {
 
 	@Override
 	public void init() {
+		
 		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Set Lazer Color Orange", new OrangeLazerButton(), Color.ORANGE));
 		buttons.add(new Button(400 - 150, -55 + 250 + 300 - (413 / 2), 300, 55, "Back to Main menu", new BackToMain(), Color.GRAY));
 	}

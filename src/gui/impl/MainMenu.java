@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import base.Launcher;
 import gui.Screen;
 import gui.objects.Button;
 import gui.objects.tasks.LazerColorButton;
@@ -20,6 +21,7 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
+		Launcher.getGame().getPlayer().setLazerColor(Color.BLACK);
 		buttons.add(new Button(400 - 150, -55 + 155 + 300 - (413 / 2), 300, 55, "Singleplayer", new StartButton(),
 				Color.GRAY));
 		buttons.add(new Button(400 - 150, -55 + 220 + 300 - (413 / 2), 300, 55, "Multiplayer", new StartButton(),

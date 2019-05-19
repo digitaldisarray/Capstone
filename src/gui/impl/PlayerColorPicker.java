@@ -8,8 +8,9 @@ import java.util.ArrayList;
 
 import gui.Screen;
 import gui.objects.Button;
+
 import gui.objects.tasks.BackToMain;
-import gui.objects.tasks.BluePlayerButton;
+import gui.objects.tasks.SetPlayerColorButton;
 
 public class PlayerColorPicker implements Screen {
 	
@@ -19,12 +20,12 @@ public class PlayerColorPicker implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(250, 170, 100, 109, "", new BluePlayerButton(), Color.BLUE));
-		buttons.add(new Button(350, 170, 100, 109, "", new BluePlayerButton(), Color.ORANGE));
-		buttons.add(new Button(450, 170, 100, 109, "", new BluePlayerButton(), Color.RED));
-		buttons.add(new Button(250, 279, 100, 109, "", new BluePlayerButton(), Color.CYAN));
-		buttons.add(new Button(350, 279, 100, 109, "", new BluePlayerButton(), Color.GREEN));
-		buttons.add(new Button(450, 279, 100, 109, "", new BluePlayerButton(), Color.magenta));
+		buttons.add(new Button(250, 170, 100, 109, "", new SetPlayerColorButton(), Color.BLUE));
+		buttons.add(new Button(350, 170, 100, 109, "", new SetPlayerColorButton(), Color.ORANGE));
+		buttons.add(new Button(450, 170, 100, 109, "", new SetPlayerColorButton(), Color.RED));
+		buttons.add(new Button(250, 279, 100, 109, "", new SetPlayerColorButton(), Color.CYAN));
+		buttons.add(new Button(350, 279, 100, 109, "", new SetPlayerColorButton(), Color.GREEN));
+		buttons.add(new Button(450, 279, 100, 109, "", new SetPlayerColorButton(), Color.magenta));
 		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), Color.GRAY));
 	}
 

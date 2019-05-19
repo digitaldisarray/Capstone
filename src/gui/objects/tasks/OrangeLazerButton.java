@@ -10,7 +10,7 @@ public class OrangeLazerButton implements ButtonTask {
 
 
 	@Override
-	public void run() {
+	public void run(Color color) {
 		Launcher.getGame().getPlayer().setLazerColor(Color.ORANGE);
 
 	}
