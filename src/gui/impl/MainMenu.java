@@ -20,10 +20,14 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
-		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Enter Game", new StartButton(), Color.GRAY));
-		buttons.add(
-				new Button(400 - 150, -55 + 250 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorButton(),Color.GRAY));
-		buttons.add(new Button(400 - 150, -55 + 150 + 300 - (413 / 2), 300, 55, "Lazer Color", new LazerColorButton(), Color.GRAY));
+		buttons.add(new Button(400 - 150, -55 + 155 + 300 - (413 / 2), 300, 55, "Singleplayer", new StartButton(),
+				Color.GRAY));
+		buttons.add(new Button(400 - 150, -55 + 220 + 300 - (413 / 2), 300, 55, "Multiplayer", new StartButton(),
+				Color.GRAY));
+		buttons.add(new Button(400 - 150, -55 + 285 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorButton(),
+				Color.GRAY));
+		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Lazer Color", new LazerColorButton(),
+				Color.GRAY));
 
 	}
 
@@ -40,6 +44,7 @@ public class MainMenu implements Screen {
 		for (Button button : buttons) {
 			button.draw(g);
 		}
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
