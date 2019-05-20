@@ -15,8 +15,13 @@ public class Player extends Entity {
 	private final int LAZER_MS_COOLDOWN = 250;
 	private long lastShot = 0;
 	private final int MOVEMENT_SPEED = 3;
+<<<<<<< HEAD
 	private static Color playerColor = Color.BLACK;
 	private static Color lazerColor = Color.RED;
+=======
+	private static Color playerColor;
+	private static Color lazerColor = Color.BLACK;
+>>>>>>> eca01cbf8cf10687aec5d215feb4fef6b834c61c
 
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);
@@ -51,7 +56,12 @@ public class Player extends Entity {
 		if (Launcher.getGame().getWindow().isKeyPressed('d'))
 			this.setX(getX() + MOVEMENT_SPEED);
 
+<<<<<<< HEAD
 		if (this.getX() < 0 + this.getWidth() / 2)
+=======
+		//Disallows player from moving off the screen
+		if (this.getX() < 0 + this.getWidth() / 2) {
+>>>>>>> eca01cbf8cf10687aec5d215feb4fef6b834c61c
 			this.setX(0 + this.getWidth() / 2);
 
 		if (this.getY() < 0 + this.getWidth() / 2)

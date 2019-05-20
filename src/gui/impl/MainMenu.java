@@ -9,9 +9,15 @@ import java.util.ArrayList;
 import base.Launcher;
 import gui.Screen;
 import gui.objects.Button;
+<<<<<<< HEAD
 import gui.objects.tasks.LazerColorButton;
 import gui.objects.tasks.MultiplayerStartButton;
 import gui.objects.tasks.PlayerColorButton;
+=======
+import gui.objects.tasks.CustomPlayerColor;
+import gui.objects.tasks.LazerColorScreen;
+import gui.objects.tasks.PlayerColorScreen;
+>>>>>>> eca01cbf8cf10687aec5d215feb4fef6b834c61c
 import gui.objects.tasks.StartButton;
 
 public class MainMenu implements Screen {
@@ -22,18 +28,23 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
+<<<<<<< HEAD
+=======
+		//Adds options to the main menu
+>>>>>>> eca01cbf8cf10687aec5d215feb4fef6b834c61c
 		buttons.add(new Button(400 - 150, -55 + 155 + 300 - (413 / 2), 300, 55, "Singleplayer", new StartButton(),
 				Color.GRAY));
 		buttons.add(new Button(400 - 150, -55 + 220 + 300 - (413 / 2), 300, 55, "Multiplayer", new MultiplayerStartButton(),
 				Color.GRAY));
-		buttons.add(new Button(400 - 150, -55 + 285 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorButton(),
+		buttons.add(new Button(400 - 150, -55 + 285 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorScreen(),
 				Color.GRAY));
-		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Lazer Color", new LazerColorButton(),
+		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Lazer Color", new LazerColorScreen(),
 				Color.GRAY));
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
+		
 		g.setColor(grey);
 		g.fillRect(400 - 150, 300 - (413 / 2), 300, 350);
 		g.setColor(Color.BLACK);
@@ -45,6 +56,7 @@ public class MainMenu implements Screen {
 		for (Button button : buttons) {
 			button.draw(g);
 		}
+		
 		
 	}
 

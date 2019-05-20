@@ -32,10 +32,10 @@ public class Lazer extends Entity {
 		super.setX((int) (super.getX()+((int)(time-lastTime))*velocity*Math.cos(-Math.toRadians(degrees))));//Moves x and y coordinates accordingly every time lazer is redrawn
 		super.setY((int) (super.getY()+((int)(time-lastTime))*velocity*Math.sin(-Math.toRadians(degrees))));
 		
-		AffineTransform old = g.getTransform();
+		AffineTransform old = g.getTransform();//Rotates the lazer
 		AffineTransform n = AffineTransform.getRotateInstance(-Math.toRadians(degrees + 90), getX(), getY());
 
-		g.transform(n);
+		g.transform(n);//Rotates the lazer
 		g.setColor(this.getColor());
 		g.fillRect(getX(), getY(), getWidth(), getHeight());
 		g.setTransform(old);
