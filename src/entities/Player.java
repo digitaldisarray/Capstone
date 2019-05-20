@@ -15,8 +15,8 @@ public class Player extends Entity {
 	private final int LAZER_MS_COOLDOWN = 250;
 	private long lastShot = 0;
 	private final int MOVEMENT_SPEED = 3;
-	private static Color playerColor;
-	private static Color lazerColor;
+	private static Color playerColor = Color.BLACK;
+	private static Color lazerColor = Color.RED;
 
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);

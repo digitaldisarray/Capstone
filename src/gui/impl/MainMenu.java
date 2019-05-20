@@ -21,7 +21,6 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
-		Launcher.getGame().getPlayer().setLazerColor(Color.BLACK);
 		buttons.add(new Button(400 - 150, -55 + 155 + 300 - (413 / 2), 300, 55, "Singleplayer", new StartButton(),
 				Color.GRAY));
 		buttons.add(new Button(400 - 150, -55 + 220 + 300 - (413 / 2), 300, 55, "Multiplayer", new StartButton(),
@@ -46,7 +45,6 @@ public class MainMenu implements Screen {
 		for (Button button : buttons) {
 			button.draw(g);
 		}
-		
 	}
 
 	public void actionPerformed(ActionEvent e) {
