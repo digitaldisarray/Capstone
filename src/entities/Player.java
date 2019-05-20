@@ -27,17 +27,16 @@ public class Player extends Entity {
 	public void draw(Graphics2D g) {
 		g.setColor(playerColor);
 		g.fillRect(getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
-		
-				
+
 		for (Lazer lazer : lazers) {
 			g.setColor(lazerColor);
 			lazer.draw(g);
 		}
 	}
 
+	// Does movement and shooting, also makes it so that player can't go off screen
 	@Override
-	public void tick() {// Handles movement and shooting, also makes it so that player can't go off
-						// screen
+	public void tick() {
 
 		// WASD Movement
 		if (Launcher.getGame().getWindow().isKeyPressed('w'))
@@ -52,38 +51,36 @@ public class Player extends Entity {
 		if (Launcher.getGame().getWindow().isKeyPressed('d'))
 			this.setX(getX() + MOVEMENT_SPEED);
 
-		if (this.getX() < 0 + this.getWidth() / 2) {
+		if (this.getX() < 0 + this.getWidth() / 2)
 			this.setX(0 + this.getWidth() / 2);
-		}
 
-		if (this.getY() < 0 + this.getWidth() / 2) {
+		if (this.getY() < 0 + this.getWidth() / 2)
 			this.setY(0 + this.getWidth() / 2);
-		}
 
-		if (this.getX() > 800 - this.getWidth() / 2) {
+		if (this.getX() > 800 - this.getWidth() / 2)
 			this.setX(800 - this.getWidth() / 2);
-		}
 
-		if (this.getY() > 600 - this.getHeight() / 2) {
+		if (this.getY() > 600 - this.getHeight() / 2)
 			this.setY(600 - this.getHeight() / 2);
-		}
 
 		// Shooting
 		if (System.currentTimeMillis() - lastShot > LAZER_MS_COOLDOWN) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
+				// This creates a new lazer. It leverages a lot of other classes and methods to get mouse position
 				lazers.add(new Lazer(getX(), getY(), 3, 20, lazerColor, Launcher.getGame().getWindow().getMouseDeg(),
-						0.5, 2000));// This creates a new lazer. It leverages a lot of other classes and methods to
-									// get mouse position
+						0.5, 2000));
 
 				lastShot = System.currentTimeMillis();
 			}
 		}
 
-		for (int i = 0; i < lazers.size(); i++) {// Used to remove old lazers to avoid an overflow error
+		// Used to remove old lazers to avoid an overflow error
+		for (int i = 0; i < lazers.size(); i++) {
 			Lazer lazer = lazers.get(i);
 			lazer.tick();
 
-			if (lazer.shouldRemove()) {// Do this last
+			// Do this last
+			if (lazer.shouldRemove()) {
 				lazers.remove(i);
 			}
 		}
@@ -92,6 +89,7 @@ public class Player extends Entity {
 	public void setPlayerColor(Color color) {
 		playerColor = color;
 	}
+
 	public void setLazerColor(Color color) {
 		lazerColor = color;
 	}

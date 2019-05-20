@@ -1,4 +1,4 @@
-package networking;
+package client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -16,18 +16,17 @@ public class Client {
 
 	private static Client client;
 
-	private Client() throws IOException {
+	public Client() {
 		protocol = new Protocol();
 	}
 
-	public void register(String Ip, int port, int posX, int posY) throws IOException {
+	public void register(String ip, int port, int x, int y) throws IOException {
 		this.serverPort = port;
-		this.hostName = Ip;
-		clientSocket = new Socket(Ip, port);
+		this.hostName = ip;
+		clientSocket = new Socket(ip, port);
 		writer = new DataOutputStream(clientSocket.getOutputStream());
 
-		writer.writeUTF(protocol.RegisterPacket(posX, posY));
-
+		writer.writeUTF(protocol.RegisterPacket(x, y));
 	}
 
 	public void sendToServer(String message) {
@@ -52,17 +51,6 @@ public class Client {
 
 	public String getIP() {
 		return hostName;
-	}
-
-	public static Client getGameClient() {
-		if (client == null)
-
-			try {
-				client = new Client();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		return client;
 	}
 
 	public void closeAll() {
