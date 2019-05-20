@@ -3,10 +3,8 @@ package gui.impl;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import base.Launcher;
 import gui.Screen;
 import gui.objects.Button;
 import gui.objects.tasks.LazerColorButton;
