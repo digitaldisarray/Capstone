@@ -7,7 +7,7 @@ import java.awt.Color;
 
 import base.Launcher;
 
-public class LazerColorButton implements ButtonTask {
+public class LazerColorScreen implements ButtonTask {
 
 
 	@Override

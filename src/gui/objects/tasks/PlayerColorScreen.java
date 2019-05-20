@@ -7,7 +7,7 @@ import java.awt.Color;
 
 import base.Launcher;
 
-public class PlayerColorButton implements ButtonTask {
+public class PlayerColorScreen implements ButtonTask {
 
 
 	@Override
