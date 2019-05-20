@@ -11,6 +11,8 @@ public class SetLazerColorButton implements ButtonTask {
 
 	@Override
 	public void run(Color color) {
+		
+		//Sets the color of the lazer
 		Launcher.getGame().getPlayer().setLazerColor(color);
 
 	}

@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import gui.Screen;
 
 public class Loading implements Screen {
-
+//Nothing yet
 	@Override
 	public void init() {
 		

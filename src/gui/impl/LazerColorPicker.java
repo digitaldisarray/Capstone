@@ -13,14 +13,14 @@ import gui.objects.tasks.BackToMain;
 import gui.objects.tasks.CustomLazerColor;
 import gui.objects.tasks.SetLazerColorButton;
 
-public class LazerColorPicker implements Screen {
+public class LazerColorPicker implements Screen {//New screen filled with color options for your lazer
 	
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
 	Font font = new Font("Serif", 10, 30);
 
 	@Override
-	public void init() {
+	public void init() {//Adds all the options to the screen
 		buttons.add(new Button(250, 170, 100, 109, "", new SetLazerColorButton(), Color.BLUE));
 		buttons.add(new Button(350, 170, 100, 109, "", new SetLazerColorButton(), Color.ORANGE));
 		buttons.add(new Button(450, 170, 100, 109, "", new SetLazerColorButton(), Color.RED));
@@ -53,7 +53,7 @@ public class LazerColorPicker implements Screen {
 	}
 
 	@Override
-	public void passPressEvent(int x, int y) {
+	public void passPressEvent(int x, int y) {//Visual to indicate to user that button has been clicked
 		for (Button button : buttons) {
 			if (button.contains(x, y)) {
 				button.setBold(true);

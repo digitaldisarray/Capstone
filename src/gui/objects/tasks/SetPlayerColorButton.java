@@ -11,7 +11,7 @@ public class SetPlayerColorButton implements ButtonTask {
 	
 
 	public void run(Color color) {
-
+//Sets the color of your player
 		Launcher.getGame().getPlayer().setPlayerColor(color);
 
 	}

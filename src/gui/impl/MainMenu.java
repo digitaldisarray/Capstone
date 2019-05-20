@@ -22,7 +22,7 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
-		
+		//Adds options to the main menu
 		buttons.add(new Button(400 - 150, -55 + 155 + 300 - (413 / 2), 300, 55, "Singleplayer", new StartButton(),
 				Color.GRAY));
 		buttons.add(new Button(400 - 150, -55 + 220 + 300 - (413 / 2), 300, 55, "Multiplayer", new StartButton(),

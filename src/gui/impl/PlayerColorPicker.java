@@ -20,7 +20,7 @@ public class PlayerColorPicker implements Screen {
 	Font font = new Font("Serif", 10, 30);
 
 	@Override
-	public void init() {
+	public void init() {//Adds color options
 		buttons.add(new Button(250, 170, 100, 109, "", new SetPlayerColorButton(), Color.BLUE));
 		buttons.add(new Button(350, 170, 100, 109, "", new SetPlayerColorButton(), Color.ORANGE));
 		buttons.add(new Button(450, 170, 100, 109, "", new SetPlayerColorButton(), Color.RED));

@@ -52,6 +52,7 @@ public class Player extends Entity {
 		if (Launcher.getGame().getWindow().isKeyPressed('d'))
 			this.setX(getX() + MOVEMENT_SPEED);
 
+		//Disallows player from moving off the screen
 		if (this.getX() < 0 + this.getWidth() / 2) {
 			this.setX(0 + this.getWidth() / 2);
 		}
