@@ -6,14 +6,12 @@ import java.awt.Color;
 
 import base.Launcher;
 
-public class SetLazerColorButton implements ButtonTask {
+public class OrangeLazerButton implements ButtonTask {
 
 
 	@Override
 	public void run(Color color) {
-		
-		//Sets the color of the lazer
-		Launcher.getGame().getPlayer().setLazerColor(color);
+		Launcher.getGame().getPlayer().setLazerColor(Color.ORANGE);
 
 	}
 

@@ -135,9 +135,7 @@ public class Window {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Launcher.getGame().mManager.getCurrent().passPressEvent(e.getX(), e.getY()); // Passes the mouse click
-																								// to where it can be
-																								// used
+				Launcher.getGame().mManager.getCurrent().passPressEvent(e.getX(), e.getY()); // Passes the mouse click to where it can be used
 
 				switch (e.getButton()) {
 				case MouseEvent.BUTTON1:
@@ -156,7 +154,7 @@ public class Window {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				Launcher.getGame().mManager.getCurrent().passReleaseEvent(e.getX(), e.getY());
-
+				
 				switch (e.getButton()) {
 				case MouseEvent.BUTTON1:
 					mouse[0] = false;
@@ -188,7 +186,7 @@ public class Window {
 
 	}
 
-	public boolean isMousePressed(int button) {//Determines wich bbutton is clicked
+	public boolean isMousePressed(int button) {
 		switch (button) {
 		case MouseEvent.BUTTON1:
 			if (mouse[0])
@@ -214,7 +212,6 @@ public class Window {
 
 	public void updateMouseCoords() { // Updates the mouse coordinates and calculates the angle from the middle of the
 										// entity to the mouse position
-		// Called in getMouseDegrees, which is called when a click is registered
 		Point p = MouseInfo.getPointerInfo().getLocation();
 		int mx = (int) (p.getX() / Launcher.getGame().getXScaleFactor()) - frame.getX();
 		int my = (int) (p.getY() / Launcher.getGame().getYScaleFactor()) - frame.getY();
@@ -225,8 +222,7 @@ public class Window {
 
 		double tanValue = Math.abs(((double) my - playerY) / ((double) mx - playerX));
 
-		if (mx == playerX) {// Code to determine correct angle. Due to arctan domain, we must check multiple
-							// times
+		if (mx == playerX) {
 			if (my < playerY)
 				mouseDeg = 90;
 			else if (my > playerY)
@@ -255,9 +251,8 @@ public class Window {
 		}
 	}
 
-	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the
-									// mouse
-		updateMouseCoords();// Recalculates angle of mouse
+	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the mouse
+		updateMouseCoords();
 		System.out.println("Radians: " + Math.toRadians(mouseDeg) + "  Degrees: " + mouseDeg);
 		return mouseDeg;
 	}

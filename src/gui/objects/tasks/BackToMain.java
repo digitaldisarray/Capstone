@@ -8,7 +8,7 @@ import java.awt.Color;
 import base.Launcher;
 
 public class BackToMain implements ButtonTask {
-//Button task, sets active screen to main menu
+
 
 	@Override
 	public void run(Color color) {
