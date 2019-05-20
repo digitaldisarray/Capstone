@@ -1,4 +1,4 @@
-package networking;
+package client;
 
 public class Protocol {
 

@@ -3,7 +3,6 @@ package server;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -23,13 +22,13 @@ public class ServerGUI extends JFrame implements ActionListener {
 	private JLabel ipLabel2;
 
 	String publicIP;
-	
+
 	private Server server;
 
 	InetAddress net;
 
 	public ServerGUI() {
-		setTitle("Game Server GUI");
+		setTitle("Bracket Server");
 		setBounds(350, 300, 300, 200);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,10 +44,10 @@ public class ServerGUI extends JFrame implements ActionListener {
 
 		statusLabel = new JLabel();
 		statusLabel.setBounds(80, 90, 200, 25);
-		
+
 		ipLabel1 = new JLabel();
 		ipLabel1.setBounds(80, 105, 200, 25);
-		
+
 		ipLabel2 = new JLabel();
 		ipLabel2.setBounds(80, 120, 200, 25);
 
@@ -57,7 +56,7 @@ public class ServerGUI extends JFrame implements ActionListener {
 		getContentPane().add(stopServerButton);
 		getContentPane().add(ipLabel1);
 		getContentPane().add(ipLabel2);
-		
+
 		try {
 			net = InetAddress.getLocalHost();
 		} catch (UnknownHostException e) {
@@ -65,7 +64,7 @@ public class ServerGUI extends JFrame implements ActionListener {
 		}
 
 		stopServerButton.setEnabled(false);
-		
+
 		setVisible(true);
 	}
 
@@ -76,18 +75,19 @@ public class ServerGUI extends JFrame implements ActionListener {
 			} catch (SocketException e2) {
 				e2.printStackTrace();
 			}
-			
+
 			server.start();
 			startServerButton.setEnabled(false);
 			stopServerButton.setEnabled(true);
-	        
-	        try {
-	            BufferedReader sc = new BufferedReader(new InputStreamReader(new URL("http://bot.whatismyipaddress.com").openStream())); 
-	            publicIP = sc.readLine().trim(); 
-	        } catch (Exception e2) { 
-	            publicIP = "Not Found";
-	        } 
-			
+
+			try {
+				BufferedReader sc = new BufferedReader(
+						new InputStreamReader(new URL("http://bot.whatismyipaddress.com").openStream()));
+				publicIP = sc.readLine().trim();
+			} catch (Exception e2) {
+				publicIP = "Not Found";
+			}
+
 			statusLabel.setText("Server: running");
 			ipLabel1.setText("Local: " + net.getHostAddress());
 			ipLabel2.setText("Public: " + publicIP);
@@ -96,22 +96,21 @@ public class ServerGUI extends JFrame implements ActionListener {
 		if (e.getSource() == stopServerButton) {
 			startServerButton.setEnabled(true);
 			stopServerButton.setEnabled(false);
-			
+
 			server.stopServer();
 			server = null;
-			
+
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			
+
 			statusLabel.setText("Server: stopped");
 			ipLabel1.setText("Local: not running");
 			ipLabel2.setText("Public: not running");
-			
+
 			System.exit(0);
 		}
 	}
-
 }

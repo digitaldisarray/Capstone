@@ -10,6 +10,7 @@ import base.Launcher;
 import gui.Screen;
 import gui.objects.Button;
 import gui.objects.tasks.LazerColorButton;
+import gui.objects.tasks.MultiplayerStartButton;
 import gui.objects.tasks.PlayerColorButton;
 import gui.objects.tasks.StartButton;
 
@@ -21,16 +22,14 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void init() {
-		Launcher.getGame().getPlayer().setLazerColor(Color.BLACK);
 		buttons.add(new Button(400 - 150, -55 + 155 + 300 - (413 / 2), 300, 55, "Singleplayer", new StartButton(),
 				Color.GRAY));
-		buttons.add(new Button(400 - 150, -55 + 220 + 300 - (413 / 2), 300, 55, "Multiplayer", new StartButton(),
+		buttons.add(new Button(400 - 150, -55 + 220 + 300 - (413 / 2), 300, 55, "Multiplayer", new MultiplayerStartButton(),
 				Color.GRAY));
 		buttons.add(new Button(400 - 150, -55 + 285 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorButton(),
 				Color.GRAY));
 		buttons.add(new Button(400 - 150, -55 + 350 + 300 - (413 / 2), 300, 55, "Lazer Color", new LazerColorButton(),
 				Color.GRAY));
-
 	}
 
 	@Override
@@ -47,10 +46,6 @@ public class MainMenu implements Screen {
 			button.draw(g);
 		}
 		
-	}
-
-	public void actionPerformed(ActionEvent e) {
-
 	}
 
 	@Override

@@ -4,9 +4,6 @@ public class Protocol {
 
 	private String message = "";
 
-	public Protocol() {
-	}
-
 	public String packetID(int id) {
 		message = "ID" + id;
 		return message;
