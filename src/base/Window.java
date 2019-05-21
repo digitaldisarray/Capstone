@@ -153,7 +153,9 @@ public class Window {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Launcher.getGame().mManager.getCurrent().passReleaseEvent(e.getX(), e.getY());
+				if(Launcher.getGame().isInGame()) {
+					Launcher.getGame().mManager.getCurrent().passReleaseEvent(e.getX(), e.getY());
+				}
 				
 				switch (e.getButton()) {
 				case MouseEvent.BUTTON1:

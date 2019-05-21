@@ -43,13 +43,12 @@ public class Loading implements Screen {
 		currentTime = System.currentTimeMillis();
 		g.setColor(Color.GREEN);
 		if (rWidth != 200.0) {
-			rWidth = (currentTime - startTime) / 50;
-			g.fillRect(300, 290, (int) rWidth, 20);
-			
-		}
-		if (startTime + 10000 <= currentTime) {
-			Launcher.getGame().getMenuManager().setCurrentScreen(new MainMenu());
+			rWidth = (currentTime - startTime) / 25; // 25 for 5 seconds, 50 for 10
+			g.fillRect(301, 291, (int) rWidth, 19);
 
+		}
+		if (startTime + 5000 <= currentTime) {
+			Launcher.getGame().getMenuManager().setCurrentScreen(new MainMenu());
 		}
 	}
 

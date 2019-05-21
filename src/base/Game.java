@@ -167,6 +167,10 @@ public class Game implements Runnable {
 		inGame = b;
 	}
 	
+	public boolean isInGame() {
+		return inGame;
+	}
+	
 	public MenuManager getMenuManager() {
 		return mManager;
 	}

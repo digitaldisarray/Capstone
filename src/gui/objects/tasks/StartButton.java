@@ -8,12 +8,9 @@ import base.Launcher;
 
 public class StartButton implements ButtonTask {
 
-
 	@Override
 	public void run(Color color) {
-		
 		Launcher.getGame().setInGame(true);
-
 	}
 
 }
