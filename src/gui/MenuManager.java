@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.Graphics2D;
 
-import gui.impl.MainMenu;
+import gui.impl.Loading;
 
 public class MenuManager {
 	Screen current;
@@ -10,7 +10,7 @@ public class MenuManager {
 	// Menu manager constructor
 	public MenuManager() {
 		// Set the current menu to the main menu and initialize it
-		current = new MainMenu();
+		current = new Loading();
 		current.init();
 	}
 	

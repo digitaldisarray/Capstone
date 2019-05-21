@@ -3,6 +3,8 @@ package gui.impl;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
@@ -34,7 +36,9 @@ public class LazerColorPicker implements Screen {//New screen filled with color 
 
 	@Override
 	public void draw(Graphics2D g) {
-
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image = toolkit.getImage("a.gif");
+		g.drawImage(image, 0, 0, 800, 600, null);
 		g.setColor(grey);
 		g.fillRect(400 - 150, 300 - (413 / 2), 300, 350);
 		g.setColor(Color.BLACK);
