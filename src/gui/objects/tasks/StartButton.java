@@ -11,6 +11,7 @@ public class StartButton implements ButtonTask {
 	@Override
 	public void run(Color color) {
 		Launcher.getGame().setInGame(true);
+		System.out.println("Yeah bruv");
 	}
 
 }
