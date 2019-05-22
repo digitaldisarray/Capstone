@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
 import entities.Entity;
+import entities.Lazer;
 import entities.Player;
 import entities.Zombie;
 import gui.MenuManager;
@@ -38,7 +39,11 @@ public class Game implements Runnable {
 	// Store the last recorded fps
 	int lastFPS;
 	
+	// The entities in the game
 	ArrayList<Entity> entities = new ArrayList<>();
+	
+	// Used for filtering entities
+	ArrayList<Entity> filtered = new ArrayList<>();
 	
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -84,13 +89,32 @@ public class Game implements Runnable {
 				// Spawn zombies
 				spawnZombie();
 				
-				// Check zombie collisions
 				
-				// Draw zombies
+				// Remove dead zombies
 				for(Entity e : entities) {
+					if(e instanceof Zombie) {
+						if((Zombie) e != null) {
+							if(((Zombie) e).isAlive()) {
+								filtered.add(e);
+							}
+						}
+					} else {
+						filtered.add(e);
+					}
+				}
+				entities = filtered;
+				filtered = new ArrayList<Entity>();
+				
+				// Draw, collide, and update zombies
+				for(Entity e : entities) {
+					for(Lazer l : player.getLazers()) {
+						e.tryCollide(l);
+					}
+					
 					e.tick();
 					e.draw(g);
 				}
+				
 			}
 		}
 

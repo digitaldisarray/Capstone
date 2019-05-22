@@ -93,5 +93,9 @@ public class Player extends Entity {
 	public void setLazerColor(Color color) {
 		lazerColor = color;
 	}
-
+	
+	public ArrayList<Lazer> getLazers() {
+		return lazers;
+	}
+	
 }

@@ -48,6 +48,10 @@ public class Lazer extends Entity {
 		}
 	}
 
+	public void setRemoveToTrue() {
+		remove = true;
+	}
+	
 	public boolean shouldRemove() {
 		return remove;
 	}

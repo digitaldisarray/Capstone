@@ -33,7 +33,7 @@ public class Entity implements Serializable {
 		g.fillRect(x, y, width, height);
 	}
 	
-	public void collide(Entity entity) {
+	public void tryCollide(Entity entity) {
 		
 	}
 	
