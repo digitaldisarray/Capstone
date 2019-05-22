@@ -33,6 +33,10 @@ public class Entity implements Serializable {
 		g.fillRect(x, y, width, height);
 	}
 	
+	public void collide(Entity entity) {
+		
+	}
+	
 	public int getX() {
 		return x;
 	}

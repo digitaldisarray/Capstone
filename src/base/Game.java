@@ -3,8 +3,11 @@ package base;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
+import entities.Entity;
 import entities.Player;
+import entities.Zombie;
 import gui.MenuManager;
 
 public class Game implements Runnable {
@@ -34,6 +37,8 @@ public class Game implements Runnable {
 
 	// Store the last recorded fps
 	int lastFPS;
+	
+	ArrayList<Entity> entities = new ArrayList<>();
 	
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -70,8 +75,23 @@ public class Game implements Runnable {
 		if(!inGame) {
 			mManager.draw(g);
 		} else {
+			// Draw and move the player
 			player.tick();
 			player.draw(g);
+			
+			// SINGLEPLAYER
+			if(!connected) {
+				// Spawn zombies
+				spawnZombie();
+				
+				// Check zombie collisions
+				
+				// Draw zombies
+				for(Entity e : entities) {
+					e.tick();
+					e.draw(g);
+				}
+			}
 		}
 
 		// Draw FPS
@@ -81,6 +101,16 @@ public class Game implements Runnable {
 		// End Graphics
 		bs.show();
 		g.dispose();
+	}
+
+	long lastSpawn = System.currentTimeMillis();
+	int spawnRate = 1000;
+	
+	private void spawnZombie() {
+		if(System.currentTimeMillis() - lastSpawn >= spawnRate) {
+			entities.add(new Zombie((int) (Math.random() * 700 + 50), (int) (Math.random() * 700 + 50)));
+			lastSpawn = System.currentTimeMillis();
+		}
 	}
 
 	// Run the game
