@@ -12,6 +12,9 @@ public class Zombie extends Entity {
 		super(x, y, 20, 20, Color.GRAY);
 	}
 	
-	
+	public void tick() {
+		int playerX;
+		int playerY;
+	}
 	
 }
