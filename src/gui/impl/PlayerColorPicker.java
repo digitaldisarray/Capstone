@@ -18,7 +18,7 @@ import gui.objects.tasks.SetPlayerColorButton;
 public class PlayerColorPicker implements Screen {
 
 	ArrayList<Button> buttons = new ArrayList<>();
-	Color grey = new Color(224, 224, 224);
+	Color grey = new Color(110, 130, 150);
 	Font font = new Font("Serif", 10, 30);
 
 	@Override

@@ -27,7 +27,7 @@ public class Loading implements Screen {
 
 	@Override
 	public void init() {// Adds color options
-
+		buttons.add(new Button(500, 600-55, 300, 55, "", new BackToMain(), grey));
 	}
 
 	@Override
@@ -41,6 +41,10 @@ public class Loading implements Screen {
 		double rWidth = 0.0;
 		long currentTime = 0;
 		currentTime = System.currentTimeMillis();
+		
+		for (Button button : buttons) {
+			button.draw(g);
+		}
 		g.setColor(Color.GREEN);
 		if (rWidth != 200.0) {
 			rWidth = (currentTime - startTime) / 25; // 25 for 5 seconds, 50 for 10

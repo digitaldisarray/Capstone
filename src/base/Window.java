@@ -1,6 +1,7 @@
 package base;
 
 import java.awt.Canvas;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -55,6 +56,9 @@ public class Window {
 		// canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(800, 600));
 
+		Cursor cursor = new Cursor(Cursor.CROSSHAIR_CURSOR);
+        frame.setCursor(cursor);
+		
 		frame.add(canvas);
 		frame.pack();
 
@@ -125,7 +129,7 @@ public class Window {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-
+				
 			}
 
 			@Override
