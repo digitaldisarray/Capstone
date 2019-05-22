@@ -20,7 +20,7 @@ public class LazerColorPicker implements Screen {//New screen filled with color 
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
 	Font font = new Font("Serif", 10, 30);
-
+	Color grey2= new Color(190, 203, 211);
 	@Override
 	public void init() {//Adds all the options to the screen
 		buttons.add(new Button(250, 170, 100, 109, "", new SetLazerColorButton(), Color.BLUE));
@@ -29,7 +29,7 @@ public class LazerColorPicker implements Screen {//New screen filled with color 
 		buttons.add(new Button(250, 279, 100, 109, "", new SetLazerColorButton(), Color.CYAN));
 		buttons.add(new Button(350, 279, 100, 109, "", new SetLazerColorButton(), Color.GREEN));
 		buttons.add(new Button(450, 279, 100, 109, "", new SetLazerColorButton(), Color.magenta));
-		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), Color.GRAY));
+		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), grey2));
 		buttons.add(new Button(400 - 150, -55 + 425 + 300 - (413 / 2), 300, 55, "Custom Color (RGB)", new CustomLazerColor(),
 				Color.GRAY));
 	}

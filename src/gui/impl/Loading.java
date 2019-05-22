@@ -22,12 +22,13 @@ public class Loading implements Screen {
 
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
+	Color grey2= new Color(190, 203, 211);
 	Font font = new Font("Serif", 10, 30);
 	long startTime = System.currentTimeMillis();
 
 	@Override
 	public void init() {// Adds color options
-		buttons.add(new Button(500, 600-55, 300, 55, "", new BackToMain(), grey));
+		buttons.add(new Button(500, 600-55, 300, 55, "", new BackToMain(), grey2));
 	}
 
 	@Override

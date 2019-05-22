@@ -18,7 +18,8 @@ import gui.objects.tasks.SetPlayerColorButton;
 public class PlayerColorPicker implements Screen {
 
 	ArrayList<Button> buttons = new ArrayList<>();
-	Color grey = new Color(110, 130, 150);
+	Color grey = new Color(224, 224, 224);
+	Color grey2= new Color(190, 203, 211);
 	Font font = new Font("Serif", 10, 30);
 
 	@Override
@@ -29,7 +30,7 @@ public class PlayerColorPicker implements Screen {
 		buttons.add(new Button(250, 279, 100, 109, "", new SetPlayerColorButton(), Color.CYAN));
 		buttons.add(new Button(350, 279, 100, 109, "", new SetPlayerColorButton(), Color.GREEN));
 		buttons.add(new Button(450, 279, 100, 109, "", new SetPlayerColorButton(), Color.magenta));
-		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), Color.GRAY));
+		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), grey2));
 		buttons.add(new Button(400 - 150, -55 + 425 + 300 - (413 / 2), 300, 55, "Custom Color (RGB)", new CustomPlayerColor(),
 				Color.GRAY));
 
