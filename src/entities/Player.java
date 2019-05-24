@@ -12,12 +12,16 @@ public class Player extends Entity {
 	String name; // The players name
 
 	ArrayList<Lazer> lazers = new ArrayList<>();
+	ArrayList<Wall> walls = new ArrayList<>();
 	private final int LAZER_MS_COOLDOWN = 250;
+	private final int WALL_MS_COOLDOWN = 1000;
 	private long lastShot = 0;
+	private long lastWall = 0;
 	private final int MOVEMENT_SPEED = 3;
+	private final int DISTANCE_FROM_PLAYER = 25;
 	private static Color playerColor = Color.BLACK;
 	private static Color lazerColor = Color.RED;
-
+	private static Color wallColor = Color.RED;
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);
 		this.name = name;
@@ -31,6 +35,11 @@ public class Player extends Entity {
 		for (Lazer lazer : lazers) {
 			g.setColor(lazerColor);
 			lazer.draw(g);
+		}
+		
+		for (Wall wall : walls) {
+			g.setColor(wallColor);
+			wall.draw(g);
 		}
 	}
 
@@ -71,6 +80,43 @@ public class Player extends Entity {
 						0.5, 2000));
 
 				lastShot = System.currentTimeMillis();
+			}
+		}
+		
+		if (System.currentTimeMillis() - lastWall > WALL_MS_COOLDOWN) {
+			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
+				int x = getX(), y = getY(), width = 50, height = 5;
+				
+				if(Launcher.getGame().getWindow().getWallDirection() == 4) {
+					width = 5;
+					height = 50;
+					x = getX() + DISTANCE_FROM_PLAYER;
+					y = getY() - height / 2;
+				}
+				
+				if(Launcher.getGame().getWindow().getWallDirection() == 1) {
+					width = 50;
+					height = 5;
+					x = getX() - width / 2;
+					y = getY() - DISTANCE_FROM_PLAYER;
+				}
+				
+				if(Launcher.getGame().getWindow().getWallDirection() == 2) {
+					width = 5;
+					height = 50;
+					x = getX() - DISTANCE_FROM_PLAYER;
+					y = getY() - height / 2;
+				}
+				
+				if(Launcher.getGame().getWindow().getWallDirection() == 3) {
+					width = 50;
+					height = 5;
+					x = getX() - width / 2;
+					y = getY() + DISTANCE_FROM_PLAYER;
+				}
+				walls.add(new Wall(x, y, width, height, Color.BLUE, Launcher.getGame().getWindow().getWallDirection()));
+
+				lastWall = System.currentTimeMillis();
 			}
 		}
 

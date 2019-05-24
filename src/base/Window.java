@@ -27,6 +27,7 @@ public class Window {
 	// The angle between the mouse and player
 	private double mouseDeg;
 	private Vector2D shooting;
+	private int wallDirection;
 
 	// Stores all key states on the keyboard
 	private boolean[] keyPressed = new boolean[256];
@@ -245,36 +246,54 @@ public class Window {
 		shooting = new Vector2D(Math.cos(angle), Math.sin(angle));
 		shooting = shooting.normalize();
 
-		// Old math
-//		double tanValue = Math.abs(((double) my - playerY) / ((double) mx - playerX));
-//
-//		if (mx == playerX) {
-//			if (my < playerY)
-//				mouseDeg = 90;
-//			else if (my > playerY)
-//				mouseDeg = 270;
-//		}
-//
-//		if (my == playerY) {
-//			if (mx < playerX)
-//				mouseDeg = 180;
-//			else if (mx > playerX)
-//				mouseDeg = 0;
-//		}
-//
-//		if (mx > playerX) {
-//			if (my < playerY)
-//				mouseDeg = Math.toDegrees(Math.atan(tanValue));
-//			else if (my > playerY)
-//				mouseDeg = 360 - Math.toDegrees(Math.atan(tanValue));
-//		}
-//
-//		if (mx < playerX) {
-//			if (my < playerY)
-//				mouseDeg = 180 - Math.toDegrees(Math.atan(tanValue));
-//			else if (my > playerY)
-//				mouseDeg = 180 + Math.toDegrees(Math.atan(tanValue));
-//		}
+		
+//		// Old math
+		double tanValue = Math.abs(((double) my - playerY) / ((double) mx - playerX));
+
+		if (mx == playerX) {
+			if (my < playerY)
+				mouseDeg = 90;
+			else if (my > playerY)
+				mouseDeg = 270;
+		}
+
+		if (my == playerY) {
+			if (mx < playerX)
+				mouseDeg = 180;
+			else if (mx > playerX)
+				mouseDeg = 0;
+		}
+
+		if (mx > playerX) {
+			if (my < playerY)
+				mouseDeg = Math.toDegrees(Math.atan(tanValue));
+			else if (my > playerY)
+				mouseDeg = 360 - Math.toDegrees(Math.atan(tanValue));
+		}
+
+		if (mx < playerX) {
+			if (my < playerY)
+				mouseDeg = 180 - Math.toDegrees(Math.atan(tanValue));
+			else if (my > playerY)
+				mouseDeg = 180 + Math.toDegrees(Math.atan(tanValue));
+		}
+		if(mouseDeg >= 45 && mouseDeg <= 135) {
+			wallDirection = 1;
+		}
+		
+		if(mouseDeg > 135 && mouseDeg < 225) {
+			wallDirection = 2;
+		}
+		if(mouseDeg >= 225 && mouseDeg <= 315) {
+			wallDirection = 3;
+			}
+		
+		if(mouseDeg > 315 || mouseDeg < 45) {
+			wallDirection = 4;
+		}
+		
+		System.out.println("Wall Direction" + wallDirection);
+		
 	}
 
 //	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the
@@ -287,6 +306,9 @@ public class Window {
 	public Vector2D getMouseDeg() {
 		updateMouseCoords();
 		return shooting;
+	}
+	public int getWallDirection() {
+		return wallDirection;
 	}
 
 }
