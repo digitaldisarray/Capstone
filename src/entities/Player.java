@@ -152,9 +152,15 @@ public class Player extends Entity {
 	public void setLazerColor(Color color) {
 		lazerColor = color;
 	}
+	public void setWallColor(Color color) {
+		wallColor = color;
+	}
 
 	public ArrayList<Lazer> getLazers() {
 		return lazers;
 	}
-
+	
+	public Color getWallColor() {
+		return wallColor;
+	}
 }

@@ -11,11 +11,9 @@ public class Wall extends Entity {
 	private long startTime;
 	private long lastTime;
 	private long duration;
-	private Color wallColor;
 
 	public Wall(int x, int y, int width, int height, Color color, int wallDirection, long duration) {
 		super(x, y, width, height, color);
-		wallColor = color;
 		startTime = System.currentTimeMillis();
 		lastTime = startTime;
 		this.duration = duration;
@@ -24,7 +22,7 @@ public class Wall extends Entity {
 
 	public void draw(Graphics2D g) {// Draws the lazer
 		long time = System.currentTimeMillis();
-		g.setColor(wallColor);
+		g.setColor(Launcher.getGame().getPlayer().getWallColor());
 		g.fillRect(getX(), getY(), getWidth(), getHeight());
 		
 		lastTime = time;
@@ -39,10 +37,6 @@ public class Wall extends Entity {
 
 	public boolean shouldRemove() {
 		return remove;
-	}
-	
-	public void setColor(Color color) {
-		wallColor = color;
 	}
 
 }

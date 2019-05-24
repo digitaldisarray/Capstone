@@ -12,7 +12,9 @@ import gui.Screen;
 import gui.objects.Button;
 
 import gui.objects.tasks.BackToMain;
+import gui.objects.tasks.CustomLazerColor;
 import gui.objects.tasks.CustomPlayerColor;
+import gui.objects.tasks.SetLazerColorButton;
 import gui.objects.tasks.SetPlayerColorButton;
 
 public class PlayerColorPicker implements Screen {
@@ -31,9 +33,9 @@ public class PlayerColorPicker implements Screen {
 		buttons.add(new Button(250, 279, 100, 109, "", new SetPlayerColorButton(), Color.CYAN));
 		buttons.add(new Button(350, 279, 100, 109, "", new SetPlayerColorButton(), Color.GREEN));
 		buttons.add(new Button(450, 279, 100, 109, "", new SetPlayerColorButton(), Color.magenta));
-		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), grey2));
-		buttons.add(new Button(400 - 150, -55 + 425 + 300 - (413 / 2), 300, 55, "Custom Color (RGB)",
-				new CustomPlayerColor(), Color.GRAY));
+		buttons.add(new Button(250, 464, 300, 55, "Back to Main", new BackToMain(), grey2));
+		buttons.add(new Button(250, 389, 300, 55, "Custom Color (RGB)",
+				new CustomLazerColor(), grey2));
 
 	}
 
@@ -43,7 +45,7 @@ public class PlayerColorPicker implements Screen {
 		Image image = toolkit.getImage("a.gif");
 		g.drawImage(image, 0, 0, 800, 600, null);
 		g.setColor(grey);
-		g.fillRect(400 - 150, 300 - (413 / 2), 300, 350);
+		g.fillRect(400 - 150, 300 - (413 / 2), 300, 410);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
 		String title = "Player Color";
