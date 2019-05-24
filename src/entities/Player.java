@@ -22,6 +22,7 @@ public class Player extends Entity {
 	private static Color playerColor = Color.BLACK;
 	private static Color lazerColor = Color.RED;
 	private static Color wallColor = Color.RED;
+
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);
 		this.name = name;
@@ -36,7 +37,7 @@ public class Player extends Entity {
 			g.setColor(lazerColor);
 			lazer.draw(g);
 		}
-		
+
 		for (Wall wall : walls) {
 			g.setColor(wallColor);
 			wall.draw(g);
@@ -75,46 +76,49 @@ public class Player extends Entity {
 		// Shooting
 		if (System.currentTimeMillis() - lastShot > LAZER_MS_COOLDOWN) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
-				// This creates a new lazer. It leverages a lot of other classes and methods to get mouse position
+				// This creates a new lazer. It leverages a lot of other classes and methods to
+				// get mouse position
 				lazers.add(new Lazer(getX(), getY(), 5, 5, lazerColor, Launcher.getGame().getWindow().getMouseDeg(),
 						0.5, 2000));
 
 				lastShot = System.currentTimeMillis();
 			}
 		}
-		
+
 		if (System.currentTimeMillis() - lastWall > WALL_MS_COOLDOWN) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
 				int x = getX(), y = getY(), width = 50, height = 5;
-				
-				if(Launcher.getGame().getWindow().getWallDirection() == 4) {
+
+				if (Launcher.getGame().getWindow().getWallDirection() == 4) {
 					width = 5;
 					height = 50;
 					x = getX() + DISTANCE_FROM_PLAYER;
 					y = getY() - height / 2;
 				}
-				
-				if(Launcher.getGame().getWindow().getWallDirection() == 1) {
+
+				if (Launcher.getGame().getWindow().getWallDirection() == 1) {
 					width = 50;
 					height = 5;
 					x = getX() - width / 2;
 					y = getY() - DISTANCE_FROM_PLAYER;
 				}
-				
-				if(Launcher.getGame().getWindow().getWallDirection() == 2) {
+
+				if (Launcher.getGame().getWindow().getWallDirection() == 2) {
 					width = 5;
 					height = 50;
 					x = getX() - DISTANCE_FROM_PLAYER;
 					y = getY() - height / 2;
 				}
-				
-				if(Launcher.getGame().getWindow().getWallDirection() == 3) {
+
+				if (Launcher.getGame().getWindow().getWallDirection() == 3) {
 					width = 50;
 					height = 5;
 					x = getX() - width / 2;
 					y = getY() + DISTANCE_FROM_PLAYER;
 				}
-				walls.add(new Wall(x, y, width, height, Color.BLUE, Launcher.getGame().getWindow().getWallDirection()));
+				
+				walls.add(new Wall(x, y, width, height, Color.BLUE, Launcher.getGame().getWindow().getWallDirection(),
+						2000));
 
 				lastWall = System.currentTimeMillis();
 			}
@@ -130,6 +134,15 @@ public class Player extends Entity {
 				lazers.remove(i);
 			}
 		}
+		for (int i = 0; i < walls.size(); i++) {
+			Wall wall = walls.get(i);
+			wall.tick();
+
+			// Do this last
+			if (wall.shouldRemove()) {
+				walls.remove(i);
+			}
+		}
 	}
 
 	public void setPlayerColor(Color color) {
@@ -139,9 +152,9 @@ public class Player extends Entity {
 	public void setLazerColor(Color color) {
 		lazerColor = color;
 	}
-	
+
 	public ArrayList<Lazer> getLazers() {
 		return lazers;
 	}
-	
+
 }
