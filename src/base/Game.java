@@ -228,4 +228,7 @@ public class Game implements Runnable {
 	public MenuManager getMenuManager() {
 		return mManager;
 	}
+	public boolean hasViewedMessage(boolean chicken) {
+		return chicken;
+	}
 }

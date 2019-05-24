@@ -311,7 +311,9 @@ public class Window {
 		updateMouseCoords();
 		return wallDirection;
 	}
-	
+	public JFrame getFrame() {
+		return frame;
+	}
 	
 
 }

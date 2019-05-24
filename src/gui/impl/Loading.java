@@ -5,18 +5,12 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import base.Launcher;
 import gui.Screen;
 import gui.objects.Button;
-
-import java.util.concurrent.TimeUnit;
-
-import base.Launcher;
 import gui.objects.tasks.BackToMain;
-import gui.objects.tasks.CustomPlayerColor;
-import gui.objects.tasks.SetPlayerColorButton;
 
 public class Loading implements Screen {
 
