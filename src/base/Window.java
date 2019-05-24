@@ -311,5 +311,7 @@ public class Window {
 		updateMouseCoords();
 		return wallDirection;
 	}
+	
+	
 
 }

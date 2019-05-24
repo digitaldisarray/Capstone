@@ -132,7 +132,7 @@ public class Game implements Runnable {
 	
 	private void spawnZombie() {
 		if(System.currentTimeMillis() - lastSpawn >= spawnRate) {
-			entities.add(new Zombie((int) (Math.random() * 700 + 50), (int) (Math.random() * 700 + 50)));
+			entities.add(new Zombie((int) (Math.random() * 700 + 50), (int) (Math.random() * 700 + 50), 20, 20, Color.GRAY, 1.0));
 			lastSpawn = System.currentTimeMillis();
 		}
 	}
