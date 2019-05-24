@@ -30,6 +30,7 @@ public class Launcher {
 		return client;
 	}
 	
+	// Checks if two rectangles are colliding
 	public static boolean collides(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
 		return new Rectangle(x1, y1, width1, height1).intersects(new Rectangle(x2, y2, width2, height2));
 	}

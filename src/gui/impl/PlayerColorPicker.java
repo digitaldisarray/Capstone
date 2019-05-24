@@ -19,11 +19,12 @@ public class PlayerColorPicker implements Screen {
 
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
-	Color grey2= new Color(190, 203, 211);
+	Color grey2 = new Color(190, 203, 211);
 	Font font = new Font("Serif", 10, 30);
 
+	// Adds color options
 	@Override
-	public void init() {//Adds color options
+	public void init() {
 		buttons.add(new Button(250, 170, 100, 109, "", new SetPlayerColorButton(), Color.BLUE));
 		buttons.add(new Button(350, 170, 100, 109, "", new SetPlayerColorButton(), Color.ORANGE));
 		buttons.add(new Button(450, 170, 100, 109, "", new SetPlayerColorButton(), Color.RED));
@@ -31,8 +32,8 @@ public class PlayerColorPicker implements Screen {
 		buttons.add(new Button(350, 279, 100, 109, "", new SetPlayerColorButton(), Color.GREEN));
 		buttons.add(new Button(450, 279, 100, 109, "", new SetPlayerColorButton(), Color.magenta));
 		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), grey2));
-		buttons.add(new Button(400 - 150, -55 + 425 + 300 - (413 / 2), 300, 55, "Custom Color (RGB)", new CustomPlayerColor(),
-				Color.GRAY));
+		buttons.add(new Button(400 - 150, -55 + 425 + 300 - (413 / 2), 300, 55, "Custom Color (RGB)",
+				new CustomPlayerColor(), Color.GRAY));
 
 	}
 
@@ -52,10 +53,6 @@ public class PlayerColorPicker implements Screen {
 		for (Button button : buttons) {
 			button.draw(g);
 		}
-	}
-
-	public void actionPerformed(ActionEvent e) {
-
 	}
 
 	@Override

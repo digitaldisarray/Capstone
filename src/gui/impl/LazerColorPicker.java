@@ -15,14 +15,17 @@ import gui.objects.tasks.BackToMain;
 import gui.objects.tasks.CustomLazerColor;
 import gui.objects.tasks.SetLazerColorButton;
 
-public class LazerColorPicker implements Screen {//New screen filled with color options for your lazer
-	
+// New screen filled with color options for your lazer
+public class LazerColorPicker implements Screen {
+
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
 	Font font = new Font("Serif", 10, 30);
-	Color grey2= new Color(190, 203, 211);
+	Color grey2 = new Color(190, 203, 211);
+
+	// Adds all the options to the screen
 	@Override
-	public void init() {//Adds all the options to the screen
+	public void init() {
 		buttons.add(new Button(250, 170, 100, 109, "", new SetLazerColorButton(), Color.BLUE));
 		buttons.add(new Button(350, 170, 100, 109, "", new SetLazerColorButton(), Color.ORANGE));
 		buttons.add(new Button(450, 170, 100, 109, "", new SetLazerColorButton(), Color.RED));
@@ -30,8 +33,8 @@ public class LazerColorPicker implements Screen {//New screen filled with color 
 		buttons.add(new Button(350, 279, 100, 109, "", new SetLazerColorButton(), Color.GREEN));
 		buttons.add(new Button(450, 279, 100, 109, "", new SetLazerColorButton(), Color.magenta));
 		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), grey2));
-		buttons.add(new Button(400 - 150, -55 + 425 + 300 - (413 / 2), 300, 55, "Custom Color (RGB)", new CustomLazerColor(),
-				Color.GRAY));
+		buttons.add(new Button(400 - 150, -55 + 425 + 300 - (413 / 2), 300, 55, "Custom Color (RGB)",
+				new CustomLazerColor(), Color.GRAY));
 	}
 
 	@Override
@@ -52,12 +55,9 @@ public class LazerColorPicker implements Screen {//New screen filled with color 
 		}
 	}
 
-	public void actionPerformed(ActionEvent e) {
-
-	}
-
+	// Visual to indicate to user that button has been clicked
 	@Override
-	public void passPressEvent(int x, int y) {//Visual to indicate to user that button has been clicked
+	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {
 			if (button.contains(x, y)) {
 				button.setBold(true);
@@ -71,8 +71,8 @@ public class LazerColorPicker implements Screen {//New screen filled with color 
 			if (button.isBold()) {
 				button.setBold(false);
 			}
-			
-			if(button.contains(x, y)) {
+
+			if (button.contains(x, y)) {
 				button.clicked();
 			}
 		}

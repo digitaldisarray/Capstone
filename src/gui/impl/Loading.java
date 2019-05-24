@@ -57,10 +57,6 @@ public class Loading implements Screen {
 		}
 	}
 
-	public void actionPerformed(ActionEvent e) {
-
-	}
-
 	@Override
 	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {

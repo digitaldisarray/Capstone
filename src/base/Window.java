@@ -13,6 +13,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
+import entities.Vector2D;
+
 public class Window {
 
 	// Window property variables
@@ -24,6 +26,7 @@ public class Window {
 
 	// The angle between the mouse and player
 	private double mouseDeg;
+	private Vector2D shooting;
 
 	// Stores all key states on the keyboard
 	private boolean[] keyPressed = new boolean[256];
@@ -57,10 +60,7 @@ public class Window {
 		canvas.setMinimumSize(new Dimension(800, 600));
 
 		Cursor cursor = new Cursor(Cursor.CROSSHAIR_CURSOR);
-        frame.setCursor(cursor);
-		
-		frame.add(canvas);
-		frame.pack();
+		frame.setCursor(cursor);
 
 		// Add key listener to the canvas
 		canvas.addKeyListener(new KeyListener() {
@@ -129,7 +129,7 @@ public class Window {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				
+
 			}
 
 			@Override
@@ -139,10 +139,12 @@ public class Window {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(!Launcher.getGame().isInGame()) {
-					Launcher.getGame().mManager.getCurrent().passPressEvent(e.getX(), e.getY()); // Passes the mouse click to where it can be used
+				if (!Launcher.getGame().isInGame()) {
+					Launcher.getGame().mManager.getCurrent().passPressEvent(e.getX(), e.getY()); // Passes the mouse
+																									// click to where it
+																									// can be used
 				}
-				
+
 				switch (e.getButton()) {
 				case MouseEvent.BUTTON1:
 					mouse[0] = true;
@@ -159,10 +161,10 @@ public class Window {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if(!Launcher.getGame().isInGame()) {
+				if (!Launcher.getGame().isInGame()) {
 					Launcher.getGame().mManager.getCurrent().passReleaseEvent(e.getX(), e.getY());
 				}
-				
+
 				switch (e.getButton()) {
 				case MouseEvent.BUTTON1:
 					mouse[0] = false;
@@ -177,6 +179,9 @@ public class Window {
 			}
 
 		});
+
+		frame.add(canvas);
+		frame.pack();
 	}
 
 	// Get the canvas object
@@ -214,55 +219,74 @@ public class Window {
 				return false;
 		}
 
-		// Prob unreachable but who knows
+		// Probably unreachable but who knows
 		return false;
 	}
 
-	public void updateMouseCoords() { // Updates the mouse coordinates and calculates the angle from the middle of the
-										// entity to the mouse position
-		Point p = MouseInfo.getPointerInfo().getLocation();
-		int mx = (int) (p.getX() / Launcher.getGame().getXScaleFactor()) - frame.getX();
-		int my = (int) (p.getY() / Launcher.getGame().getYScaleFactor()) - frame.getY();
-		System.out.print(mx);
-		// playerX, playerY
+	// Updates mouse position & calculates angles from player to mouse
+	Point p;
+	public void updateMouseCoords() {
+		p = MouseInfo.getPointerInfo().getLocation();
+		double mx = p.getX() / Launcher.getGame().getXScaleFactor() - frame.getX();
+		double my = p.getY() - 30 / Launcher.getGame().getYScaleFactor() - frame.getY();
+//		System.out.println("mx: " + mx + "my: " + my);
+		
 		int playerX = Launcher.getGame().getPlayer().getX() + Launcher.getGame().getPlayer().getWidth() / 2;
 		int playerY = Launcher.getGame().getPlayer().getY() + Launcher.getGame().getPlayer().getHeight() / 2;
 
-		double tanValue = Math.abs(((double) my - playerY) / ((double) mx - playerX));
+		double width = mx - playerX;
+		double height = my - playerY;
 
-		if (mx == playerX) {
-			if (my < playerY)
-				mouseDeg = 90;
-			else if (my > playerY)
-				mouseDeg = 270;
-		}
+		double angle = Math.atan(height / width);
 
-		if (my == playerY) {
-			if (mx < playerX)
-				mouseDeg = 180;
-			else if (mx > playerX)
-				mouseDeg = 0;
-		}
+		if (width < 0)
+			angle = -Math.PI + angle;
 
-		if (mx > playerX) {
-			if (my < playerY)
-				mouseDeg = Math.toDegrees(Math.atan(tanValue));
-			else if (my > playerY)
-				mouseDeg = 360 - Math.toDegrees(Math.atan(tanValue));
-		}
+		shooting = new Vector2D(Math.cos(angle), Math.sin(angle));
+		shooting = shooting.normalize();
 
-		if (mx < playerX) {
-			if (my < playerY)
-				mouseDeg = 180 - Math.toDegrees(Math.atan(tanValue));
-			else if (my > playerY)
-				mouseDeg = 180 + Math.toDegrees(Math.atan(tanValue));
-		}
+		// Old math
+//		double tanValue = Math.abs(((double) my - playerY) / ((double) mx - playerX));
+//
+//		if (mx == playerX) {
+//			if (my < playerY)
+//				mouseDeg = 90;
+//			else if (my > playerY)
+//				mouseDeg = 270;
+//		}
+//
+//		if (my == playerY) {
+//			if (mx < playerX)
+//				mouseDeg = 180;
+//			else if (mx > playerX)
+//				mouseDeg = 0;
+//		}
+//
+//		if (mx > playerX) {
+//			if (my < playerY)
+//				mouseDeg = Math.toDegrees(Math.atan(tanValue));
+//			else if (my > playerY)
+//				mouseDeg = 360 - Math.toDegrees(Math.atan(tanValue));
+//		}
+//
+//		if (mx < playerX) {
+//			if (my < playerY)
+//				mouseDeg = 180 - Math.toDegrees(Math.atan(tanValue));
+//			else if (my > playerY)
+//				mouseDeg = 180 + Math.toDegrees(Math.atan(tanValue));
+//		}
 	}
 
-	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the mouse
+//	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the
+//									// mouse
+//		updateMouseCoords();
+//		System.out.println("Radians: " + Math.toRadians(mouseDeg) + "  Degrees: " + mouseDeg);
+//		return mouseDeg;
+//	}
+
+	public Vector2D getMouseDeg() {
 		updateMouseCoords();
-		System.out.println("Radians: " + Math.toRadians(mouseDeg) + "  Degrees: " + mouseDeg);
-		return mouseDeg;
+		return shooting;
 	}
 
 }

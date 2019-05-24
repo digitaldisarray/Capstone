@@ -19,11 +19,12 @@ public class MainMenu implements Screen {
 	ArrayList<Button> buttons = new ArrayList<>();
 	Color grey = new Color(224, 224, 224);
 	Font font = new Font("Serif", 10, 30);
-	Color grey2= new Color(190, 203, 211);
+	Color grey2 = new Color(190, 203, 211);
+
 	@Override
 	public void init() {
-		buttons.add(new Button(400 - 150, -55 + 155 + 300 - (413 / 2), 300, 55, "Singleplayer", new StartButton(),
-				grey2));
+		buttons.add(
+				new Button(400 - 150, -55 + 155 + 300 - (413 / 2), 300, 55, "Singleplayer", new StartButton(), grey2));
 		buttons.add(new Button(400 - 150, -55 + 220 + 300 - (413 / 2), 300, 55, "Multiplayer",
 				new MultiplayerStartButton(), grey2));
 		buttons.add(new Button(400 - 150, -55 + 285 + 300 - (413 / 2), 300, 55, "Player Color", new PlayerColorButton(),
