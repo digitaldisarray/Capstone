@@ -32,8 +32,8 @@ public class LazerColorPicker implements Screen {
 		buttons.add(new Button(250, 279, 100, 109, "", new SetLazerColorButton(), Color.CYAN));
 		buttons.add(new Button(350, 279, 100, 109, "", new SetLazerColorButton(), Color.GREEN));
 		buttons.add(new Button(450, 279, 100, 109, "", new SetLazerColorButton(), Color.magenta));
-		buttons.add(new Button(250, 389, 300, 55, "Back to Main", new BackToMain(), grey2));
-		buttons.add(new Button(250, 464, 300, 55, "Custom Color (RGB)",
+		buttons.add(new Button(250, 464, 300, 55, "Back to Main", new BackToMain(), grey2));
+		buttons.add(new Button(250, 389, 300, 55, "Custom Color (RGB)",
 				new CustomLazerColor(), grey2));
 	}
 
@@ -43,13 +43,13 @@ public class LazerColorPicker implements Screen {
 		Image image = toolkit.getImage("a.gif");
 		g.drawImage(image, 0, 0, 800, 600, null);
 		g.setColor(grey);
-		g.fillRect(250, 94, 300, 350);
+		g.fillRect(250, 94, 300, 410);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
-		String title = "Player Color";
+		String title = "Lazer Color";
 		int stringWidth = g.getFontMetrics().stringWidth(title);
 		int difference = (300 - stringWidth) / 2;
-		g.drawString("Player Color", 250 + difference, 150);
+		g.drawString(title, 250 + difference, 150);
 		for (Button button : buttons) {
 			button.draw(g);
 		}
