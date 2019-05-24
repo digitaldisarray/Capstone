@@ -86,7 +86,7 @@ public class Player extends Entity {
 		}
 
 		if (System.currentTimeMillis() - lastWall > WALL_MS_COOLDOWN) {
-			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
+			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON3)) {
 				int x = getX(), y = getY(), width = 50, height = 5;
 
 				if (Launcher.getGame().getWindow().getWallDirection() == 4) {
