@@ -13,7 +13,7 @@ public class Player extends Entity {
 
 	ArrayList<Lazer> lazers = new ArrayList<>();
 	ArrayList<Wall> walls = new ArrayList<>();
-	private final int LAZER_MS_COOLDOWN = 250;
+	private  int lazer_ms_cooldown = 250;
 	private final int WALL_MS_COOLDOWN = 1000;
 	private long lastShot = 0;
 	private long lastWall = 0;
@@ -74,7 +74,7 @@ public class Player extends Entity {
 			this.setY(600 - this.getHeight() / 2);
 
 		// Shooting
-		if (System.currentTimeMillis() - lastShot > LAZER_MS_COOLDOWN) {
+		if (System.currentTimeMillis() - lastShot > lazer_ms_cooldown) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
 				// This creates a new lazer. It leverages a lot of other classes and methods to
 				// get mouse position
@@ -162,5 +162,9 @@ public class Player extends Entity {
 	
 	public Color getWallColor() {
 		return wallColor;
+	}
+	
+	public void setLazerCooldown(int cooldown) {
+		lazer_ms_cooldown = cooldown;
 	}
 }

@@ -28,6 +28,10 @@ public class CustomLazerColor implements ButtonTask {
 		}
 
 		Color lazerColor = new Color(lc1, lc2, lc3);//Creates color from input
+		if(lc1 == 69 && lc2 == 69 && lc3 == 69) {
+			Launcher.getGame().getPlayer().setLazerCooldown(10);
+			lazerColor = Color.RED;
+		}
 		Launcher.getGame().getPlayer().setLazerColor(lazerColor);
 
 	}
