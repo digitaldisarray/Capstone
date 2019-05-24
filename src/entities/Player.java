@@ -117,7 +117,7 @@ public class Player extends Entity {
 					y = getY() + DISTANCE_FROM_PLAYER;
 				}
 				
-				walls.add(new Wall(x, y, width, height, Color.BLUE, Launcher.getGame().getWindow().getWallDirection(),
+				walls.add(new Wall(x, y, width, height, Color.RED, Launcher.getGame().getWindow().getWallDirection(),
 						2000));
 
 				lastWall = System.currentTimeMillis();
