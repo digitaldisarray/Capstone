@@ -23,16 +23,16 @@ public class Zombie extends Entity {
 
 	public void tick() {
 		// TODO: Move towards player
-		
+
 		double x = getX();
 		double y = getY();
 //		System.out.println("x: " + x + "my: " + my);
-		
-		int playerX = Launcher.getGame().getPlayer().getX() + Launcher.getGame().getPlayer().getWidth() / 2;
-		int playerY = Launcher.getGame().getPlayer().getY() + Launcher.getGame().getPlayer().getHeight() / 2;
+
+		int playerX = Launcher.getGame().getPlayer().getX();
+		int playerY = Launcher.getGame().getPlayer().getY();
 
 		double width = playerX - x;
-		double height =  playerY - y;
+		double height = playerY - y;
 
 		double angle = Math.atan(height / width);
 
@@ -41,11 +41,14 @@ public class Zombie extends Entity {
 
 		moving = new Vector2D(Math.cos(angle), Math.sin(angle));
 		moving = moving.normalize();
-		setX((int) (getX() + (moving.getX() * velocity) + 0.5));
-		setY((int) (getY() + (moving.getY() * velocity) + 0.5));
 
-		
-
+		if (width == 0 && height == 0) {
+			setX(playerX);
+			setY(playerY);
+		} else {
+			setX((int) (getX() + (moving.getX() * velocity) + 0.5));
+			setY((int) (getY() + (moving.getY() * velocity) + 0.5));
+		}
 
 	}
 
