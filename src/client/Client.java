@@ -14,8 +14,6 @@ public class Client {
 	private DataOutputStream writer;
 	private Protocol protocol;
 
-	private static Client client;
-
 	public Client() {
 		protocol = new Protocol();
 	}
