@@ -263,6 +263,10 @@ public class Game implements Runnable {
 		clientThread.start();
 	}
 	
+	public boolean isConnected() {
+		return connected;
+	}
+	
 	public class ClientRecivingThread extends Thread {
 		Socket clientSocket;
 		DataInputStream reader;

@@ -52,27 +52,33 @@ public class Player extends Entity {
 	public void tick() {
 
 		// WASD Movement
-		if (Launcher.getGame().getWindow().isKeyPressed('w'))
+		if (Launcher.getGame().getWindow().isKeyPressed('w')) {
 			hasMoved = true;
-		this.setY(getY() - MOVEMENT_SPEED);
+			this.setY(getY() - MOVEMENT_SPEED);
+		}
 
-		if (Launcher.getGame().getWindow().isKeyPressed('a'))
+		if (Launcher.getGame().getWindow().isKeyPressed('a')) {
 			hasMoved = true;
-		this.setX(getX() - MOVEMENT_SPEED);
+			this.setX(getX() - MOVEMENT_SPEED);
+		}
 
-		if (Launcher.getGame().getWindow().isKeyPressed('s'))
+		if (Launcher.getGame().getWindow().isKeyPressed('s')) {
 			hasMoved = true;
-		this.setY(getY() + MOVEMENT_SPEED);
+			this.setY(getY() + MOVEMENT_SPEED);
+		}
 
-		if (Launcher.getGame().getWindow().isKeyPressed('d'))
+		if (Launcher.getGame().getWindow().isKeyPressed('d')) {
 			hasMoved = true;
-		this.setX(getX() + MOVEMENT_SPEED);
+			this.setX(getX() + MOVEMENT_SPEED);
+		}
 
-		if (hasMoved) {
+		if (hasMoved && Launcher.getGame().isConnected()) {
 			// Send player x and y to server
 			Launcher.getClient()
 					.sendToServer(new Protocol().UpdatePacket(getX(), getY(), getID(), 1));
 		}
+		
+		hasMoved = false;
 
 		if (this.getX() < 0 + this.getWidth() / 2)
 			this.setX(0 + this.getWidth() / 2);
