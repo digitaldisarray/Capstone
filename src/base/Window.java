@@ -187,46 +187,27 @@ public class Window {
 		frame.addWindowListener(new WindowListener() {
 
 			@Override
-			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void windowOpened(WindowEvent e) { }
 
+			@Override
 			public void windowClosing(WindowEvent e) {
-				// int response=JOptionPane.showConfirmDialog(this,"Are you sure you want to exit ?","Game",JOptionPane.YES_NO_OPTION);
-				
 				Launcher.getClient().sendToServer(new Protocol().ExitMessagePacket(Launcher.getGame().getPlayer().getID()));
 		    }
 
 			@Override
-			public void windowClosed(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void windowClosed(WindowEvent e) { }
 
 			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void windowIconified(WindowEvent e) { }
 
 			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void windowDeiconified(WindowEvent e) { }
 
 			@Override
-			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void windowActivated(WindowEvent e) { }
 
 			@Override
-			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void windowDeactivated(WindowEvent e) { }
 			
 		});
 		

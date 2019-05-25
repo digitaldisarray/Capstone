@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import client.Protocol;
 import entities.EnemyLazer;
 import entities.EnemyPlayer;
 import entities.Entity;
@@ -130,7 +131,7 @@ public class Game implements Runnable {
 					if(e instanceof EnemyLazer) {
 						player.tryCollide(e);
 					}
-
+					
 					e.tick();
 					e.draw(g);
 				}

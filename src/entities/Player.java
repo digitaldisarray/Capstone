@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import base.Launcher;
+import client.Protocol;
 
 public class Player extends Entity {
 
@@ -13,7 +14,7 @@ public class Player extends Entity {
 
 	ArrayList<Lazer> lazers = new ArrayList<>();
 	ArrayList<Wall> walls = new ArrayList<>();
-	private  int lazer_ms_cooldown = 250;
+	private int lazer_ms_cooldown = 250;
 	private final int WALL_MS_COOLDOWN = 1000;
 	private long lastShot = 0;
 	private long lastWall = 0;
@@ -44,22 +45,34 @@ public class Player extends Entity {
 		}
 	}
 
+	boolean hasMoved = false;
+
 	// Does movement and shooting, also makes it so that player can't go off screen
 	@Override
 	public void tick() {
 
 		// WASD Movement
 		if (Launcher.getGame().getWindow().isKeyPressed('w'))
-			this.setY(getY() - MOVEMENT_SPEED);
+			hasMoved = true;
+		this.setY(getY() - MOVEMENT_SPEED);
 
 		if (Launcher.getGame().getWindow().isKeyPressed('a'))
-			this.setX(getX() - MOVEMENT_SPEED);
+			hasMoved = true;
+		this.setX(getX() - MOVEMENT_SPEED);
 
 		if (Launcher.getGame().getWindow().isKeyPressed('s'))
-			this.setY(getY() + MOVEMENT_SPEED);
+			hasMoved = true;
+		this.setY(getY() + MOVEMENT_SPEED);
 
 		if (Launcher.getGame().getWindow().isKeyPressed('d'))
-			this.setX(getX() + MOVEMENT_SPEED);
+			hasMoved = true;
+		this.setX(getX() + MOVEMENT_SPEED);
+
+		if (hasMoved) {
+			// Send player x and y to server
+			Launcher.getClient()
+					.sendToServer(new Protocol().UpdatePacket(getX(), getY(), getID(), 1));
+		}
 
 		if (this.getX() < 0 + this.getWidth() / 2)
 			this.setX(0 + this.getWidth() / 2);
@@ -116,7 +129,7 @@ public class Player extends Entity {
 					x = getX() - width / 2;
 					y = getY() + DISTANCE_FROM_PLAYER;
 				}
-				
+
 				walls.add(new Wall(x, y, width, height, Color.RED, Launcher.getGame().getWindow().getWallDirection(),
 						2000));
 
@@ -152,6 +165,7 @@ public class Player extends Entity {
 	public void setLazerColor(Color color) {
 		lazerColor = color;
 	}
+
 	public void setWallColor(Color color) {
 		wallColor = color;
 	}
@@ -159,11 +173,11 @@ public class Player extends Entity {
 	public ArrayList<Lazer> getLazers() {
 		return lazers;
 	}
-	
+
 	public Color getWallColor() {
 		return wallColor;
 	}
-	
+
 	public void setLazerCooldown(int cooldown) {
 		lazer_ms_cooldown = cooldown;
 	}
