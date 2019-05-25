@@ -10,9 +10,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
+import client.Protocol;
 import entities.Vector2D;
 
 public class Window {
@@ -181,6 +184,52 @@ public class Window {
 
 		});
 
+		frame.addWindowListener(new WindowListener() {
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void windowClosing(WindowEvent e) {
+				// int response=JOptionPane.showConfirmDialog(this,"Are you sure you want to exit ?","Game",JOptionPane.YES_NO_OPTION);
+				
+				Launcher.getClient().sendToServer(new Protocol().ExitMessagePacket(Launcher.getGame().getPlayer().getID()));
+		    }
+
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
 		frame.add(canvas);
 		frame.pack();
 	}
@@ -292,7 +341,7 @@ public class Window {
 			wallDirection = 4;
 		}
 		
-		System.out.println("Wall Direction" + wallDirection);
+		//System.out.println("Wall Direction" + wallDirection);
 		
 	}
 
@@ -314,6 +363,4 @@ public class Window {
 	public JFrame getFrame() {
 		return frame;
 	}
-	
-
 }

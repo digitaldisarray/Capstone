@@ -13,5 +13,10 @@ public class Protocol {
 		message = "NewClient" + x + "," + y + "-" + dir + "|" + id;
 		return message;
 	}
+	
+	public String NewBulletPacket(int x, int y, int dir, int id) {
+		message = "NewBullet" + x + "," + y + "-" + dir + "|" + id;
+		return message;
+	}
 
 }

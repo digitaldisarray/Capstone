@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import base.Game;
 import base.Launcher;
 import gui.objects.ButtonTask;
 
@@ -35,18 +36,20 @@ public class MultiplayerStartButton implements ButtonTask {
 		}
 
 		try {
-			Launcher.getClient().register(ip, port, (int) (Math.random() * 700 + 50), (int) (Math.random() * 500 + 50));
+			int x = (int) (Math.random() * 700 + 50);
+			int y = (int) (Math.random() * 500 + 50);
+			Launcher.getGame().getPlayer().setX(x);
+			Launcher.getGame().getPlayer().setY(y);
+			Launcher.getClient().register(ip, port, x, y);
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Could not connect to server.", "Connection Error",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
-		// Get username
-
-		// Connect
-
 		// Set in game if connected
+		Launcher.getGame().startClientThread();
+		Launcher.getGame().setConnected(true);
 		Launcher.getGame().setInGame(true);
 	}
 
