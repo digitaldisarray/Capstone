@@ -93,12 +93,48 @@ public class Server extends Thread {
 					}
 				}
 
-			} else if (sentence.startsWith("Shot")) {
+			} else if(sentence.startsWith("LazerUpdate")) {
+				int pos1 = sentence.indexOf(',');
+				int pos2 = sentence.indexOf('-');
+				int pos3 = sentence.indexOf('|');
+				int x = Integer.parseInt(sentence.substring(11, pos1));
+				int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
+				int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
+
 				try {
-					BroadCastMessage(sentence);
+					if (clients.get(id - 1) != null) {
+						clients.get(id - 1).setPosX(x);
+						clients.get(id - 1).setPosY(y);
+						try {
+							BroadCastMessage(sentence);
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+					}
+				} catch (ArrayIndexOutOfBoundsException ex) {
+					// ignore cause means we have no id for it yet
+				}
+			} else if (sentence.startsWith("NewShot")) {
+				int pos1 = sentence.indexOf(',');
+				int pos2 = sentence.indexOf('-');
+				int x = Integer.parseInt(sentence.substring(7, pos1));
+				int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
+				
+				try {
+					writer = new DataOutputStream(clientSocket.getOutputStream());
+				} catch(IOException ex) {
+					ex.printStackTrace();
+				}
+				
+				sendToClient(protocol.shotID(clients.size() + 1));
+				
+				try {
+					BroadCastMessage(protocol.NewShotPacket(x, y, 1, clients.size() + 1));
+					sendAllClients(writer);
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
+				clients.add(new ClientInfo(null, x, y, 1));
 			} else if (sentence.startsWith("Remove")) {
 				int id = Integer.parseInt(sentence.substring(6));
 
@@ -137,7 +173,7 @@ public class Server extends Thread {
 
 	public void BroadCastMessage(String mess) throws IOException {
 		for (int i = 0; i < clients.size(); i++) {
-			if (clients.get(i) != null)
+			if (clients.get(i) != null && clients.get(i).getWriterStream() != null)
 				clients.get(i).getWriterStream().writeUTF(mess);
 		}
 	}
@@ -209,5 +245,4 @@ public class Server extends Thread {
 			return direction;
 		}
 	}
-
 }

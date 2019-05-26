@@ -3,6 +3,9 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import base.Launcher;
+import client.Protocol;
+
 public class Lazer extends Entity {
 	static int totalNumber;
 
@@ -22,6 +25,10 @@ public class Lazer extends Entity {
 		lastTime = startTime;
 		this.duration = duration;
 		totalNumber = totalNumber + 1;
+		
+		if (Launcher.getGame().isConnected()) {
+			Launcher.getClient().sendToServer(new Protocol().ShotPacket(getX(), getY(), getID(), 1));
+		}
 	}
 
 	@Override
@@ -49,10 +56,14 @@ public class Lazer extends Entity {
 		if (time - startTime > duration) {
 			remove = true;
 		}
+		
+		if (Launcher.getGame().isConnected()) {
+			Launcher.getClient().sendToServer(new Protocol().ShotUpdatePacket(getX(), getY(), getID(), 1));
+		}
 	}
 
-	public void setRemoveToTrue() {
-		remove = true;
+	public void setRemove(boolean r) {
+		remove = r;
 	}
 
 	public boolean shouldRemove() {

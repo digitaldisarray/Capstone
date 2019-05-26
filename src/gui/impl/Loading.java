@@ -22,7 +22,7 @@ public class Loading implements Screen {
 
 	@Override
 	public void init() {// Adds color options
-		buttons.add(new Button(500, 600-55, 300, 55, "", new BackToMain(), grey2));
+		buttons.add(new Button(798, 0, 2, 2, "", new BackToMain(), grey2));
 	}
 
 	@Override

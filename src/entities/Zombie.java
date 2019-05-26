@@ -64,6 +64,7 @@ public class Zombie extends Entity {
 			if (entity instanceof Lazer) {
 				alive = false;
 				zombieKills++;
+				((Lazer) entity).setRemove(true);
 			}
 		}
 	}

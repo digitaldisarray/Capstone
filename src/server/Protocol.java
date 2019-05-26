@@ -14,8 +14,13 @@ public class Protocol {
 		return message;
 	}
 	
-	public String NewBulletPacket(int x, int y, int dir, int id) {
-		message = "NewBullet" + x + "," + y + "-" + dir + "|" + id;
+	public String NewShotPacket(int x, int y, int dir, int id) {
+		message = "NewShot" + x + "," + y + "-" + dir + "|" + id;
+		return message;
+	}
+	
+	public String shotID (int id) {
+		message = "ShotID" + id;
 		return message;
 	}
 

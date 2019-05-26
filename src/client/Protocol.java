@@ -17,9 +17,14 @@ public class Protocol {
 		message = "Update" + x + "," + y + "-" + dir + "|" + id;
 		return message;
 	}
+	
+	public String ShotUpdatePacket(int x, int y, int id, int dir) {
+		message = "LazerUpdate" + x + "," + y + "-" + dir + "|" + id;
+		return message;
+	}
 
-	public String ShotPacket(int id) {
-		message = "Shot" + id;
+	public String ShotPacket(int x, int y, int id, int dir) {
+		message = "NewShot" + x + "," + y + "-" + id + "|" + id;
 		return message;
 	}
 

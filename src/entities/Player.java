@@ -74,10 +74,9 @@ public class Player extends Entity {
 
 		if (hasMoved && Launcher.getGame().isConnected()) {
 			// Send player x and y to server
-			Launcher.getClient()
-					.sendToServer(new Protocol().UpdatePacket(getX(), getY(), getID(), 1));
+			Launcher.getClient().sendToServer(new Protocol().UpdatePacket(getX(), getY(), getID(), 1));
 		}
-		
+
 		hasMoved = false;
 
 		if (this.getX() < 0 + this.getWidth() / 2)
@@ -160,6 +159,24 @@ public class Player extends Entity {
 			// Do this last
 			if (wall.shouldRemove()) {
 				walls.remove(i);
+			}
+		}
+	}
+
+	public void tryCollide(Entity entity) {
+		// Make sure we are not colliding with ourself
+		if (entity.equals(this)) {
+			return;
+		}
+
+		// See if we colide with something, if so what is it
+		if (Launcher.collides(getX(), getY(), getWidth(), getHeight(), entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight())) {
+			if (entity instanceof EnemyLazer) {
+
+			}
+
+			if (entity instanceof Zombie) {
+
 			}
 		}
 	}

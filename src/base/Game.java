@@ -96,7 +96,7 @@ public class Game implements Runnable {
 			// Draw and move the player
 			player.tick();
 			player.draw(g);
-
+			
 			// SINGLEPLAYER
 			if (!connected) {
 				// Spawn zombies
@@ -146,7 +146,6 @@ public class Game implements Runnable {
 
 				for (Integer i : removals) {
 					filtered.remove(i.intValue());
-					System.out.println("Removed stuff");
 				}
 				removals.clear();
 
@@ -311,7 +310,7 @@ public class Game implements Runnable {
 				if (sentence.startsWith("ID")) {
 					int id = Integer.parseInt(sentence.substring(2));
 					player.setID(id);
-					System.out.println("My ID: " + id);
+//					System.out.println("My ID: " + id);
 
 				} else if (sentence.startsWith("NewClient")) {
 					int pos1 = sentence.indexOf(',');
@@ -339,7 +338,6 @@ public class Game implements Runnable {
 						exists = false;
 					}
 				} else if (sentence.startsWith("Update")) {
-					System.out.println("Client side update recived");
 					int pos1 = sentence.indexOf(',');
 					int pos2 = sentence.indexOf('-');
 					int pos3 = sentence.indexOf('|');
@@ -357,17 +355,53 @@ public class Game implements Runnable {
 							}
 						}
 					}
+				} else if (sentence.startsWith("ShotID"))  {
+					int id = Integer.parseInt(sentence.substring(6));
+					player.getLazers().get(player.getLazers().size()).setID(id);
+				} else if (sentence.startsWith("LazerUpdate")) { // Lazer update
+					int pos1 = sentence.indexOf(',');
+					int pos2 = sentence.indexOf('-');
+					int pos3 = sentence.indexOf('|');
+					int x = Integer.parseInt(sentence.substring(11, pos1));
+					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
+					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
+					
+					int index = 0;
+					for(Entity e : entities) {
+						if(e instanceof EnemyLazer && e.getID() == id) {
+							e.setX(x);
+							e.setY(y);
+						}
+					}
+					
+				} else if (sentence.startsWith("NewShot")) { // New lazer
+					int pos1 = sentence.indexOf(',');
+					int pos2 = sentence.indexOf('-');
+					int pos3 = sentence.indexOf('|');
+					int x = Integer.parseInt(sentence.substring(7, pos1));
+					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
+					int dir = Integer.parseInt(sentence.substring(pos2 + 1, pos3));
+					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
 
-				} else if (sentence.startsWith("Shot")) { // New projectile
-//					int id = Integer.parseInt(sentence.substring(4));
-//
-//					if (id != player.getID()) {
-//						boardPanel.getTank(id).Shot();
-//						entities.add(new EnemyLazer());
-//					}
+					// Is not local player
+					// TODO: Make it check that it is not a local lazer
+					if (id != player.getID()) {
+						// Does not already exist in list
+						filtered = entities;
+						for (Entity e : filtered) {
+							if (e instanceof EnemyLazer && e.getID() == id) {
+								exists = true;
+							}
+						}
 
+						// If it does not exists in the array list, add it
+						if (!exists) {
+							filtered.add(new EnemyLazer(x, y, id));
+						}
+						exists = false;
+					}
+					
 				} else if (sentence.startsWith("Remove")) {
-					System.out.println("Got removal request");
 					int id = Integer.parseInt(sentence.substring(6));
 
 					if (id == player.getID()) {
@@ -385,15 +419,12 @@ public class Game implements Runnable {
 
 					}
 				} else if (sentence.startsWith("Exit")) {
-					System.out.println("Client got that EXIT");
 					int id = Integer.parseInt(sentence.substring(4));
 
 					// Remove the thing from entity array list
 					removals.clear();
 					for (Entity e : entities) {
-						System.out.println("Comparing: " + e.getID() + " and " + id);
 						if (e.getID() == id) {
-							System.out.println("Added");
 							removals.add(entities.indexOf(e));
 						}
 					}
