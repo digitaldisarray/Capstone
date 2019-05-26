@@ -127,7 +127,10 @@ public class Game implements Runnable {
 					e.tick();
 					e.draw(g);
 				}
-
+				
+				g.setColor(Color.BLACK);
+				g.drawString("Kills: " + Zombie.getZombieKills(), 790 - g.getFontMetrics().stringWidth("Kills: " + Zombie.getZombieKills()), 15);
+				
 			} else {
 				// MUTLIPLAYER
 
@@ -154,7 +157,7 @@ public class Game implements Runnable {
 		// Draw FPS
 		g.setColor(Color.BLACK);
 		g.drawString("FPS: " + lastFPS, 1, 15);
-		g.drawString("Kills: " + Zombie.getZombieKills(), 730, 15);
+		
 		// End Graphics
 		bs.show();
 		g.dispose();
