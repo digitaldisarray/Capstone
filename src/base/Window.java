@@ -87,10 +87,13 @@ public class Window {
 					c = 'd';
 					break;
 				}
-
-				if (c >= 0 && c < keyPressed.length)
+				if(c == 'p' || c == 'P') {
+					Launcher.getGame().setInGame(false);
+					
+				}
+				if (c >= 0 && c < keyPressed.length) {
 					keyPressed[c] = keyTyped[c] = true;
-
+				}
 			}
 
 			@Override

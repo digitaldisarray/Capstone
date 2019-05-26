@@ -65,6 +65,7 @@ public class Game implements Runnable {
 		window = new Window(title, width, height);
 		mManager = new MenuManager();
 		player = new Player((int) (Math.random() * 700) + 50, (int) (Math.random() * 500) + 50, 10, 10, new Color(0, 100, 80), "Test Player");
+		
 	}
 
 	int x = 0;
@@ -141,7 +142,7 @@ public class Game implements Runnable {
 		// Draw FPS
 		g.setColor(Color.BLACK);
 		g.drawString("FPS: " + lastFPS, 1, 15);
-
+		g.drawString("Kills: " + Zombie.getZombieKills(), 730, 15);
 		// End Graphics
 		bs.show();
 		g.dispose();

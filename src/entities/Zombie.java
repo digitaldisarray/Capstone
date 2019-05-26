@@ -9,7 +9,7 @@ public class Zombie extends Entity {
 	boolean alive;
 	private Vector2D moving;
 	private double velocity, zombieDeg;
-
+	private static int zombieKills = 0;
 	public Zombie(int x, int y, int width, int height, Color color, double velocityp) {
 		super(x, y, width, height, color);
 		alive = true;
@@ -63,10 +63,13 @@ public class Zombie extends Entity {
 				entity.getHeight())) {
 			if (entity instanceof Lazer) {
 				alive = false;
+				zombieKills++;
 			}
 		}
 	}
-
+	public static int getZombieKills() {
+		return zombieKills;
+	}
 	public boolean isAlive() {
 		return alive;
 	}
