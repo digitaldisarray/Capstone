@@ -144,9 +144,7 @@ public class Window {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (!Launcher.getGame().isInGame()) {
-					Launcher.getGame().mManager.getCurrent().passPressEvent(e.getX(), e.getY()); // Passes the mouse
-																									// click to where it
-																									// can be used
+					Launcher.getGame().getMenuManager().getCurrent().passPressEvent(e.getX(), e.getY());
 				}
 
 				switch (e.getButton()) {
@@ -166,7 +164,7 @@ public class Window {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (!Launcher.getGame().isInGame()) {
-					Launcher.getGame().mManager.getCurrent().passReleaseEvent(e.getX(), e.getY());
+					Launcher.getGame().getMenuManager().getCurrent().passReleaseEvent(e.getX(), e.getY());
 				}
 
 				switch (e.getButton()) {

@@ -32,7 +32,7 @@ public class Player extends Entity {
 	@Override
 	public void draw(Graphics2D g) {
 		g.setColor(playerColor);
-		g.fillRect(getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
 
 		for (Lazer lazer : lazers) {
 			g.setColor(lazerColor);

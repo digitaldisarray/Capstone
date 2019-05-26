@@ -33,26 +33,30 @@ public class Game implements Runnable {
 	private boolean connected = false;
 
 	// The menu manager object
-	MenuManager mManager;
+	private MenuManager mManager;
 
 	// Graphics objects
 	private BufferStrategy bs;
 	private Graphics2D g;
 
 	// The local player
-	Player player;
+	private Player player;
 
 	// Store the last recorded fps
-	int lastFPS;
+	private int lastFPS;
 
 	// The entities in the game
-	ArrayList<Entity> entities = new ArrayList<>();
+	private ArrayList<Entity> entities = new ArrayList<>();
 
-	// Used for filtering entities
-	ArrayList<Entity> filtered = new ArrayList<>();
-	
+	// Used for filtering entities in the game loop
+	private ArrayList<Entity> filtered = new ArrayList<>();
+	private boolean found = false;
+
+	// For filtering entities outside of game loop
+	private ArrayList<Integer> removals = new ArrayList<>();
+
 	// Object for getting new info from server
-	ClientRecivingThread clientThread;
+	private ClientRecivingThread clientThread;
 
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -64,7 +68,8 @@ public class Game implements Runnable {
 	private void init() {
 		window = new Window(title, width, height);
 		mManager = new MenuManager();
-		player = new Player((int) (Math.random() * 700) + 50, (int) (Math.random() * 500) + 50, 10, 10, new Color(0, 100, 80), "Test Player");
+		player = new Player((int) (Math.random() * 700) + 50, (int) (Math.random() * 500) + 50, 10, 10,
+				new Color(0, 100, 80), "Test Player");
 	}
 
 	int x = 0;
@@ -126,15 +131,24 @@ public class Game implements Runnable {
 
 			} else {
 				// MUTLIPLAYER
+
 				// Draw, collide, and update things
 				for (Entity e : entities) {
-					if(e instanceof EnemyLazer) {
+					if (e instanceof EnemyLazer) {
 						player.tryCollide(e);
 					}
-					
+
 					e.tick();
 					e.draw(g);
 				}
+
+				for (Integer i : removals) {
+					filtered.remove(i.intValue());
+					System.out.println("Removed stuff");
+				}
+				removals.clear();
+
+				entities = filtered;
 			}
 		}
 
@@ -257,16 +271,16 @@ public class Game implements Runnable {
 	public void setConnected(boolean connected) {
 		this.connected = connected;
 	}
-	
+
 	public void startClientThread() {
 		clientThread = new ClientRecivingThread(Launcher.getClient().getSocket());
 		clientThread.start();
 	}
-	
+
 	public boolean isConnected() {
 		return connected;
 	}
-	
+
 	public class ClientRecivingThread extends Thread {
 		Socket clientSocket;
 		DataInputStream reader;
@@ -281,9 +295,9 @@ public class Game implements Runnable {
 
 		}
 
-		
 		boolean exists = false;
 		boolean isRunning = true;
+
 		public void run() {
 			while (isRunning) {
 				String sentence = "";
@@ -305,19 +319,20 @@ public class Game implements Runnable {
 					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
 					int dir = Integer.parseInt(sentence.substring(pos2 + 1, pos3));
 					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
-					
+
 					// Is not local player
 					if (id != player.getID()) {
 						// Does not already exist in list
-						for(Entity e : entities) {
-							if(e instanceof EnemyPlayer && e.getID() == id) {
+						filtered = entities;
+						for (Entity e : filtered) {
+							if (e instanceof EnemyPlayer && e.getID() == id) {
 								exists = true;
 							}
 						}
-						
+
 						// If it does not exists in the array list, add it
-						if(!exists) {
-							entities.add(new EnemyPlayer(x, y, id));
+						if (!exists) {
+							filtered.add(new EnemyPlayer(x, y, id));
 						}
 						exists = false;
 					}
@@ -332,17 +347,13 @@ public class Game implements Runnable {
 					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
 
 					if (id != player.getID()) {
-						for(Entity e : entities) {
-							if(e.getID() == id) {
+						filtered = entities;
+						for (Entity e : filtered) {
+							if (e.getID() == id) {
 								e.setX(x);
 								e.setY(y);
 							}
 						}
-						
-//						boardPanel.getTank(id).setXpoistion(x);
-//						boardPanel.getTank(id).setYposition(y);
-//						boardPanel.getTank(id).setDirection(dir);
-//						boardPanel.repaint();
 					}
 
 				} else if (sentence.startsWith("Shot")) { // New projectile
@@ -354,30 +365,37 @@ public class Game implements Runnable {
 //					}
 
 				} else if (sentence.startsWith("Remove")) {
-//					int id = Integer.parseInt(sentence.substring(6));
-//
-//					if (id == clientTank.getTankID()) {
-//						int response = JOptionPane.showConfirmDialog(null,
-//								"Sorry, You are loss. Do you want to try again ?", "Tanks 2D Multiplayer Game",
-//								JOptionPane.OK_CANCEL_OPTION);
-//						if (response == JOptionPane.OK_OPTION) {
-//							// client.closeAll();
-//							setVisible(false);
-//							dispose();
-//
-//							new ClientGUI();
-//						} else {
-//							System.exit(0);
-//						}
-//					} else {
-//						boardPanel.removeTank(id);
-//					}
+					System.out.println("Got removal request");
+					int id = Integer.parseInt(sentence.substring(6));
+
+					if (id == player.getID()) {
+						// The current player died
+						// Probably wont use this part of if
+						// This is because we do deaths on client side
+					} else {
+						// Remove the thing from entity array list
+						removals.clear();
+						for (Entity e : entities) {
+							if (e.getID() == id) {
+								removals.add(entities.indexOf(e));
+							}
+						}
+
+					}
 				} else if (sentence.startsWith("Exit")) {
-//					int id = Integer.parseInt(sentence.substring(4));
-//
-//					if (id != clientTank.getTankID()) {
-//						boardPanel.removeTank(id);
-//					}
+					System.out.println("Client got that EXIT");
+					int id = Integer.parseInt(sentence.substring(4));
+
+					// Remove the thing from entity array list
+					removals.clear();
+					for (Entity e : entities) {
+						System.out.println("Comparing: " + e.getID() + " and " + id);
+						if (e.getID() == id) {
+							System.out.println("Added");
+							removals.add(entities.indexOf(e));
+						}
+					}
+
 				}
 
 			}

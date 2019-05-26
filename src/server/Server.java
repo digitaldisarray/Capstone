@@ -53,7 +53,7 @@ public class Server extends Thread {
 				ex.printStackTrace();
 			}
 
-			System.out.println(sentence);
+			// System.out.(sentence);
 			if (sentence.startsWith("Hello")) {
 				int pos = sentence.indexOf(',');
 				int x = Integer.parseInt(sentence.substring(5, pos));
