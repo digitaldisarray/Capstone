@@ -1,5 +1,6 @@
-/server/
-/entities/
-/client/
+/EpicUML.ucls
 /base/
+/client/
+/entities/
 /gui/
+/server/

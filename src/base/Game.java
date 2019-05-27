@@ -152,10 +152,6 @@ public class Game implements Runnable {
 					e.draw(g);
 				}
 
-				g.setColor(Color.BLACK);
-				g.drawString("Kills: " + Zombie.getZombieKills(),
-						770 - g.getFontMetrics().stringWidth("Kills: " + Zombie.getZombieKills()), 15);
-				g.drawString("Health: ", 775 - g.getFontMetrics().stringWidth("Health: "), 35);
 				
 				
 				if (Launcher.getGame().getPlayer().getHealth() > 500)
@@ -164,10 +160,14 @@ public class Game implements Runnable {
 					g.setColor(Color.ORANGE);
 				if (Launcher.getGame().getPlayer().getHealth() <= 250)
 					g.setColor(Color.RED);
-				g.drawRect(690, 40, 100, 20);
-				g.fillRect(690, 40, (int) (((double)Launcher.getGame().getPlayer().getHealth() / Launcher.getGame().getPlayer().getStartHelath()) * 100), 20);
+				
+				g.fillRect(680, 20, (int) (((double)Launcher.getGame().getPlayer().getHealth() / Launcher.getGame().getPlayer().getStartHelath()) * 110), 20);
 
-
+				g.setColor(Color.BLACK);
+				g.drawString("Kills: " + Zombie.getZombieKills(),
+						720 - g.getFontMetrics().stringWidth("Kills: " + Zombie.getZombieKills()), 15);
+				g.drawRect(680, 20, 110, 20);
+				g.drawString("Health: "  + Launcher.getGame().getPlayer().getHealth() + "/" + Launcher.getGame().getPlayer().getStartHelath(), 725 - g.getFontMetrics().stringWidth("Health: "), 35);
 			} else {
 				// MUTLIPLAYER
 
