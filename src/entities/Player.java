@@ -11,6 +11,9 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import base.Launcher;
 import client.Protocol;
 
@@ -21,7 +24,7 @@ public class Player extends Entity {
 	ArrayList<Lazer> lazers = new ArrayList<>();
 	ArrayList<Wall> walls = new ArrayList<>();
 	private int lazer_ms_cooldown = 250;
-	private final int WALL_MS_COOLDOWN = 1000;
+	private final int WALL_MS_COOLDOWN = 2111;
 	private long lastShot = 0;
 	private long lastWall = 0;
 	private final int MOVEMENT_SPEED = 3;
@@ -29,6 +32,8 @@ public class Player extends Entity {
 	private static Color playerColor = Color.BLACK;
 	private static Color lazerColor = Color.RED;
 	private static Color wallColor = Color.RED;
+	public final int START_HEALTH = 1000;
+	private int health = START_HEALTH;
 
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);
@@ -39,6 +44,13 @@ public class Player extends Entity {
 	public void draw(Graphics2D g) {
 		g.setColor(playerColor);
 		g.fillRect(getX(), getY(), getWidth(), getHeight());
+
+		if (health > 50)
+			g.setColor(Color.GREEN);
+		if (health > 25 && health <= 50)
+			g.setColor(Color.ORANGE);
+		if (health <= 25)
+			g.setColor(Color.RED);
 
 		for (Lazer lazer : lazers) {
 			g.setColor(lazerColor);
@@ -164,25 +176,43 @@ public class Player extends Entity {
 
 			// Do this last
 			if (wall.shouldRemove()) {
+
 				walls.remove(i);
+
 			}
+
 		}
 	}
 
 	public void tryCollide(Entity entity) {
 		// Make sure we are not colliding with ourself
+
 		if (entity.equals(this)) {
 			return;
 		}
 
 		// See if we colide with something, if so what is it
-		if (Launcher.collides(getX(), getY(), getWidth(), getHeight(), entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight())) {
+		if (Launcher.collides(getX(), getY(), getWidth(), getHeight(), entity.getX(), entity.getY(), entity.getWidth(),
+				entity.getHeight())) {
 			if (entity instanceof EnemyLazer) {
 
 			}
 
 			if (entity instanceof Zombie) {
+				health -= 1;
+				System.out.println("Health: " + health);
+			}
+		}
+		if (health == 0) {
+			final JFrame parent = new JFrame();
+			JOptionPane.showMessageDialog(parent,
+					"Haha, you died. Loser. You had " + Zombie.getZombieKills() + " kills");
+			Launcher.getGame().setInGame(false);
 
+			for (Entity e : Launcher.getGame().getEntities()) {
+				if (e instanceof Zombie) {
+					((Zombie) e).setDead();
+				}
 			}
 		}
 	}
@@ -203,6 +233,10 @@ public class Player extends Entity {
 		return lazers;
 	}
 
+	public ArrayList<Wall> getWalls() {
+		return walls;
+	}
+
 	public Color getWallColor() {
 		return wallColor;
 	}
@@ -210,4 +244,17 @@ public class Player extends Entity {
 	public void setLazerCooldown(int cooldown) {
 		lazer_ms_cooldown = cooldown;
 	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public int getStartHelath() {
+		return START_HEALTH;
+	}
+
+	public void resetHealth() {
+		health = START_HEALTH;
+	}
+
 }

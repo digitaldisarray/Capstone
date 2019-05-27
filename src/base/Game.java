@@ -21,6 +21,7 @@ import entities.EnemyPlayer;
 import entities.Entity;
 import entities.Lazer;
 import entities.Player;
+import entities.Wall;
 import entities.Zombie;
 import gui.MenuManager;
 
@@ -75,7 +76,8 @@ public class Game implements Runnable {
 	private void init() {
 		window = new Window(title, width, height);
 		mManager = new MenuManager();
-		player = new Player((int) (Math.random() * 700) + 50, (int) (Math.random() * 500) + 50, 10, 10, new Color(0, 100, 80), "Test Player");
+		player = new Player((int) (Math.random() * 700) + 50, (int) (Math.random() * 500) + 50, 10, 10,
+				new Color(0, 100, 80), "Test Player");
 	}
 
 	int x = 0;
@@ -103,7 +105,7 @@ public class Game implements Runnable {
 			// Draw and move the player
 			player.tick();
 			player.draw(g);
-			
+
 			// SINGLEPLAYER
 			if (!connected) {
 				// Spawn zombies
@@ -127,17 +129,45 @@ public class Game implements Runnable {
 				// Draw, collide, and update zombies
 				for (Entity e : entities) {
 					// Collide lazers and entities
+					
 					for (Lazer l : player.getLazers()) {
 						e.tryCollide(l);
 					}
 
+					for (Wall l : player.getWalls()) {
+						
+						e.tryCollide(l);
+					
+					}
+					
+					if(player.getWalls().size() == 0) {
+						if (e instanceof Zombie) {
+							((Zombie) e).setMovingState(true);
+						}
+					
+					}
+					player.tryCollide(e);
+
 					e.tick();
 					e.draw(g);
 				}
-				
+
 				g.setColor(Color.BLACK);
-				g.drawString("Kills: " + Zombie.getZombieKills(), 790 - g.getFontMetrics().stringWidth("Kills: " + Zombie.getZombieKills()), 15);
+				g.drawString("Kills: " + Zombie.getZombieKills(),
+						770 - g.getFontMetrics().stringWidth("Kills: " + Zombie.getZombieKills()), 15);
+				g.drawString("Health: ", 775 - g.getFontMetrics().stringWidth("Health: "), 35);
 				
+				
+				if (Launcher.getGame().getPlayer().getHealth() > 500)
+					g.setColor(Color.GREEN);
+				if (Launcher.getGame().getPlayer().getHealth() > 250 && Launcher.getGame().getPlayer().getHealth() <= 500)
+					g.setColor(Color.ORANGE);
+				if (Launcher.getGame().getPlayer().getHealth() <= 250)
+					g.setColor(Color.RED);
+				g.drawRect(690, 40, 100, 20);
+				g.fillRect(690, 40, (int) (((double)Launcher.getGame().getPlayer().getHealth() / Launcher.getGame().getPlayer().getStartHelath()) * 100), 20);
+
+
 			} else {
 				// MUTLIPLAYER
 
@@ -149,15 +179,15 @@ public class Game implements Runnable {
 
 					e.tick();
 					e.draw(g);
-					
+
 					// Remove those dead lazers
-					if(e instanceof EnemyLazer) {
+					if (e instanceof EnemyLazer) {
 						if (((EnemyLazer) e).shouldRemove()) {
 							removals.add(entities.indexOf(e));
 						}
 					}
 				}
-				
+
 				for (Integer i : removals) {
 					filtered.remove(i.intValue());
 				}
@@ -170,7 +200,7 @@ public class Game implements Runnable {
 		// Draw FPS
 		g.setColor(Color.BLACK);
 		g.drawString("FPS: " + lastFPS, 1, 15);
-		
+
 		// End Graphics
 		bs.show();
 		g.dispose();
@@ -257,6 +287,10 @@ public class Game implements Runnable {
 	public double getYScaleFactor() {
 
 		return window.getCanvas().getHeight() / 600.0;
+	}
+	
+	public ArrayList<Entity> getEntities() {
+		return entities;
 	}
 
 	public Window getWindow() {
@@ -377,17 +411,17 @@ public class Game implements Runnable {
 						int x = Integer.parseInt(sentence.substring(11, pos1));
 						int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
 						String uuid = sentence.substring(pos3 + 1, sentence.length());
-						
+
 						int index = 0;
-						for(Entity e : entities) {
-							if(e instanceof EnemyLazer) {
-								if(((EnemyLazer) e).getStringUUID().equals(uuid)) {
+						for (Entity e : entities) {
+							if (e instanceof EnemyLazer) {
+								if (((EnemyLazer) e).getStringUUID().equals(uuid)) {
 									e.setX(x);
 									e.setY(y);
 								}
 							}
 						}
-					} catch(Exception e) {
+					} catch (Exception e) {
 						// Do nothing and wait for the removal request
 					}
 				} else if (sentence.startsWith("NewShot")) { // New lazer
@@ -399,22 +433,21 @@ public class Game implements Runnable {
 					int dir = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
 					String uuid = sentence.substring(pos2 + 1, pos3);
 
-					
 					// Make sure it does not belong to us
 					boolean belongsToUs = false;
-					for(Lazer l : player.getLazers()) {
-						if(l.getStringUUID().equals(uuid)) {
+					for (Lazer l : player.getLazers()) {
+						if (l.getStringUUID().equals(uuid)) {
 							belongsToUs = true;
 						}
 					}
-					
+
 					// TODO: Make it check that it is not a local lazer
 					if (!belongsToUs) {
 						// Does not already exist in list
 						filtered = entities;
 						for (Entity e : filtered) {
 							if (e instanceof EnemyLazer) {
-								if(((EnemyLazer) e).getStringUUID().equals(uuid)) {
+								if (((EnemyLazer) e).getStringUUID().equals(uuid)) {
 									exists = true;
 								}
 							}
@@ -426,7 +459,7 @@ public class Game implements Runnable {
 						}
 						exists = false;
 					}
-					
+
 				} else if (sentence.startsWith("Remove")) {
 					int id = Integer.parseInt(sentence.substring(6));
 

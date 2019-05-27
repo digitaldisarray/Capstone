@@ -5,12 +5,15 @@ import gui.objects.ButtonTask;
 import java.awt.Color;
 
 import base.Launcher;
+import entities.Zombie;
 
 public class StartButton implements ButtonTask {
 
 	@Override
 	public void run(Color color) {
 		Launcher.getGame().setInGame(true);
+		Launcher.getGame().getPlayer().resetHealth();
+		Zombie.resetZombieKills();
 	}
 
 }

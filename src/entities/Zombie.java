@@ -33,7 +33,7 @@ public class Zombie extends Entity {
 	// Makes the zombiemove towards the player
 	public void tick() {
 		// TODO: Move towards player
-
+		
 		double x = getX();
 		double y = getY();
 //		System.out.println("x: " + x + "my: " + my);
@@ -67,27 +67,30 @@ public class Zombie extends Entity {
 //Collision
 	public void tryCollide(Entity entity) {
 		// Make sure we are not colliding with ourself
+		
 		if (entity.equals(this)) {
 			return;
 		}
-
+		
 		// See if we colide with something, if so what is it
 		if (Launcher.collides(getX(), getY(), getWidth(), getHeight(), entity.getX(), entity.getY(), entity.getWidth(),
 				entity.getHeight())) {
+
 			if (entity instanceof Lazer) {
+
 				alive = false;
-				
 				zombieKills++;
-				((Lazer) entity).setRemove(true);
+//				((Lazer) entity).setRemove(true);
 			}
+			
+
 			if (entity instanceof Wall) {
+
 				isMoving = false;
-				System.out.println("Collide");
 			}
 			
 
 		}
-		
 
 	}
 
@@ -99,4 +102,15 @@ public class Zombie extends Entity {
 	public boolean isAlive() {
 		return alive;
 	}
+	
+	public void setMovingState(boolean moving){
+		isMoving = moving;
+	}
+	public static void resetZombieKills() {
+		zombieKills = 0;
+	}
+	public void setDead() {
+		alive = false;
+	}
+	
 }

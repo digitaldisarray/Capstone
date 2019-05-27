@@ -26,7 +26,7 @@ public class Wall extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void draw(Graphics2D g) {// Draws the lazer
+	public void draw(Graphics2D g) {// Draws the wall
 		long time = System.currentTimeMillis();
 		g.setColor(Launcher.getGame().getPlayer().getWallColor());
 		g.fillRect(getX(), getY(), getWidth(), getHeight());
