@@ -14,13 +14,8 @@ public class Protocol {
 		return message;
 	}
 	
-	public String NewShotPacket(int x, int y, int dir, int id) {
-		message = "NewShot" + x + "," + y + "-" + dir + "|" + id;
-		return message;
-	}
-	
-	public String shotID (int id) {
-		message = "ShotID" + id;
+	public String NewShotPacket(int x, int y, int dir, String uuid) {
+		message = "NewShot" + x + "," + y + "-" + uuid + "|" + dir;
 		return message;
 	}
 

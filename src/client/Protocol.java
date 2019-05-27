@@ -18,13 +18,13 @@ public class Protocol {
 		return message;
 	}
 	
-	public String ShotUpdatePacket(int x, int y, int id, int dir) {
+	public String ShotUpdatePacket(int x, int y, String id, int dir) {
 		message = "LazerUpdate" + x + "," + y + "-" + dir + "|" + id;
 		return message;
 	}
 
-	public String ShotPacket(int x, int y, int id, int dir) {
-		message = "NewShot" + x + "," + y + "-" + id + "|" + id;
+	public String ShotPacket(int x, int y, String uuid, int dir) {
+		message = "NewShot" + x + "," + y + "-" + uuid + "|" + uuid;
 		return message;
 	}
 

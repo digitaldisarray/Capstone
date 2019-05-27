@@ -362,22 +362,22 @@ public class Game implements Runnable {
 							}
 						}
 					}
-				} else if (sentence.startsWith("ShotID"))  {
-					int id = Integer.parseInt(sentence.substring(6));
-					player.getLazers().get(player.getLazers().size()).setID(id);
 				} else if (sentence.startsWith("LazerUpdate")) { // Lazer update
+					System.out.println("LazerUpdate: " + sentence);
 					int pos1 = sentence.indexOf(',');
 					int pos2 = sentence.indexOf('-');
 					int pos3 = sentence.indexOf('|');
 					int x = Integer.parseInt(sentence.substring(11, pos1));
 					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
-					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
+					String uuid = sentence.substring(pos3 + 1, sentence.length());
 					
 					int index = 0;
 					for(Entity e : entities) {
-						if(e instanceof EnemyLazer && e.getID() == id) {
-							e.setX(x);
-							e.setY(y);
+						if(e instanceof EnemyLazer) {
+							if(((EnemyLazer) e).getStringUUID().equals(uuid)) {
+								e.setX(x);
+								e.setY(y);
+							}
 						}
 					}
 					
@@ -387,23 +387,33 @@ public class Game implements Runnable {
 					int pos3 = sentence.indexOf('|');
 					int x = Integer.parseInt(sentence.substring(7, pos1));
 					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
-					int dir = Integer.parseInt(sentence.substring(pos2 + 1, pos3));
-					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
+					int dir = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
+					String uuid = sentence.substring(pos2 + 1, pos3);
 
-					// Is not local player
+					
+					// Make sure it does not belong to us
+					boolean belongsToUs = false;
+					for(Lazer l : player.getLazers()) {
+						if(l.getStringUUID().equals(uuid)) {
+							belongsToUs = true;
+						}
+					}
+					
 					// TODO: Make it check that it is not a local lazer
-					if (id != player.getID()) {
+					if (!belongsToUs) {
 						// Does not already exist in list
 						filtered = entities;
 						for (Entity e : filtered) {
-							if (e instanceof EnemyLazer && e.getID() == id) {
-								exists = true;
+							if (e instanceof EnemyLazer) {
+								if(((EnemyLazer) e).getStringUUID().equals(uuid)) {
+									exists = true;
+								}
 							}
 						}
 
 						// If it does not exists in the array list, add it
 						if (!exists) {
-							filtered.add(new EnemyLazer(x, y, id));
+							filtered.add(new EnemyLazer(x, y, uuid));
 						}
 						exists = false;
 					}

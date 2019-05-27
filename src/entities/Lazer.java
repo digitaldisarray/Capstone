@@ -8,6 +8,7 @@ package entities;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.UUID;
 
 import base.Launcher;
 import client.Protocol;
@@ -21,6 +22,7 @@ public class Lazer extends Entity {
 	private long startTime;
 	private long lastTime;
 	private long duration;
+	private UUID uuid;
 
 	public Lazer(int x, int y, int width, int height, Color color, Vector2D vector2d, double velocity, long duration) {
 		super(x, y, width, height, color);
@@ -32,8 +34,10 @@ public class Lazer extends Entity {
 		this.duration = duration;
 		totalNumber = totalNumber + 1;
 		
+		uuid = UUID.randomUUID();
+		
 		if (Launcher.getGame().isConnected()) {
-			Launcher.getClient().sendToServer(new Protocol().ShotPacket(getX(), getY(), getID(), 1));
+			Launcher.getClient().sendToServer(new Protocol().ShotPacket(getX(), getY(), getStringUUID(), 1));
 		}
 	}
 
@@ -63,8 +67,8 @@ public class Lazer extends Entity {
 			remove = true;
 		}
 		
-		if (Launcher.getGame().isConnected()) {
-			Launcher.getClient().sendToServer(new Protocol().ShotUpdatePacket(getX(), getY(), getID(), 1));
+		if (Launcher.getGame().isConnected() && remove  == false) {
+			Launcher.getClient().sendToServer(new Protocol().ShotUpdatePacket(getX(), getY(), getStringUUID(), 1));
 		}
 	}
 
@@ -74,5 +78,9 @@ public class Lazer extends Entity {
 
 	public boolean shouldRemove() {
 		return remove;
+	}
+
+	public String getStringUUID() {
+		return uuid.toString();
 	}
 }
