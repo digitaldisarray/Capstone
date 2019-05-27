@@ -21,7 +21,7 @@ public class Server extends Thread {
 	private boolean running = true;
 
 	private Socket clientSocket;
-	
+
 	public Server() throws SocketException {
 		clients = new ArrayList<ClientInfo>();
 		protocol = new Protocol();
@@ -46,7 +46,7 @@ public class Server extends Thread {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-			
+
 			try {
 				sentence = reader.readUTF();
 			} catch (IOException ex) {
@@ -93,14 +93,12 @@ public class Server extends Thread {
 					}
 				}
 
-			} else if(sentence.startsWith("LazerUpdate")) {
-
+			} else if (sentence.startsWith("LazerUpdate")) {
 				try {
 					BroadCastMessage(sentence);
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
-
 			} else if (sentence.startsWith("NewShot")) {
 				int pos1 = sentence.indexOf(',');
 				int pos2 = sentence.indexOf('-');
@@ -108,7 +106,7 @@ public class Server extends Thread {
 				int x = Integer.parseInt(sentence.substring(7, pos1));
 				int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
 				String uuid = sentence.substring(pos3 + 1, sentence.length());
-				
+
 				try {
 					writer = new DataOutputStream(clientSocket.getOutputStream());
 					BroadCastMessage(protocol.NewShotPacket(x, y, 1, uuid));
@@ -136,6 +134,13 @@ public class Server extends Thread {
 				if (clients.get(id - 1) != null)
 					clients.set(id - 1, null);
 			}
+//			else if (sentence.startsWith("ShotRemove")) {
+//				try {
+//					BroadCastMessage(sentence);
+//				} catch (IOException ex) {
+//					ex.printStackTrace();
+//				}
+//			}
 		}
 
 		try {

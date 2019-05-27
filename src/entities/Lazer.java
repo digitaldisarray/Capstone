@@ -33,9 +33,9 @@ public class Lazer extends Entity {
 		lastTime = startTime;
 		this.duration = duration;
 		totalNumber = totalNumber + 1;
-		
+
 		uuid = UUID.randomUUID();
-		
+
 		if (Launcher.getGame().isConnected()) {
 			Launcher.getClient().sendToServer(new Protocol().ShotPacket(getX(), getY(), getStringUUID(), 1));
 		}
@@ -65,9 +65,10 @@ public class Lazer extends Entity {
 		lastTime = time;
 		if (time - startTime > duration) {
 			remove = true;
+			//Launcher.getClient().sendToServer(new Protocol().ShotRemovePacket(getStringUUID()));
 		}
-		
-		if (Launcher.getGame().isConnected() && remove  == false) {
+
+		if (Launcher.getGame().isConnected() && !remove) {
 			Launcher.getClient().sendToServer(new Protocol().ShotUpdatePacket(getX(), getY(), getStringUUID(), 1));
 		}
 	}

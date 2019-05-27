@@ -149,8 +149,15 @@ public class Game implements Runnable {
 
 					e.tick();
 					e.draw(g);
+					
+					// Remove those dead lazers
+					if(e instanceof EnemyLazer) {
+						if (((EnemyLazer) e).shouldRemove()) {
+							removals.add(entities.indexOf(e));
+						}
+					}
 				}
-
+				
 				for (Integer i : removals) {
 					filtered.remove(i.intValue());
 				}
@@ -363,24 +370,26 @@ public class Game implements Runnable {
 						}
 					}
 				} else if (sentence.startsWith("LazerUpdate")) { // Lazer update
-					System.out.println("LazerUpdate: " + sentence);
-					int pos1 = sentence.indexOf(',');
-					int pos2 = sentence.indexOf('-');
-					int pos3 = sentence.indexOf('|');
-					int x = Integer.parseInt(sentence.substring(11, pos1));
-					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
-					String uuid = sentence.substring(pos3 + 1, sentence.length());
-					
-					int index = 0;
-					for(Entity e : entities) {
-						if(e instanceof EnemyLazer) {
-							if(((EnemyLazer) e).getStringUUID().equals(uuid)) {
-								e.setX(x);
-								e.setY(y);
+					try {
+						int pos1 = sentence.indexOf(',');
+						int pos2 = sentence.indexOf('-');
+						int pos3 = sentence.indexOf('|');
+						int x = Integer.parseInt(sentence.substring(11, pos1));
+						int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
+						String uuid = sentence.substring(pos3 + 1, sentence.length());
+						
+						int index = 0;
+						for(Entity e : entities) {
+							if(e instanceof EnemyLazer) {
+								if(((EnemyLazer) e).getStringUUID().equals(uuid)) {
+									e.setX(x);
+									e.setY(y);
+								}
 							}
 						}
+					} catch(Exception e) {
+						// Do nothing and wait for the removal request
 					}
-					
 				} else if (sentence.startsWith("NewShot")) { // New lazer
 					int pos1 = sentence.indexOf(',');
 					int pos2 = sentence.indexOf('-');
@@ -447,6 +456,19 @@ public class Game implements Runnable {
 					}
 
 				}
+//				else if(sentence.startsWith("ShotRemove")) {
+//					String uuid = sentence.substring(10);
+//					
+//					removals.clear();
+//					for (Entity e : entities) {
+//						if(e instanceof EnemyLazer) {
+//							if (((EnemyLazer) e).getStringUUID().equals(uuid)) {
+//								System.out.println("Added a shot to the removals");
+//								removals.add(entities.indexOf(e));
+//							}
+//						}
+//					}
+//				}
 
 			}
 

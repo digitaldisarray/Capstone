@@ -37,4 +37,9 @@ public class Protocol {
 		message = "Exit" + id;
 		return message;
 	}
+
+	public String ShotRemovePacket(String uuid) {
+		message = "ShotRemove" + uuid;
+		return message;
+	}
 }
