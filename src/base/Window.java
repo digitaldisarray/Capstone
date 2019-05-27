@@ -274,7 +274,7 @@ public class Window {
 	public void updateMouseCoords() {
 		p = MouseInfo.getPointerInfo().getLocation();
 		double mx = p.getX() / Launcher.getGame().getXScaleFactor() - frame.getX();
-		double my = p.getY() - 30 / Launcher.getGame().getYScaleFactor() - frame.getY();
+		double my = (p.getY() - 30) / Launcher.getGame().getYScaleFactor() - frame.getY();
 //		System.out.println("mx: " + mx + "my: " + my);
 
 		int playerX = Launcher.getGame().getPlayer().getX() + Launcher.getGame().getPlayer().getWidth() / 2;
