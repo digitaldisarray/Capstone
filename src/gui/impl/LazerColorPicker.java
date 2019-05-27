@@ -1,3 +1,8 @@
+/*
+ * Class that implements the interface screen. This class represents a 
+ * screen with buttons that allow you to pick the color of your player, walls, and lazers
+ * */
+
 package gui.impl;
 
 import java.awt.Color;
@@ -33,10 +38,10 @@ public class LazerColorPicker implements Screen {
 		buttons.add(new Button(350, 279, 100, 109, "", new SetLazerColorButton(), Color.GREEN));
 		buttons.add(new Button(450, 279, 100, 109, "", new SetLazerColorButton(), Color.magenta));
 		buttons.add(new Button(250, 464, 300, 55, "Back to Main", new BackToMain(), grey2));
-		buttons.add(new Button(250, 389, 300, 55, "Custom Color (RGB)",
-				new CustomLazerColor(), grey2));
+		buttons.add(new Button(250, 389, 300, 55, "Custom Color (RGB)", new CustomLazerColor(), grey2));
 	}
 
+	//Draw method
 	@Override
 	public void draw(Graphics2D g) {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();

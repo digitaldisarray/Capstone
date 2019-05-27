@@ -1,3 +1,9 @@
+/*
+ * Represents a lazer that shoot from your player, killing zombies or damaging other players
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ * */
+
 package entities;
 
 import java.awt.Color;

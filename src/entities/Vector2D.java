@@ -1,3 +1,7 @@
+/*
+ * Used to help with zombie movement and shooting angle. This is not our code, credit goes to:
+ * */
+
 package entities;
 
 public class Vector2D {

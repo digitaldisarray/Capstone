@@ -1,3 +1,9 @@
+/*Represents your player on the screen
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ * 
+ * */
+
 package entities;
 
 import java.awt.Color;

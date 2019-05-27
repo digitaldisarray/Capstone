@@ -1,3 +1,10 @@
+/*Class: Game
+ * 
+ * Purpose: To set framework for the game. Creates some graphics objects,windows, and menus
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ * */
+
 package base;
 
 import java.awt.Color;

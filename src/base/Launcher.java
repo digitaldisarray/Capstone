@@ -1,3 +1,9 @@
+/*
+ * Main instance of the game. COntains main methods, gets the program running.
+ * Author: THe Mustangs
+ * Last edited: 5/22/2019
+ * */
+
 package base;
 
 import java.awt.Rectangle;

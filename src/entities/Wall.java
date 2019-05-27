@@ -1,3 +1,9 @@
+/*
+ * represents a wall that can be placed to stop enemy bullets or zombies
+ * Author: The Mustngs
+ * Last edited: 5/22/2019
+ * */
+
 package entities;
 
 import java.awt.Color;
@@ -11,7 +17,7 @@ public class Wall extends Entity {
 	private long startTime;
 	private long lastTime;
 	private long duration;
-
+	//Constructor
 	public Wall(int x, int y, int width, int height, Color color, int wallDirection, long duration) {
 		super(x, y, width, height, color);
 		startTime = System.currentTimeMillis();
@@ -31,11 +37,11 @@ public class Wall extends Entity {
 		}
 	}
 
-	public void setRemoveToTrue() {
+	public void setRemoveToTrue() {//Changes the remove boolean
 		remove = true;
 	}
 
-	public boolean shouldRemove() {
+	public boolean shouldRemove() {//Changes the remove boolean
 		return remove;
 	}
 

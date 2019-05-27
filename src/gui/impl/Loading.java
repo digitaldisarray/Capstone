@@ -1,3 +1,10 @@
+/*
+ * This class represents an animated screen that runs for a few seconds whe the program starts.
+ * It has no functional value, it is purely for looks
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
+
 package gui.impl;
 
 import java.awt.Color;

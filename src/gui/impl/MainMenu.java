@@ -1,3 +1,9 @@
+/*
+ * This class represents the main menu of the program from which you can naavigate to different screens and gamemodes
+ * Author: THe Mustangs
+ * Last edited: 5/22/2019
+ */
+
 package gui.impl;
 
 import java.awt.Color;

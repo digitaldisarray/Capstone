@@ -1,3 +1,9 @@
+/*Represents an enemy zombie that chases you
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ * 
+ * */
+
 package entities;
 
 import java.awt.Color;
@@ -6,21 +12,25 @@ import base.Launcher;
 
 public class Zombie extends Entity {
 
-	boolean alive;
+	boolean alive, isMoving = true;
 	private Vector2D moving;
-	private double velocity, zombieDeg;
+	private double velocity;
 	private static int zombieKills = 0;
+
+	// Constructor
 	public Zombie(int x, int y, int width, int height, Color color, double velocityp) {
 		super(x, y, width, height, color);
 		alive = true;
 		velocity = velocityp;
 	}
 
+	// Simpler constructor
 	public Zombie(int x, int y) {
 		super(x, y, 20, 20, Color.GRAY);
 		alive = true;
 	}
 
+	// Makes the zombiemove towards the player
 	public void tick() {
 		// TODO: Move towards player
 
@@ -46,12 +56,15 @@ public class Zombie extends Entity {
 			setX(playerX);
 			setY(playerY);
 		} else {
-			setX((int) (getX() + (moving.getX() * velocity) + 0.5));
-			setY((int) (getY() + (moving.getY() * velocity) + 0.5));
+			if (isMoving) {
+				setX((int) (getX() + (moving.getX() * velocity) + 0.5));
+				setY((int) (getY() + (moving.getY() * velocity) + 0.5));
+			}
 		}
 
 	}
 
+//Collision
 	public void tryCollide(Entity entity) {
 		// Make sure we are not colliding with ourself
 		if (entity.equals(this)) {
@@ -63,14 +76,26 @@ public class Zombie extends Entity {
 				entity.getHeight())) {
 			if (entity instanceof Lazer) {
 				alive = false;
+				
 				zombieKills++;
 				((Lazer) entity).setRemove(true);
 			}
+			if (entity instanceof Wall) {
+				isMoving = false;
+				System.out.println("Collide");
+			}
+			
+
 		}
+		
+
 	}
+
+	// Returns how many zombies you have killed
 	public static int getZombieKills() {
 		return zombieKills;
 	}
+
 	public boolean isAlive() {
 		return alive;
 	}

@@ -1,3 +1,9 @@
+/*Interface to beimplemented by classes that represent a screen
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ * 
+ * */
+
 package gui;
 
 import java.awt.Graphics2D;

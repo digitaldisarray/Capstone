@@ -1,5 +1,11 @@
 package base;
 
+/*
+ * Sets up the window of the program. Handles key and mouse input, as well as some math and vector stuff to find angles for walls and bullets
+ * 
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 import java.awt.Canvas;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -87,9 +93,9 @@ public class Window {
 					c = 'd';
 					break;
 				}
-				if(c == 'p' || c == 'P') {
+				if (c == 'p' || c == 'P') {
 					Launcher.getGame().setInGame(false);
-					
+
 				}
 				if (c >= 0 && c < keyPressed.length) {
 					keyPressed[c] = keyTyped[c] = true;
@@ -188,30 +194,37 @@ public class Window {
 		frame.addWindowListener(new WindowListener() {
 
 			@Override
-			public void windowOpened(WindowEvent e) { }
+			public void windowOpened(WindowEvent e) {
+			}
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				Launcher.getClient().sendToServer(new Protocol().ExitMessagePacket(Launcher.getGame().getPlayer().getID()));
-		    }
+				Launcher.getClient()
+						.sendToServer(new Protocol().ExitMessagePacket(Launcher.getGame().getPlayer().getID()));
+			}
 
 			@Override
-			public void windowClosed(WindowEvent e) { }
+			public void windowClosed(WindowEvent e) {
+			}
 
 			@Override
-			public void windowIconified(WindowEvent e) { }
+			public void windowIconified(WindowEvent e) {
+			}
 
 			@Override
-			public void windowDeiconified(WindowEvent e) { }
+			public void windowDeiconified(WindowEvent e) {
+			}
 
 			@Override
-			public void windowActivated(WindowEvent e) { }
+			public void windowActivated(WindowEvent e) {
+			}
 
 			@Override
-			public void windowDeactivated(WindowEvent e) { }
-			
+			public void windowDeactivated(WindowEvent e) {
+			}
+
 		});
-		
+
 		frame.add(canvas);
 		frame.pack();
 	}
@@ -257,12 +270,13 @@ public class Window {
 
 	// Updates mouse position & calculates angles from player to mouse
 	Point p;
+
 	public void updateMouseCoords() {
 		p = MouseInfo.getPointerInfo().getLocation();
 		double mx = p.getX() / Launcher.getGame().getXScaleFactor() - frame.getX();
 		double my = p.getY() - 30 / Launcher.getGame().getYScaleFactor() - frame.getY();
 //		System.out.println("mx: " + mx + "my: " + my);
-		
+
 		int playerX = Launcher.getGame().getPlayer().getX() + Launcher.getGame().getPlayer().getWidth() / 2;
 		int playerY = Launcher.getGame().getPlayer().getY() + Launcher.getGame().getPlayer().getHeight() / 2;
 
@@ -277,7 +291,6 @@ public class Window {
 		shooting = new Vector2D(Math.cos(angle), Math.sin(angle));
 		shooting = shooting.normalize();
 
-		
 //		// Old math
 		double tanValue = Math.abs(((double) my - playerY) / ((double) mx - playerX));
 
@@ -308,23 +321,23 @@ public class Window {
 			else if (my > playerY)
 				mouseDeg = 180 + Math.toDegrees(Math.atan(tanValue));
 		}
-		if(mouseDeg >= 45 && mouseDeg <= 135) {
+		if (mouseDeg >= 45 && mouseDeg <= 135) {
 			wallDirection = 1;
 		}
-		
-		if(mouseDeg > 135 && mouseDeg < 225) {
+
+		if (mouseDeg > 135 && mouseDeg < 225) {
 			wallDirection = 2;
 		}
-		if(mouseDeg >= 225 && mouseDeg <= 315) {
+		if (mouseDeg >= 225 && mouseDeg <= 315) {
 			wallDirection = 3;
-			}
-		
-		if(mouseDeg > 315 || mouseDeg < 45) {
+		}
+
+		if (mouseDeg > 315 || mouseDeg < 45) {
 			wallDirection = 4;
 		}
-		
-		//System.out.println("Wall Direction" + wallDirection);
-		
+
+		// System.out.println("Wall Direction" + wallDirection);
+
 	}
 
 //	public double getMouseDeg() {// Calls updateMouseCoords, forces angle to update to the current angle of the
@@ -338,10 +351,12 @@ public class Window {
 		updateMouseCoords();
 		return shooting;
 	}
+
 	public int getWallDirection() {
 		updateMouseCoords();
 		return wallDirection;
 	}
+
 	public JFrame getFrame() {
 		return frame;
 	}

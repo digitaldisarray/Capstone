@@ -1,3 +1,10 @@
+/*Represents a screen filled with buttons that can change the color of your player
+ * Author: The Mustngs
+ * Last edited: 5/22/2019
+ * 
+ * 
+*/
+
 package gui.impl;
 
 import java.awt.Color;

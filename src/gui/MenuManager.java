@@ -1,3 +1,9 @@
+/*
+ * Menu manager to change and draw screens
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ * */
+
 package gui;
 
 import java.awt.Graphics2D;

@@ -1,3 +1,9 @@
+
+
+/*Represents a screen that allows you to change the color of the walls that you place
+ * 
+ * 
+*/
 package gui.impl;
 
 import java.awt.Color;
