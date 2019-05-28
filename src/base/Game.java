@@ -191,21 +191,23 @@ public class Game implements Runnable {
 			}
 		}
 
-		if (Launcher.getGame().getPlayer().getHealth() > 500)
-			g.setColor(Color.GREEN);
-		if (Launcher.getGame().getPlayer().getHealth() > 250 && Launcher.getGame().getPlayer().getHealth() <= 500)
-			g.setColor(Color.ORANGE);
-		if (Launcher.getGame().getPlayer().getHealth() <= 250)
-			g.setColor(Color.RED);
+		if (inGame) {
+			if (Launcher.getGame().getPlayer().getHealth() > 500)
+				g.setColor(Color.GREEN);
+			if (Launcher.getGame().getPlayer().getHealth() > 250 && Launcher.getGame().getPlayer().getHealth() <= 500)
+				g.setColor(Color.ORANGE);
+			if (Launcher.getGame().getPlayer().getHealth() <= 250)
+				g.setColor(Color.RED);
 
-		g.fillRect(680, 20, (int) (((double) Launcher.getGame().getPlayer().getHealth()
-				/ Launcher.getGame().getPlayer().getStartHelath()) * 110), 20);
-
-		g.drawRect(680, 20, 110, 20);
-		g.drawString(
-				"Health: " + Launcher.getGame().getPlayer().getHealth() + "/"
-						+ Launcher.getGame().getPlayer().getStartHelath(),
-				725 - g.getFontMetrics().stringWidth("Health: "), 35);
+			g.fillRect(680, 20, (int) (((double) Launcher.getGame().getPlayer().getHealth()
+					/ Launcher.getGame().getPlayer().getStartHelath()) * 110), 20);
+			g.setColor(Color.BLACK);
+			g.drawRect(680, 20, 110, 20);
+			g.drawString(
+					"Health: " + Launcher.getGame().getPlayer().getHealth() + "/"
+							+ Launcher.getGame().getPlayer().getStartHelath(),
+					725 - g.getFontMetrics().stringWidth("Health: "), 35);
+		}
 
 		// Draw FPS
 		g.setColor(Color.BLACK);
