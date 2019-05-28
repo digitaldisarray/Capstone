@@ -6,7 +6,7 @@ package base;
  * Author: The Mustangs
  * Last edited: 5/22/2019
  */
-import java.awt.Canvas;
+import java.awt.Canvas;//Epic imports
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.MouseInfo;

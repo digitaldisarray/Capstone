@@ -4,7 +4,7 @@
  * 
  * */
 
-package entities;
+package entities;//Epic imports
 
 import java.awt.Color;
 import java.awt.Graphics2D;
