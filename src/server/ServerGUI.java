@@ -2,11 +2,8 @@ package server;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.net.URL;
 import java.net.UnknownHostException;
 
 import javax.swing.JButton;
@@ -19,7 +16,6 @@ public class ServerGUI extends JFrame implements ActionListener {
 	private JButton stopServerButton;
 	private JLabel statusLabel;
 	private JLabel ipLabel1;
-	private JLabel ipLabel2;
 
 	String publicIP;
 
@@ -28,7 +24,8 @@ public class ServerGUI extends JFrame implements ActionListener {
 	InetAddress net;
 
 	public ServerGUI() {
-		setTitle("Bracket Server");
+		setResizable(false);
+		setTitle("A server for epic. (Epic)");
 		setBounds(350, 300, 300, 200);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,16 +43,12 @@ public class ServerGUI extends JFrame implements ActionListener {
 		statusLabel.setBounds(80, 90, 200, 25);
 
 		ipLabel1 = new JLabel();
-		ipLabel1.setBounds(80, 105, 200, 25);
-
-		ipLabel2 = new JLabel();
-		ipLabel2.setBounds(80, 120, 200, 25);
+		ipLabel1.setBounds(50, 105, 200, 25);
 
 		getContentPane().add(statusLabel);
 		getContentPane().add(startServerButton);
 		getContentPane().add(stopServerButton);
 		getContentPane().add(ipLabel1);
-		getContentPane().add(ipLabel2);
 
 		try {
 			net = InetAddress.getLocalHost();
@@ -80,17 +73,8 @@ public class ServerGUI extends JFrame implements ActionListener {
 			startServerButton.setEnabled(false);
 			stopServerButton.setEnabled(true);
 
-			try {
-				BufferedReader sc = new BufferedReader(
-						new InputStreamReader(new URL("http://bot.whatismyipaddress.com").openStream()));
-				publicIP = sc.readLine().trim();
-			} catch (Exception e2) {
-				publicIP = "Not Found";
-			}
-
 			statusLabel.setText("Server: running");
-			ipLabel1.setText("Local: " + net.getHostAddress());
-			ipLabel2.setText("Public: " + publicIP);
+			ipLabel1.setText("Maybe Correct IP: " + net.getHostAddress());
 		}
 
 		if (e.getSource() == stopServerButton) {
@@ -107,8 +91,7 @@ public class ServerGUI extends JFrame implements ActionListener {
 			}
 
 			statusLabel.setText("Server: stopped");
-			ipLabel1.setText("Local: not running");
-			ipLabel2.setText("Public: not running");
+			ipLabel1.setText("Maybe Correct IP: not running");
 
 			System.exit(0);
 		}

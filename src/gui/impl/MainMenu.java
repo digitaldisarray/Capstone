@@ -60,7 +60,7 @@ public class MainMenu implements Screen {
 		g.fillRect(250, 94, 300, 405);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
-		String title = "Bracket";
+		String title = "Epic";
 		int stringWidth = g.getFontMetrics().stringWidth(title);
 		int difference = (300 - stringWidth) / 2;
 		g.drawString(title, 250 + difference, 150);
