@@ -9,6 +9,7 @@ package base;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -129,22 +130,22 @@ public class Game implements Runnable {
 				// Draw, collide, and update zombies
 				for (Entity e : entities) {
 					// Collide lazers and entities
-					
+
 					for (Lazer l : player.getLazers()) {
 						e.tryCollide(l);
 					}
 
 					for (Wall l : player.getWalls()) {
-						
+
 						e.tryCollide(l);
-					
+
 					}
-					
-					if(player.getWalls().size() == 0) {
+
+					if (player.getWalls().size() == 0) {
 						if (e instanceof Zombie) {
 							((Zombie) e).setMovingState(true);
 						}
-					
+
 					}
 					player.tryCollide(e);
 
@@ -152,26 +153,32 @@ public class Game implements Runnable {
 					e.draw(g);
 				}
 
-				
-				
 				if (Launcher.getGame().getPlayer().getHealth() > 500)
 					g.setColor(Color.GREEN);
-				if (Launcher.getGame().getPlayer().getHealth() > 250 && Launcher.getGame().getPlayer().getHealth() <= 500)
+				if (Launcher.getGame().getPlayer().getHealth() > 250
+						&& Launcher.getGame().getPlayer().getHealth() <= 500)
 					g.setColor(Color.ORANGE);
 				if (Launcher.getGame().getPlayer().getHealth() <= 250)
 					g.setColor(Color.RED);
-				
-				g.fillRect(680, 20, (int) (((double)Launcher.getGame().getPlayer().getHealth() / Launcher.getGame().getPlayer().getStartHelath()) * 110), 20);
+
+				g.fillRect(680, 20, (int) (((double) Launcher.getGame().getPlayer().getHealth()
+						/ Launcher.getGame().getPlayer().getStartHelath()) * 110), 20);
 
 				g.setColor(Color.BLACK);
 				g.drawString("Kills: " + Zombie.getZombieKills(),
 						720 - g.getFontMetrics().stringWidth("Kills: " + Zombie.getZombieKills()), 15);
 				g.drawRect(680, 20, 110, 20);
-				g.drawString("Health: "  + Launcher.getGame().getPlayer().getHealth() + "/" + Launcher.getGame().getPlayer().getStartHelath(), 725 - g.getFontMetrics().stringWidth("Health: "), 35);
+				g.drawString(
+						"Health: " + Launcher.getGame().getPlayer().getHealth() + "/"
+								+ Launcher.getGame().getPlayer().getStartHelath(),
+						725 - g.getFontMetrics().stringWidth("Health: "), 35);
 			} else {
 				// MUTLIPLAYER
 				g.drawRect(680, 20, 110, 20);
-				g.drawString("Health: "  + Launcher.getGame().getPlayer().getHealth() + "/" + Launcher.getGame().getPlayer().getStartHelath(), 725 - g.getFontMetrics().stringWidth("Health: "), 35);
+				g.drawString(
+						"Health: " + Launcher.getGame().getPlayer().getHealth() + "/"
+								+ Launcher.getGame().getPlayer().getStartHelath(),
+						725 - g.getFontMetrics().stringWidth("Health: "), 35);
 
 				// Draw, collide, and update things
 				for (Entity e : entities) {
@@ -290,7 +297,7 @@ public class Game implements Runnable {
 
 		return window.getCanvas().getHeight() / 600.0;
 	}
-	
+
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
@@ -330,6 +337,11 @@ public class Game implements Runnable {
 
 	public boolean isConnected() {
 		return connected;
+	}
+
+	// Checks if two rectangles are colliding
+	public boolean collides(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
+		return new Rectangle(x1, y1, width1, height1).intersects(new Rectangle(x2, y2, width2, height2));
 	}
 
 	public class ClientRecivingThread extends Thread {

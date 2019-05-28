@@ -65,7 +65,8 @@ public class Lazer extends Entity {
 		lastTime = time;
 		if (time - startTime > duration) {
 			remove = true;
-			//Launcher.getClient().sendToServer(new Protocol().ShotRemovePacket(getStringUUID()));
+			// Launcher.getClient().sendToServer(new
+			// Protocol().ShotRemovePacket(getStringUUID()));
 		}
 
 		if (Launcher.getGame().isConnected() && !remove) {

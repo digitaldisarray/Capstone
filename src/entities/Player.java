@@ -40,7 +40,7 @@ public class Player extends Entity {
 	private boolean deadOnMultiplayer = false;
 
 	boolean hasMoved = false;
-	
+
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);
 		this.name = name;
@@ -54,8 +54,8 @@ public class Player extends Entity {
 			g.setColor(Color.ORANGE);
 		else if (health <= 250)
 			g.setColor(Color.RED);
-		
-		if(!Launcher.getGame().isConnected() || (!deadOnMultiplayer && Launcher.getGame().isConnected()))
+
+		if (!Launcher.getGame().isConnected() || (!deadOnMultiplayer && Launcher.getGame().isConnected()))
 			g.fillRect(getX(), getY(), getWidth(), getHeight());
 
 		for (Lazer lazer : lazers) {
@@ -74,10 +74,10 @@ public class Player extends Entity {
 			g.drawString("YOU DIED", 400 - g.getFontMetrics().stringWidth("YOU DIED") / 2, 300);
 		} else if (deadOnMultiplayer == true) {
 			deadOnMultiplayer = false;
-			
+
 			setX((int) (Math.random() * 750) + 50);
 			setY((int) (Math.random() * 550) + 50);
-			
+
 			// Send respawn packet
 			Launcher.getClient().sendToServer(new Protocol().RespawnPacket(getX(), getY(), 1, getID()));
 		}
@@ -185,7 +185,7 @@ public class Player extends Entity {
 				lastDeathMS = System.currentTimeMillis();
 				health = START_HEALTH;
 				deadOnMultiplayer = true;
-				
+
 				// Send death request to server
 				Launcher.getClient().sendToServer(new Protocol().DeathPacket(getID()));
 			}
@@ -220,8 +220,8 @@ public class Player extends Entity {
 		}
 
 		// See if we colide with something, if so what is it
-		if (Launcher.collides(getX(), getY(), getWidth(), getHeight(), entity.getX(), entity.getY(), entity.getWidth(),
-				entity.getHeight())) {
+		if (Launcher.getGame().collides(getX(), getY(), getWidth(), getHeight(), entity.getX(), entity.getY(),
+				entity.getWidth(), entity.getHeight())) {
 			if (entity instanceof EnemyLazer) {
 				health -= 100;
 			}

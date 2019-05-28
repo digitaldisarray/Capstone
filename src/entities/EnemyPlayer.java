@@ -8,5 +8,5 @@ public class EnemyPlayer extends Entity {
 		super(x, y, 10, 10, Color.CYAN);
 		setID(id);
 	}
-	
+
 }

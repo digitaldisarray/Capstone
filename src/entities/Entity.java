@@ -8,9 +8,8 @@ package entities;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.io.Serializable;
 
-public class Entity implements Serializable {
+public class Entity {
 
 	private int x;
 	private int y;
