@@ -325,8 +325,8 @@ public class Game implements Runnable {
 		return mManager;
 	}
 
-	public boolean hasViewedMessage(boolean chicken) {
-		return chicken;
+	public boolean hasViewedMessage(boolean b) {
+		return b;
 	}
 
 	public void setConnected(boolean connected) {
