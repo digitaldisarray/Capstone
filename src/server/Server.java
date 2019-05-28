@@ -133,6 +133,18 @@ public class Server extends Thread {
 				}
 				if (clients.get(id - 1) != null)
 					clients.set(id - 1, null);
+			} else if(sentence.startsWith("Death")) {
+				try {
+					BroadCastMessage(sentence);
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			} else if(sentence.startsWith("Respawn")) {
+				try {
+					BroadCastMessage(sentence);
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
 			}
 //			else if (sentence.startsWith("ShotRemove")) {
 //				try {

@@ -35,6 +35,12 @@ public class Player extends Entity {
 	public final int START_HEALTH = 1000;
 	private int health = START_HEALTH;
 
+	private final int DEATH_COOLDOWN = 5000;
+	private long lastDeathMS;
+	private boolean deadOnMultiplayer = false;
+
+	boolean hasMoved = false;
+	
 	public Player(int x, int y, int width, int height, Color color, String name) {
 		super(x, y, width, height, color);
 		this.name = name;
@@ -42,15 +48,15 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.setColor(playerColor);
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
-
-		if (health > 50)
-			g.setColor(Color.GREEN);
-		if (health > 25 && health <= 50)
+		if (health > 500)
+			g.setColor(playerColor);
+		else if (health > 250 && health <= 500)
 			g.setColor(Color.ORANGE);
-		if (health <= 25)
+		else if (health <= 250)
 			g.setColor(Color.RED);
+		
+		if(!Launcher.getGame().isConnected() || (!deadOnMultiplayer && Launcher.getGame().isConnected()))
+			g.fillRect(getX(), getY(), getWidth(), getHeight());
 
 		for (Lazer lazer : lazers) {
 			g.setColor(lazerColor);
@@ -61,38 +67,52 @@ public class Player extends Entity {
 			g.setColor(wallColor);
 			wall.draw(g);
 		}
-	}
 
-	boolean hasMoved = false;
+		// while the death cooldown is not up
+		if (System.currentTimeMillis() - lastDeathMS < DEATH_COOLDOWN) {
+			g.setColor(Color.RED);
+			g.drawString("YOU DIED", 400 - g.getFontMetrics().stringWidth("YOU DIED") / 2, 300);
+		} else if (deadOnMultiplayer == true) {
+			deadOnMultiplayer = false;
+			
+			setX((int) (Math.random() * 750) + 50);
+			setY((int) (Math.random() * 550) + 50);
+			
+			// Send respawn packet
+			Launcher.getClient().sendToServer(new Protocol().RespawnPacket(getX(), getY(), 1, getID()));
+		}
+	}
 
 	// Does movement and shooting, also makes it so that player can't go off screen
 	@Override
 	public void tick() {
 
 		// WASD Movement
-		if (Launcher.getGame().getWindow().isKeyPressed('w')) {
-			hasMoved = true;
-			this.setY(getY() - MOVEMENT_SPEED);
-		}
+		if (!deadOnMultiplayer) {
+			if (Launcher.getGame().getWindow().isKeyPressed('w')) {
+				hasMoved = true;
+				this.setY(getY() - MOVEMENT_SPEED);
+			}
 
-		if (Launcher.getGame().getWindow().isKeyPressed('a')) {
-			hasMoved = true;
-			this.setX(getX() - MOVEMENT_SPEED);
-		}
+			if (Launcher.getGame().getWindow().isKeyPressed('a')) {
+				hasMoved = true;
+				this.setX(getX() - MOVEMENT_SPEED);
+			}
 
-		if (Launcher.getGame().getWindow().isKeyPressed('s')) {
-			hasMoved = true;
-			this.setY(getY() + MOVEMENT_SPEED);
-		}
+			if (Launcher.getGame().getWindow().isKeyPressed('s')) {
+				hasMoved = true;
+				this.setY(getY() + MOVEMENT_SPEED);
+			}
 
-		if (Launcher.getGame().getWindow().isKeyPressed('d')) {
-			hasMoved = true;
-			this.setX(getX() + MOVEMENT_SPEED);
-		}
+			if (Launcher.getGame().getWindow().isKeyPressed('d')) {
+				hasMoved = true;
+				this.setX(getX() + MOVEMENT_SPEED);
+			}
 
-		if (hasMoved && Launcher.getGame().isConnected()) {
-			// Send player x and y to server
-			Launcher.getClient().sendToServer(new Protocol().UpdatePacket(getX(), getY(), getID(), 1));
+			if (hasMoved && Launcher.getGame().isConnected()) {
+				// Send player x and y to server
+				Launcher.getClient().sendToServer(new Protocol().UpdatePacket(getX(), getY(), getID(), 1));
+			}
 		}
 
 		hasMoved = false;
@@ -158,6 +178,17 @@ public class Player extends Entity {
 
 				lastWall = System.currentTimeMillis();
 			}
+
+			// When they die
+
+			if (health <= 0 && Launcher.getGame().isConnected() && Launcher.getGame().isInGame()) {
+				lastDeathMS = System.currentTimeMillis();
+				health = START_HEALTH;
+				deadOnMultiplayer = true;
+				
+				// Send death request to server
+				Launcher.getClient().sendToServer(new Protocol().DeathPacket(getID()));
+			}
 		}
 
 		// Used to remove old lazers to avoid an overflow error
@@ -176,11 +207,8 @@ public class Player extends Entity {
 
 			// Do this last
 			if (wall.shouldRemove()) {
-
 				walls.remove(i);
-
 			}
-
 		}
 	}
 
@@ -195,15 +223,15 @@ public class Player extends Entity {
 		if (Launcher.collides(getX(), getY(), getWidth(), getHeight(), entity.getX(), entity.getY(), entity.getWidth(),
 				entity.getHeight())) {
 			if (entity instanceof EnemyLazer) {
-
+				health -= 100;
 			}
 
 			if (entity instanceof Zombie) {
 				health -= 1;
-				System.out.println("Health: " + health);
 			}
 		}
-		if (health == 0) {
+
+		if (health == 0 && !Launcher.getGame().isConnected() && Launcher.getGame().isInGame()) {
 			final JFrame parent = new JFrame();
 			JOptionPane.showMessageDialog(parent,
 					"Haha, you died. Loser. You had " + Zombie.getZombieKills() + " kills");

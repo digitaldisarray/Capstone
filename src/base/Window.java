@@ -191,8 +191,8 @@ public class Window {
 
 		});
 
+		// Added so when we close the game we can tell the server we are leaving
 		frame.addWindowListener(new WindowListener() {
-
 			@Override
 			public void windowOpened(WindowEvent e) {
 			}

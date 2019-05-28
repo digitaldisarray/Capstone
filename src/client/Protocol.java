@@ -42,4 +42,14 @@ public class Protocol {
 		message = "ShotRemove" + uuid;
 		return message;
 	}
+	
+	public String DeathPacket(int id) {
+		message = "Death" + id;
+		return message;
+	}
+	
+	public String RespawnPacket(int x, int y, int dir, int id) {
+		message = "Respawn" + x + "," + y + "-" + dir + "|" + id;
+		return message;
+	}
 }

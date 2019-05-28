@@ -170,6 +170,8 @@ public class Game implements Runnable {
 				g.drawString("Health: "  + Launcher.getGame().getPlayer().getHealth() + "/" + Launcher.getGame().getPlayer().getStartHelath(), 725 - g.getFontMetrics().stringWidth("Health: "), 35);
 			} else {
 				// MUTLIPLAYER
+				g.drawRect(680, 20, 110, 20);
+				g.drawString("Health: "  + Launcher.getGame().getPlayer().getHealth() + "/" + Launcher.getGame().getPlayer().getStartHelath(), 725 - g.getFontMetrics().stringWidth("Health: "), 35);
 
 				// Draw, collide, and update things
 				for (Entity e : entities) {
@@ -488,6 +490,43 @@ public class Game implements Runnable {
 						}
 					}
 
+				} else if (sentence.startsWith("Respawn")) {
+					int pos1 = sentence.indexOf(',');
+					int pos2 = sentence.indexOf('-');
+					int pos3 = sentence.indexOf('|');
+					int x = Integer.parseInt(sentence.substring(7, pos1));
+					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
+					int dir = Integer.parseInt(sentence.substring(pos2 + 1, pos3));
+					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
+
+					// Is not local player
+					if (id != player.getID()) {
+						// Does not already exist in list
+						filtered = entities;
+						for (Entity e : filtered) {
+							if (e instanceof EnemyPlayer && e.getID() == id) {
+								exists = true;
+							}
+						}
+
+						// If it does not exists in the array list, add it
+						if (!exists) {
+							filtered.add(new EnemyPlayer(x, y, id));
+						}
+						exists = false;
+					}
+				} else if (sentence.startsWith("Death")) {
+					int id = Integer.parseInt(sentence.substring(5));
+
+					// Remove the thing from entity array list
+					if (id != player.getID()) {
+						removals.clear();
+						for (Entity e : entities) {
+							if (e.getID() == id) {
+								removals.add(entities.indexOf(e));
+							}
+						}
+					}
 				}
 //				else if(sentence.startsWith("ShotRemove")) {
 //					String uuid = sentence.substring(10);
