@@ -59,7 +59,6 @@ public class Game implements Runnable {
 
 	// Used for filtering entities in the game loop
 	private ArrayList<Entity> filtered = new ArrayList<>();
-	private boolean found = false;
 
 	// For filtering entities outside of game loop
 	private ArrayList<Integer> removals = new ArrayList<>();
@@ -136,9 +135,7 @@ public class Game implements Runnable {
 					}
 
 					for (Wall l : player.getWalls()) {
-
 						e.tryCollide(l);
-
 					}
 
 					if (player.getWalls().size() == 0) {
@@ -154,8 +151,8 @@ public class Game implements Runnable {
 				}
 
 				g.setColor(Color.BLACK);
-				g.drawString("Kills: " + Zombie.getZombieKills(),
-						720 - g.getFontMetrics().stringWidth("Kills: " + Zombie.getZombieKills()), 15);
+				g.drawString("Eliminations: " + Zombie.getZombieKills(),
+						720 - g.getFontMetrics().stringWidth("Eliminations: " + Zombie.getZombieKills()), 15);
 			} else {
 				// MUTLIPLAYER
 
