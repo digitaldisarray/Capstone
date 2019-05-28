@@ -130,7 +130,7 @@ public class Player extends Entity {
 			this.setY(600 - this.getHeight() / 2);
 
 		// Shooting
-		if (System.currentTimeMillis() - lastShot > lazer_ms_cooldown) {
+		if (System.currentTimeMillis() - lastShot > lazer_ms_cooldown && !deadOnMultiplayer) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
 				// This creates a new lazer. It leverages a lot of other classes and methods to
 				// get mouse position
@@ -141,7 +141,7 @@ public class Player extends Entity {
 			}
 		}
 
-		if (System.currentTimeMillis() - lastWall > WALL_MS_COOLDOWN) {
+		if (System.currentTimeMillis() - lastWall > WALL_MS_COOLDOWN && !deadOnMultiplayer) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON3)) {
 				int x = getX(), y = getY(), width = 50, height = 5;
 
