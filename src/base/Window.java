@@ -20,9 +20,12 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import client.Protocol;
+import entities.Entity;
 import entities.Vector2D;
+import entities.Zombie;
 
 public class Window {
 
@@ -92,11 +95,19 @@ public class Window {
 				case KeyEvent.VK_RIGHT:
 					c = 'd';
 					break;
-				}
-				if (c == 'p' || c == 'P') {
+				case KeyEvent.VK_ESCAPE:
 					Launcher.getGame().setInGame(false);
+					for (Entity E : Launcher.getGame().getEntities()) {
+						if (E instanceof Zombie) {
+							((Zombie) E).setDead();
+						}
+					}
+					final JFrame parent = new JFrame();
+					JOptionPane.showMessageDialog(parent, "Good game. You had " + Zombie.getZombieKills() + " kills");
+					break;
 
 				}
+
 				if (c >= 0 && c < keyPressed.length) {
 					keyPressed[c] = keyTyped[c] = true;
 				}

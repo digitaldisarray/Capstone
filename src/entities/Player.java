@@ -48,12 +48,6 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(Graphics2D g) {
-		if (health > 500)
-			g.setColor(playerColor);
-		else if (health > 250 && health <= 500)
-			g.setColor(Color.ORANGE);
-		else if (health <= 250)
-			g.setColor(Color.RED);
 
 		if (!Launcher.getGame().isConnected() || (!deadOnMultiplayer && Launcher.getGame().isConnected()))
 			g.fillRect(getX(), getY(), getWidth(), getHeight());
