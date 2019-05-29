@@ -44,7 +44,7 @@ public class WallColorPicker implements Screen {
 	@Override
 	public void draw(Graphics2D g) {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image image = toolkit.getImage("res/a.gif");
+		Image image = toolkit.getImage("resources/a.gif");
 		g.drawImage(image, 0, 0, 800, 600, null);
 		g.setColor(grey);
 		g.fillRect(400 - 150, 300 - (413 / 2), 300, 410);
