@@ -5,13 +5,11 @@
  */
 package gui.objects.tasks;
 
-import gui.impl.PlayerColorPicker;
-import gui.impl.WallColorPicker;
-import gui.objects.ButtonTask;
-
 import java.awt.Color;
 
 import base.Launcher;
+import gui.impl.WallColorPicker;
+import gui.objects.ButtonTask;
 
 public class WallColorButton implements ButtonTask {
 

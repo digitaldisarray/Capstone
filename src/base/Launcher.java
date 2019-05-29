@@ -1,8 +1,9 @@
 /*
- * Main instance of the game. COntains main methods, gets the program running.
+ * Main instance of the game. Contains main methods, gets the program running.
+ * Project: Java Capstone
  * Author: The Mustangs
- * Last edited: 5/27/2019
- * */
+ * Last edited: 5/28/2019
+ */
 
 package base;
 
@@ -12,6 +13,8 @@ import server.ServerGUI;
 public class Launcher {
 	// The main instance of the game
 	private static Game game;
+	
+	// Instance of the client connection
 	private static Client client;
 	
 	public static void main(String[] args) {
@@ -30,6 +33,7 @@ public class Launcher {
 		return game;
 	}
 	
+	// Get the client instance
 	public static Client getClient() {
 		return client;
 	}

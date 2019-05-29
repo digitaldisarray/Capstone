@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import base.Game;
 import base.Launcher;
 import gui.objects.ButtonTask;
 

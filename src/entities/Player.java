@@ -21,24 +21,39 @@ public class Player extends Entity {
 
 	String name; // The players name
 
+	// The lazers and walls that belong to the player
 	ArrayList<Lazer> lazers = new ArrayList<>();
 	ArrayList<Wall> walls = new ArrayList<>();
+	
+	// The cool down for shooting and walls
 	private int lazer_ms_cooldown = 250;
 	private final int WALL_MS_COOLDOWN = 2111;
+	
+	// The last time that a wall was placed or shot fired
 	private long lastShot = 0;
 	private long lastWall = 0;
+	
+	// The player movement speed
 	private final int MOVEMENT_SPEED = 3;
+	
+	// Distance that a wall is from the player
 	private final int DISTANCE_FROM_PLAYER = 25;
+	
+	// Default colors
 	private static Color playerColor = Color.BLACK;
 	private static Color lazerColor = Color.RED;
 	private static Color wallColor = Color.RED;
+	
+	// Health variables
 	public final int START_HEALTH = 1000;
 	private int health = START_HEALTH;
 
+	// Death variables
 	private final int DEATH_COOLDOWN = 5000;
 	private long lastDeathMS;
 	private boolean deadOnMultiplayer = false;
 
+	// Used to optimize player update packets for networking
 	boolean hasMoved = false;
 
 	public Player(int x, int y, int width, int height, Color color, String name) {
@@ -50,6 +65,7 @@ public class Player extends Entity {
 	public void draw(Graphics2D g) {
 
 		if (!Launcher.getGame().isConnected() || (!deadOnMultiplayer && Launcher.getGame().isConnected()))
+			g.setColor(playerColor);
 			g.fillRect(getX(), getY(), getWidth(), getHeight());
 
 		for (Lazer lazer : lazers) {

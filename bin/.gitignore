@@ -1,3 +1,5 @@
-/gui/
-/entities/
+/base/
 /client/
+/entities/
+/gui/
+/server/

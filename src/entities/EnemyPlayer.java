@@ -13,7 +13,7 @@ public class EnemyPlayer extends Entity {
 
 	//creates the enemy player
 	public EnemyPlayer(int x, int y, int id) {
-		super(x, y, 10, 10, Color.CYAN);
+		super(x, y, 10, 10, Color.GRAY);
 		setID(id);
 	}
 

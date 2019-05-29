@@ -9,15 +9,9 @@ package gui.impl;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
-import base.Launcher;
-import base.Window;
-
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import gui.Screen;
 import gui.objects.Button;
@@ -46,9 +40,6 @@ public class MainMenu implements Screen {
 				grey2));
 		buttons.add(new Button(250, 454, 300, 55, "Wall Color", new WallColorButton(),
 				grey2));
-
-		JOptionPane.showMessageDialog(Launcher.getGame().getWindow().getFrame(), "WASD or arrow keys to move. Left-Click: for Shoot. Right-Click to place wall");
-		Launcher.getGame().hasViewedMessage(true);
 	}
 
 	@Override
@@ -68,6 +59,9 @@ public class MainMenu implements Screen {
 		for (Button button : buttons) {
 			button.draw(g);
 		}
+		
+		g.setColor(Color.black);
+		g.drawString("WASD or arrow keys to move. Left-Click: for Shoot. Right-Click to place wall", 0, 595);
 	}
 
 	@Override

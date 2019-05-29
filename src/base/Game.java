@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import client.Protocol;
 import entities.EnemyLazer;
 import entities.EnemyPlayer;
 import entities.Entity;
@@ -288,53 +287,58 @@ public class Game implements Runnable {
 		}
 	}
 
+	// Get the scale factor for the x axis
 	public double getXScaleFactor() {
-
 		return window.getCanvas().getWidth() / 800.0;
 	}
 
+	// Get the scale factor for the y axis
 	public double getYScaleFactor() {
-
 		return window.getCanvas().getHeight() / 600.0;
 	}
 
+	// Get the array list of current entities
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
 
+	// Get the window object used by the game
 	public Window getWindow() {
 		return this.window;
 	}
 
+	// Get the player instance for the game
 	public Player getPlayer() {
 		return player;
 	}
 
+	// Set if the player is in the game or not
 	public void setInGame(boolean b) {
 		inGame = b;
 	}
 
+	// Get if the player is in the game or not
 	public boolean isInGame() {
 		return inGame;
 	}
 
+	// Get the menu manager for the game
 	public MenuManager getMenuManager() {
 		return mManager;
 	}
-
-	public boolean hasViewedMessage(boolean b) {
-		return b;
-	}
-
+	
+	// Set if the player is connected to the server or not
 	public void setConnected(boolean connected) {
 		this.connected = connected;
 	}
 
+	// Start the client connection thread
 	public void startClientThread() {
 		clientThread = new ClientRecivingThread(Launcher.getClient().getSocket());
 		clientThread.start();
 	}
 
+	// Get if the player is connected to the server
 	public boolean isConnected() {
 		return connected;
 	}
@@ -380,7 +384,6 @@ public class Game implements Runnable {
 					int pos3 = sentence.indexOf('|');
 					int x = Integer.parseInt(sentence.substring(9, pos1));
 					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
-					int dir = Integer.parseInt(sentence.substring(pos2 + 1, pos3));
 					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
 
 					// Is not local player
@@ -405,7 +408,6 @@ public class Game implements Runnable {
 					int pos3 = sentence.indexOf('|');
 					int x = Integer.parseInt(sentence.substring(6, pos1));
 					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
-					int dir = Integer.parseInt(sentence.substring(pos2 + 1, pos3));
 					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
 
 					if (id != player.getID()) {
@@ -426,7 +428,6 @@ public class Game implements Runnable {
 						int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
 						String uuid = sentence.substring(pos3 + 1, sentence.length());
 
-						int index = 0;
 						for (Entity e : entities) {
 							if (e instanceof EnemyLazer) {
 								if (((EnemyLazer) e).getStringUUID().equals(uuid)) {
@@ -444,7 +445,6 @@ public class Game implements Runnable {
 					int pos3 = sentence.indexOf('|');
 					int x = Integer.parseInt(sentence.substring(7, pos1));
 					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
-					int dir = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
 					String uuid = sentence.substring(pos2 + 1, pos3);
 
 					// Make sure it does not belong to us
@@ -508,7 +508,6 @@ public class Game implements Runnable {
 					int pos3 = sentence.indexOf('|');
 					int x = Integer.parseInt(sentence.substring(7, pos1));
 					int y = Integer.parseInt(sentence.substring(pos1 + 1, pos2));
-					int dir = Integer.parseInt(sentence.substring(pos2 + 1, pos3));
 					int id = Integer.parseInt(sentence.substring(pos3 + 1, sentence.length()));
 
 					// Is not local player
@@ -540,20 +539,6 @@ public class Game implements Runnable {
 						}
 					}
 				}
-//				else if(sentence.startsWith("ShotRemove")) {
-//					String uuid = sentence.substring(10);
-//					
-//					removals.clear();
-//					for (Entity e : entities) {
-//						if(e instanceof EnemyLazer) {
-//							if (((EnemyLazer) e).getStringUUID().equals(uuid)) {
-//								System.out.println("Added a shot to the removals");
-//								removals.add(entities.indexOf(e));
-//							}
-//						}
-//					}
-//				}
-
 			}
 
 			try {
@@ -562,7 +547,6 @@ public class Game implements Runnable {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-
 		}
 	}
 }
