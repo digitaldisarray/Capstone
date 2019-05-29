@@ -142,8 +142,7 @@ public class Player extends Entity {
 		// Shooting
 		if (System.currentTimeMillis() - lastShot > lazer_ms_cooldown && !deadOnMultiplayer) {
 			if (Launcher.getGame().getWindow().isMousePressed(MouseEvent.BUTTON1)) {
-				// This creates a new lazer. It leverages a lot of other classes and methods to
-				// get mouse position
+				// This creates a new lazer. It leverages a lot of other classes and methods to get mouse position
 				lazers.add(new Lazer(getX(), getY(), 5, 5, lazerColor, Launcher.getGame().getWindow().getMouseDeg(),
 						0.5, 2000));
 

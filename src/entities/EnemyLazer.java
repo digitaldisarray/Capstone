@@ -20,7 +20,7 @@ public class EnemyLazer extends Entity {
 
 	//creates the enemy lazer and starts the timer
 	public EnemyLazer(int x, int y, String uuid) {
-		super(x, y, 5, 5, Color.PINK);
+		super(x, y, 5, 5, Color.MAGENTA);
 		this.uuid = uuid;
 
 		remove = false;
