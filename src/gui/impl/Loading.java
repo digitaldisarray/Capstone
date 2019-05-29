@@ -1,5 +1,5 @@
 /*
- * This class represents an animated screen that runs for a few seconds whe the program starts.
+ * This class represents an animated screen that runs for a few seconds before the program starts.
  * It has no functional value, it is purely for looks
  * Author: The Mustangs
  * Last edited: 5/22/2019
@@ -33,8 +33,10 @@ public class Loading implements Screen {
 	}
 
 	@Override
+	//draws our graphics
 	public void draw(Graphics2D g) {
 
+		//toolkit is a class called for displaying gifs
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = toolkit.getImage("A.Lo.gif");
 
@@ -59,6 +61,7 @@ public class Loading implements Screen {
 	}
 
 	@Override
+	//visual to indicate for if a button is pressed
 	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {
 			if (button.contains(x, y)) {

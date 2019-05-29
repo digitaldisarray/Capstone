@@ -1,3 +1,8 @@
+/*
+ * This class represents the start button for multiplayer
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 package gui.objects.tasks;
 
 import java.awt.Color;

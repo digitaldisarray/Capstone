@@ -69,8 +69,7 @@ public class LazerColorPicker implements Screen {
 			}
 		}
 	}
-
-	@Override
+	
 	public void passReleaseEvent(int x, int y) {
 		for (Button button : buttons) {
 			if (button.isBold()) {

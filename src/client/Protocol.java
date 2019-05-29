@@ -1,3 +1,8 @@
+/*
+ * This class represents the protocol for packets.
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 package client;
 
 public class Protocol {

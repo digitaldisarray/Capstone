@@ -1,3 +1,8 @@
+/*
+ * This class represents a button task that sets the screen to main meny
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 package gui.objects.tasks;
 
 import gui.impl.MainMenu;

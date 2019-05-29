@@ -1,3 +1,8 @@
+/*
+ * This class represents a button task that starts the game and resets zombie kills
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 package gui.objects.tasks;
 
 import gui.objects.ButtonTask;

@@ -31,6 +31,7 @@ public class Entity {
 
 	}
 
+	//draws graphics
 	public void draw(Graphics2D g) {
 		g.setColor(color);
 		g.fillRect(x, y, width, height);

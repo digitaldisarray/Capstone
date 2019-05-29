@@ -1,3 +1,8 @@
+/*
+ * This class represents client
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 package client;
 
 import java.io.DataInputStream;

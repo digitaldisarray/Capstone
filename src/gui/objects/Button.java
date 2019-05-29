@@ -1,3 +1,8 @@
+/*
+ * This class represents a button and the parameters of that button
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 package gui.objects;
 
 import java.awt.Color;

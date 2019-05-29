@@ -1,3 +1,8 @@
+/*
+ * This class represents a prompt that allows you to input custom rgb values for lazer color
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 package gui.objects.tasks;
 
 import java.awt.Color;

@@ -60,6 +60,7 @@ public class WallColorPicker implements Screen {
 	}
 
 	@Override
+	// indicated when a button is pressed
 	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {
 			if (button.contains(x, y)) {

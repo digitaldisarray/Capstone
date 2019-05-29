@@ -47,6 +47,7 @@ public class PlayerColorPicker implements Screen {
 	}
 
 	@Override
+	//draws our graphic menu
 	public void draw(Graphics2D g) {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = toolkit.getImage("a.gif");
@@ -65,6 +66,7 @@ public class PlayerColorPicker implements Screen {
 	}
 
 	@Override
+	// visuals to indicate when a button is pressed
 	public void passPressEvent(int x, int y) {
 		for (Button button : buttons) {
 			if (button.contains(x, y)) {

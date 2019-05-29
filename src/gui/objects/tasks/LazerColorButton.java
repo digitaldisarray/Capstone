@@ -1,3 +1,8 @@
+/*
+ * This class represents a task that sets the screen to the lazerColorPicker window
+ * Author: The Mustangs
+ * Last edited: 5/22/2019
+ */
 package gui.objects.tasks;
 
 import gui.impl.LazerColorPicker;
