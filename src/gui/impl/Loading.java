@@ -38,7 +38,7 @@ public class Loading implements Screen {
 
 		//toolkit is a class called for displaying gifs
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image image = toolkit.getImage("A.Lo.gif");
+		Image image = toolkit.getImage("res/A.Lo.gif");
 
 		g.drawImage(image, 350, 150, 100, 100, null);
 		g.drawRect(300, 290, 200, 20);
