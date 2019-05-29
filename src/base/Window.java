@@ -95,6 +95,15 @@ public class Window {
 				case KeyEvent.VK_RIGHT:
 					c = 'd';
 					break;
+				case KeyEvent.VK_M:
+					
+					Game.setMusic(!Game.PlayMusic);
+					if (Game.PlayMusic == false)
+						Launcher.getGame().getMusic().setVolume(0);
+					else if (Game.PlayMusic == true)
+						Launcher.getGame().getMusic().setVolume(1);
+					break;
+					
 				case KeyEvent.VK_ESCAPE:
 					Launcher.getGame().setInGame(false);
 					for (Entity E : Launcher.getGame().getEntities()) {

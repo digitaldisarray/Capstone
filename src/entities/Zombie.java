@@ -7,7 +7,10 @@
 package entities;
 
 import java.awt.Color;
+import java.io.File;
 
+import base.BetterSound;
+import base.Game;
 import base.Launcher;
 
 public class Zombie extends Entity {
@@ -73,8 +76,12 @@ public class Zombie extends Entity {
 			if (entity instanceof Lazer) {
 
 				alive = false;
+				if(Game.PlayMusic) {
+					BetterSound oof = new BetterSound(new File("resources" +Game.fileSeparator +"Oof.wav"), true, false);
+					oof.setVolume(0.65);
+				}
 				zombieKills++;
-//				((Lazer) entity).setRemove(true);
+				//				((Lazer) entity).setRemove(true);
 			}
 
 			if (entity instanceof Wall) {

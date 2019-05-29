@@ -9,11 +9,14 @@ package entities;//Epic imports
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import base.BetterSound;
+import base.Game;
 import base.Launcher;
 import client.Protocol;
 
@@ -24,26 +27,26 @@ public class Player extends Entity {
 	// The lazers and walls that belong to the player
 	ArrayList<Lazer> lazers = new ArrayList<>();
 	ArrayList<Wall> walls = new ArrayList<>();
-	
+
 	// The cool down for shooting and walls
 	private int lazer_ms_cooldown = 250;
 	private final int WALL_MS_COOLDOWN = 2111;
-	
+
 	// The last time that a wall was placed or shot fired
 	private long lastShot = 0;
 	private long lastWall = 0;
-	
+
 	// The player movement speed
 	private final int MOVEMENT_SPEED = 3;
-	
+
 	// Distance that a wall is from the player
 	private final int DISTANCE_FROM_PLAYER = 25;
-	
+
 	// Default colors
 	private static Color playerColor = Color.BLACK;
 	private static Color lazerColor = Color.RED;
 	private static Color wallColor = Color.RED;
-	
+
 	// Health variables
 	public final int START_HEALTH = 1000;
 	private int health = START_HEALTH;
@@ -66,7 +69,7 @@ public class Player extends Entity {
 
 		if (!Launcher.getGame().isConnected() || (!deadOnMultiplayer && Launcher.getGame().isConnected()))
 			g.setColor(playerColor);
-			g.fillRect(getX(), getY(), getWidth(), getHeight());
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
 
 		for (Lazer lazer : lazers) {
 			g.setColor(lazerColor);
@@ -145,7 +148,10 @@ public class Player extends Entity {
 				// This creates a new lazer. It leverages a lot of other classes and methods to get mouse position
 				lazers.add(new Lazer(getX(), getY(), 5, 5, lazerColor, Launcher.getGame().getWindow().getMouseDeg(),
 						0.5, 2000));
-
+				if(Game.PlayMusic) {
+					BetterSound pew = new BetterSound(new File("resources" +Game.fileSeparator +"Pew.wav"), true, false);
+					pew.setVolume(0.7);
+				}
 				lastShot = System.currentTimeMillis();
 			}
 		}
@@ -184,6 +190,11 @@ public class Player extends Entity {
 
 				walls.add(new Wall(x, y, width, height, Color.RED, Launcher.getGame().getWindow().getWallDirection(),
 						2000));
+
+				if(Game.PlayMusic) {
+					BetterSound place = new BetterSound(new File("resources" +Game.fileSeparator +"Place.wav"), true, false);
+					place.setVolume(0.85);
+				}
 
 				lastWall = System.currentTimeMillis();
 			}

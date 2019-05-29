@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -27,6 +28,10 @@ import gui.MenuManager;
 
 public class Game implements Runnable {
 
+	private BetterSound music;
+	public static final String fileSeparator = System.getProperty("file.separator");
+	public static Boolean PlayMusic = true;
+	
 	// Window properties
 	private Window window;
 	public int width, height;
@@ -73,10 +78,13 @@ public class Game implements Runnable {
 
 	// Init anything we need here like asset managers
 	private void init() {
+		music = new BetterSound(new File("resources" +fileSeparator +"BackMusic.wav"), true, true);
 		window = new Window(title, width, height);
 		mManager = new MenuManager();
 		player = new Player((int) (Math.random() * 700) + 50, (int) (Math.random() * 500) + 50, 10, 10,
 				new Color(0, 100, 80), "Test Player");
+		
+		
 	}
 
 	int x = 0;
@@ -347,7 +355,14 @@ public class Game implements Runnable {
 	public boolean isConnected() {
 		return connected;
 	}
+	
+	public static void setMusic(boolean b) {
+		PlayMusic = b;
+	}
 
+	public BetterSound getMusic() {
+		return music;
+	}
 	// Checks if two rectangles are colliding
 	public boolean collides(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
 		return new Rectangle(x1, y1, width1, height1).intersects(new Rectangle(x2, y2, width2, height2));
