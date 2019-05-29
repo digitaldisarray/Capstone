@@ -42,7 +42,7 @@ public class PlayerColorPicker implements Screen {
 		buttons.add(new Button(450, 279, 100, 109, "", new SetPlayerColorButton(), Color.magenta));
 		buttons.add(new Button(250, 464, 300, 55, "Back to Main", new BackToMain(), grey2));
 		buttons.add(new Button(250, 389, 300, 55, "Custom Color (RGB)",
-				new CustomLazerColor(), grey2));
+				new CustomPlayerColor(), grey2));
 
 	}
 
